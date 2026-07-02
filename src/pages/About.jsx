@@ -16,15 +16,15 @@ export default function About() {
             <h1 className="text-4xl md:text-6xl font-serif text-brand-black leading-tight mb-6">
               Exceeding <span className="text-brand-gold">Expectations</span> Every Time
             </h1>
-            <div className="space-y-6 text-gray-700 leading-relaxed font-sans text-lg">
+            <div className="space-y-6 text-gray-700 leading-relaxed font-sans text-lg text-justify">
               <p>
-                Expectations are the combination of written specification and emotional needs and wants. We are achieving quality improvement in terms of improved customer satisfaction and meaningful reduction in waste of time and physical resources getting things right first time & every time & aiming for zero defects.
+                Sankey Events started in 1996 is establish business organisation that conceptualized various activities relating to today's customer & with a definite role-play tomorrow on setting standards for advancement in technical innovation.
               </p>
               <p>
-                As a result of doing right every time, we are able to provide assurance of our services so that all are treated equally, planned & controlled in a systematic manner.
+                We have provided a comprehensive and unique approach vision with the tangibles to produce a distinctive and memorable event. we will develop a concept and than that achieves your objectives in a style that appeals to you and your guest and colleagues.
               </p>
               <p className="font-medium text-brand-black border-l-4 border-brand-gold pl-6 py-2">
-                Sankey provides a suite of equipment, services, audio visual products, and top-notch integrated solutions, which facilitates any kind of corporate, Entertainment & Educational Events. We also operate a premier Modelling Agency.
+                We at Sankey maintained an exhaustive network of relationship that specialize in all your needs. Eighteen years ago right from the day of our foundation, we have been guided by one motive that is to offer satisfactory service to our clients, com what may. We have the vast experience to cater any kind of requirements, Sankey provides complete event management planing from theme development, venue selection, entertainment. Community and musics festivals,celebrity appearances, various types of events are manage like fashion shows, ad Film Making with model co ordination, annual general meeting, award ceremonies, brand promotion, exhibition stall designing, Product Promotion, Corporat films, Dealer Meets, Events and conferences, Brand Identity theme Events etc..
               </p>
             </div>
           </motion.div>

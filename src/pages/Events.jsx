@@ -82,6 +82,97 @@ const galleries = {
     images: [
       '/raichur show 2012/image copy.png', '/raichur show 2012/image.png'
     ]
+  },
+  salem2013: {
+    title: 'Salem Show 2013',
+    subtitle: 'Live Event',
+    images: [
+      '/salem show 2013/image copy 2.png', '/salem show 2013/image copy 3.png',
+      '/salem show 2013/image copy 4.png', '/salem show 2013/image copy 5.png',
+      '/salem show 2013/image copy.png', '/salem show 2013/image.png'
+    ]
+  },
+  gardencity2013: {
+    title: 'Miss Gardencity 2013',
+    subtitle: 'Fashion Event',
+    images: [
+      '/miss gardencity 2013/image copy 2.png', '/miss gardencity 2013/image copy 3.png',
+      '/miss gardencity 2013/image copy 4.png', '/miss gardencity 2013/image copy.png',
+      '/miss gardencity 2013/image.png'
+    ]
+  },
+  hangyo2013: {
+    title: 'Hangyo Ice Cream 2013',
+    subtitle: 'Brand Promotion',
+    images: [
+      '/hangyo ice cream 2013/image copy 2.png', '/hangyo ice cream 2013/image copy 3.png',
+      '/hangyo ice cream 2013/image copy 4.png', '/hangyo ice cream 2013/image copy.png',
+      '/hangyo ice cream 2013/image.png'
+    ]
+  },
+  samsung2013: {
+    title: 'Samsung 2013',
+    subtitle: 'Product Launch',
+    images: [
+      '/samsung 2013/image copy 2.png', '/samsung 2013/image copy.png', '/samsung 2013/image.png'
+    ]
+  },
+  sony2013: {
+    title: 'Sony Show 2013',
+    subtitle: 'Electronics Expo',
+    images: [
+      '/sony show 2013/image copy 2.png', '/sony show 2013/image copy 3.png',
+      '/sony show 2013/image copy 4.png', '/sony show 2013/image copy.png',
+      '/sony show 2013/image.png'
+    ]
+  },
+  kerala2013: {
+    title: 'Kerala Handloom 2013',
+    subtitle: 'Exhibition',
+    images: [
+      '/kerala hand loom technology 2013/image copy 2.png', '/kerala hand loom technology 2013/image copy 3.png',
+      '/kerala hand loom technology 2013/image copy 4.png', '/kerala hand loom technology 2013/image copy.png',
+      '/kerala hand loom technology 2013/image.png'
+    ]
+  },
+  itpl2013: {
+    title: 'ITPL Show on 31st',
+    subtitle: 'New Year Event',
+    images: [
+      '/ITPL show on 31st 2013/image copy 2.png', '/ITPL show on 31st 2013/image copy.png',
+      '/ITPL show on 31st 2013/image.png'
+    ]
+  },
+  iift2013: {
+    title: 'IIFT 2013',
+    subtitle: 'Institution Event',
+    images: [
+      '/IIFT 2013/image copy 2.png', '/IIFT 2013/image copy 3.png',
+      '/IIFT 2013/image copy 4.png', '/IIFT 2013/image copy.png', '/IIFT 2013/image.png'
+    ]
+  },
+  sriganesh2013: {
+    title: 'Sri Ganesh Diamonds',
+    subtitle: 'Jewellery Expo',
+    images: [
+      '/sri ganesh diamonds & jewellery 2013/image copy.png', '/sri ganesh diamonds & jewellery 2013/image.png'
+    ]
+  },
+  shravana2013: {
+    title: 'Shravana Banthu 2013',
+    subtitle: 'Cultural Fest',
+    images: [
+      '/shravana banthu sharavana 2013/image copy 2.png', '/shravana banthu sharavana 2013/image copy 3.png',
+      '/shravana banthu sharavana 2013/image copy 4.png', '/shravana banthu sharavana 2013/image copy 5.png',
+      '/shravana banthu sharavana 2013/image copy.png', '/shravana banthu sharavana 2013/image.png'
+    ]
+  },
+  tripunithura2013: {
+    title: 'Tripunithura Show 2013',
+    subtitle: 'Live Event',
+    images: [
+      '/Tripunithura Show 2013/image.png'
+    ]
   }
 };
 
@@ -190,6 +281,32 @@ export default function Events() {
             <GalleryCard type="newyear" delay={0.4} />
             <GalleryCard type="raichur" delay={0.5} />
             <GalleryCard type="acc" delay={0.6} />
+          </div>
+        </div>
+      </div>
+
+      {/* 2013 Events Section */}
+      <div className="py-24 bg-white relative border-t border-gray-200">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="mb-16 text-center">
+            <h2 className="text-3xl md:text-4xl font-serif text-brand-black relative inline-block">
+              Events from 2013
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 bg-brand-gold rounded-full"></div>
+            </h2>
+          </div>
+          
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <GalleryCard type="salem2013" delay={0} />
+            <GalleryCard type="gardencity2013" delay={0.1} />
+            <GalleryCard type="hangyo2013" delay={0.2} />
+            <GalleryCard type="samsung2013" delay={0.3} />
+            <GalleryCard type="sony2013" delay={0.4} />
+            <GalleryCard type="kerala2013" delay={0.5} />
+            <GalleryCard type="itpl2013" delay={0.6} />
+            <GalleryCard type="iift2013" delay={0.7} />
+            <GalleryCard type="sriganesh2013" delay={0.8} />
+            <GalleryCard type="shravana2013" delay={0.9} />
+            <GalleryCard type="tripunithura2013" delay={1.0} />
           </div>
         </div>
       </div>

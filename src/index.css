@@ -15,9 +15,11 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   body {
     @apply bg-brand-ivory text-brand-black font-sans antialiased;
+    overflow-x: hidden;
   }
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;

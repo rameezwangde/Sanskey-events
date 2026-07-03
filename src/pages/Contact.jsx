@@ -34,7 +34,7 @@ const stats = [
 export default function Contact() {
   return (
     <div className="min-h-screen bg-brand-ivory text-brand-black">
-      <section className="relative overflow-hidden pt-16 pb-0">
+      <section className="relative overflow-hidden pt-12 pb-0 md:pt-16">
         <img
           src="/hero.png"
           alt=""
@@ -43,45 +43,45 @@ export default function Contact() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand-ivory via-brand-ivory/96 to-brand-ivory"></div>
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_18%,rgba(182,139,74,0.16),transparent_28%),radial-gradient(circle_at_86%_22%,rgba(182,139,74,0.12),transparent_28%)]"></div>
 
-        <div className="relative z-10 mx-auto max-w-[1500px] px-4 pb-10 md:px-8">
-          <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-end">
+        <div className="relative z-10 mx-auto max-w-[1500px] px-4 pb-8 md:px-8 md:pb-10">
+          <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-end">
             <div>
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.24em] text-brand-bronze">
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.24em] text-brand-bronze">
                 Get In Touch
               </p>
-              <h1 className="max-w-3xl text-4xl font-serif leading-[0.95] text-brand-black md:text-6xl">
+              <h1 className="max-w-3xl font-serif text-3xl leading-tight text-brand-black sm:text-4xl md:text-6xl md:leading-[0.95]">
                 Let&apos;s Create Something
                 <span className="mt-1 block font-serif italic text-brand-gold">Extraordinary</span>
               </h1>
               <div className="mt-3 h-px w-80 max-w-full bg-gradient-to-r from-brand-gold via-brand-gold/75 to-transparent"></div>
             </div>
 
-            <div className="border-l border-brand-gold/55 pl-6 text-sm leading-7 text-brand-black/72 md:text-base">
+            <div className="border-l-0 border-brand-gold/55 pl-0 text-sm sm:border-l sm:pl-6 leading-7 text-brand-black/72 md:text-base">
               <p>Have a question, idea, or event in mind?</p>
               <p>We&apos;d love to hear from you. Reach out to our team and let&apos;s bring your vision to life.</p>
             </div>
           </div>
 
-          <div className="mt-8 grid gap-5 lg:grid-cols-[0.9fr_1.15fr]">
+          <div className="mt-6 grid gap-5 md:mt-8 lg:grid-cols-[0.9fr_1.15fr]">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55 }}
-              className="rounded-2xl border border-brand-gold/35 bg-white/78 p-5 shadow-2xl shadow-brand-bronze/10 backdrop-blur-md md:p-7"
+              className="rounded-2xl border border-brand-gold/35 bg-white/78 p-4 sm:p-5 shadow-2xl shadow-brand-bronze/10 backdrop-blur-md md:p-7"
             >
-              <div className="mb-5 flex items-center gap-4">
-                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-brand-gold/60 bg-brand-beige text-brand-bronze shadow-lg shadow-brand-bronze/10">
+              <div className="mb-5 flex items-center gap-3 sm:gap-4">
+                <div className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full border border-brand-gold/60 bg-brand-beige text-brand-bronze shadow-lg shadow-brand-bronze/10">
                   <Send size={25} />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-serif text-brand-black">Send us a Message</h2>
+                  <h2 className="text-xl font-serif sm:text-2xl text-brand-black">Send us a Message</h2>
                   <p className="text-sm text-brand-bronze">We&apos;ll get back to you shortly!</p>
                 </div>
               </div>
 
               <form className="space-y-4">
-                <div className="grid gap-4 md:grid-cols-2">
+                <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
                   <label className="relative block">
                     <User size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-bronze" />
                     <input
@@ -120,7 +120,7 @@ export default function Contact() {
 
                 <button
                   type="button"
-                  className="mx-auto flex h-12 min-w-56 items-center justify-center gap-4 rounded-md bg-brand-gold px-8 text-xs font-bold uppercase tracking-wide text-white shadow-xl shadow-brand-gold/20 transition-transform hover:-translate-y-0.5 hover:bg-brand-bronze"
+                  className="flex h-12 w-full min-w-0 sm:mx-auto sm:w-auto sm:min-w-56 items-center justify-center gap-4 rounded-md bg-brand-gold px-8 text-xs font-bold uppercase tracking-wide text-white shadow-xl shadow-brand-gold/20 transition-transform hover:-translate-y-0.5 hover:bg-brand-bronze"
                 >
                   Send Message <ArrowRight size={16} />
                 </button>
@@ -147,13 +147,13 @@ export default function Contact() {
                 <iframe
                   title="Sankey Events location"
                   src="https://www.google.com/maps?q=Sankey%20Road%20Bangalore%20560020&output=embed"
-                  className="h-64 w-full border-0 md:h-72"
+                  className="h-56 w-full border-0 sm:h-64 md:h-72"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
               </div>
 
-              <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
                 {contactCards.map((card) => (
                   <div key={card.title} className="rounded-lg border border-brand-gold/20 bg-brand-ivory/65 p-4">
                     <div className="mb-2 flex items-center gap-2 text-brand-bronze">
@@ -172,10 +172,10 @@ export default function Contact() {
       </section>
 
       <section className="border-t border-brand-gold/20 bg-brand-beige/55">
-        <div className="mx-auto grid max-w-[1500px] gap-6 px-4 py-6 md:grid-cols-[1.5fr_repeat(4,1fr)] md:px-8">
+        <div className="mx-auto grid max-w-[1500px] gap-5 px-4 py-6 sm:grid-cols-2 md:grid-cols-[1.5fr_repeat(4,1fr)] md:gap-6 md:px-8">
           <div className="flex items-center gap-4 text-brand-black/85">
             <Star size={34} className="shrink-0 text-brand-gold" />
-            <p className="text-lg font-serif leading-tight">
+            <p className="text-base font-serif sm:text-lg leading-tight">
               We don&apos;t just plan events,<br />
               <span className="text-brand-bronze">we create unforgettable experiences.</span>
             </p>
@@ -187,7 +187,7 @@ export default function Contact() {
                 <stat.icon size={22} />
               </div>
               <div>
-                <p className="text-2xl font-serif font-bold text-brand-bronze">{stat.value}</p>
+                <p className="text-xl font-serif sm:text-2xl font-bold text-brand-bronze">{stat.value}</p>
                 <p className="text-xs text-brand-black/65">{stat.label}</p>
               </div>
             </div>

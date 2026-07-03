@@ -33,7 +33,7 @@ export default function Navbar() {
     <nav
       className={clsx(
         'fixed top-0 z-50 w-full transition-all duration-300',
-        isScrolled ? 'bg-brand-ivory/95 py-4 shadow-sm backdrop-blur-md' : 'bg-transparent py-6',
+        isScrolled ? 'bg-brand-ivory/95 py-3 shadow-sm backdrop-blur-md sm:py-4' : 'bg-brand-ivory/92 py-3 backdrop-blur-md sm:bg-transparent sm:py-6',
       )}
     >
       <div className="container mx-auto flex items-center justify-between px-4 md:px-8">
@@ -72,7 +72,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className="text-brand-black xl:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-brand-bronze/20 text-brand-black xl:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle navigation menu"
         >
@@ -86,16 +86,16 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="absolute left-0 top-full w-full overflow-hidden border-t border-brand-beige bg-brand-ivory shadow-lg xl:hidden"
+            className="absolute left-0 top-full max-h-[calc(100vh-76px)] w-full overflow-y-auto border-t border-brand-beige bg-brand-ivory shadow-lg xl:hidden"
           >
-            <div className="flex flex-col space-y-4 px-6 py-4">
+            <div className="flex flex-col space-y-1 px-5 py-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={clsx(
-                    'text-lg font-medium transition-colors',
+                    'rounded-lg px-2 py-3 text-base font-medium transition-colors',
                     location.pathname === link.path ? 'text-brand-bronze' : 'text-brand-black',
                   )}
                 >

@@ -1,46 +1,61 @@
 import { useState } from 'react';
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
+import Lightbox from 'yet-another-react-lightbox';
+import 'yet-another-react-lightbox/styles.css';
 import { motion } from 'framer-motion';
 
-const images = [
-  { src: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=1080", width: 1080, height: 720 },
-  { src: "https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?q=80&w=1080", width: 1080, height: 1620 },
-  { src: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=1080", width: 1080, height: 1080 },
-  { src: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1080", width: 1080, height: 1620 },
-  { src: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1080", width: 1080, height: 720 },
-  { src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1080", width: 1080, height: 720 },
-  { src: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1080", width: 1080, height: 1620 },
-  { src: "https://images.unsplash.com/photo-1478147424095-2dd1240dc501?q=80&w=1080", width: 1080, height: 1080 }
-];
+const galleryModules = import.meta.glob('../../gallery/*.{png,jpg,jpeg,webp}', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+});
+
+const getImageNumber = (path) => {
+  const fileName = path.split('/').pop();
+  const match = fileName.match(/image(\d*)\./i);
+  return match?.[1] ? Number(match[1]) : 1;
+};
+
+const images = Object.entries(galleryModules)
+  .sort(([a], [b]) => getImageNumber(a) - getImageNumber(b))
+  .map(([, src], index) => ({
+    src,
+    alt: `Sankey Events gallery image ${index + 1}`,
+  }));
 
 export default function Gallery() {
   const [index, setIndex] = useState(-1);
 
   return (
-    <div className="pt-32 pb-20 min-h-screen bg-brand-ivory">
+    <div className="min-h-screen bg-brand-ivory pt-12 pb-16 md:pt-20 md:pb-20">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center mb-12">
-           <p className="text-brand-bronze font-sans font-bold tracking-[0.2em] uppercase text-sm mb-2">
+        <div className="mb-8 text-center md:mb-12">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-bronze sm:text-sm">
             Portfolio
           </p>
-          <h1 className="text-4xl md:text-5xl font-serif text-brand-black mb-4">Events & Shows Gallery</h1>
+          <h1 className="mb-4 font-serif text-3xl text-brand-black sm:text-4xl md:text-5xl">
+            Events & Shows Gallery
+          </h1>
         </div>
 
-        <div className="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
+        <div className="columns-1 gap-4 space-y-4 sm:columns-2 md:columns-3">
           {images.map((image, idx) => (
-            <motion.div 
-              key={idx}
+            <motion.div
+              key={image.src}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: (idx % 3) * 0.1 }}
-              className="break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl shadow-md border border-brand-beige"
+              className="group relative break-inside-avoid cursor-pointer overflow-hidden rounded-xl border border-brand-beige shadow-md"
               onClick={() => setIndex(idx)}
             >
-              <img src={image.src} alt={`Gallery ${idx}`} className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-brand-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                 <span className="text-white font-serif text-lg tracking-wider">View Image</span>
+              <img
+                src={image.src}
+                alt={image.alt}
+                className="h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-brand-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <span className="font-serif text-lg tracking-wider text-white">View Image</span>
               </div>
             </motion.div>
           ))}
@@ -51,8 +66,9 @@ export default function Gallery() {
         index={index}
         open={index >= 0}
         close={() => setIndex(-1)}
-        slides={images.map(img => ({ src: img.src }))}
+        slides={images.map((image) => ({ src: image.src, alt: image.alt }))}
       />
     </div>
   );
 }
+

@@ -7,27 +7,27 @@ const commitments = ['Integrated production', 'Audio visual solutions', 'Corpora
 
 export default function AboutPreviewSection() {
   return (
-    <section className="relative overflow-hidden bg-brand-ivory pt-36 pb-20">
-      <div className="pointer-events-none absolute -left-24 top-20 h-80 w-80 rounded-full border border-brand-bronze/10" />
+    <section className="relative overflow-hidden bg-brand-ivory pt-16 pb-16 md:pt-36 md:pb-20">
+      <div className="pointer-events-none absolute -left-24 top-20 h-52 w-52 md:h-80 md:w-80 rounded-full border border-brand-bronze/10" />
       <div className="pointer-events-none absolute right-0 top-12 h-full w-1/2 bg-[radial-gradient(circle_at_top_right,rgba(212,175,55,0.18),transparent_38%)]" />
 
       <div className="container relative z-10 mx-auto px-4 md:px-8">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.08fr_0.92fr]">
+        <div className="grid items-center gap-10 md:gap-12 lg:grid-cols-[1.08fr_0.92fr]">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7 }}
           >
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.24em] text-brand-bronze">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] sm:text-sm sm:tracking-[0.24em] text-brand-bronze">
               About Us
             </p>
-            <h2 className="font-serif text-4xl leading-tight text-brand-black md:text-5xl">
+            <h2 className="font-serif text-3xl leading-tight text-brand-black sm:text-4xl md:text-5xl">
               Planned with precision, shaped around every expectation.
             </h2>
             <div className="my-7 h-px w-20 bg-brand-bronze" />
 
-            <div className="max-w-3xl space-y-5 text-base leading-8 text-gray-700 md:text-lg">
+            <div className="max-w-3xl space-y-4 text-sm leading-7 text-gray-700 sm:text-base md:space-y-5 md:text-lg md:leading-8">
               <p>
                 Expectations combine written specifications with emotional needs and personal aspirations. Sankey Events turns that clarity into carefully controlled planning, quality execution and memorable experiences.
               </p>
@@ -36,9 +36,9 @@ export default function AboutPreviewSection() {
               </p>
             </div>
 
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            <div className="mt-7 grid gap-3 md:mt-8 md:grid-cols-3">
               {commitments.map((item) => (
-                <div key={item} className="flex items-center gap-3 rounded-full border border-brand-beige bg-white/70 px-4 py-3 text-sm font-medium text-brand-black shadow-sm">
+                <div key={item} className="flex items-center gap-3 rounded-xl border border-brand-beige bg-white/70 px-4 py-3 text-sm md:rounded-full font-medium text-brand-black shadow-sm">
                   <CheckCircle2 size={17} className="shrink-0 text-brand-bronze" />
                   <span>{item}</span>
                 </div>
@@ -58,21 +58,21 @@ export default function AboutPreviewSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.25 }}
             transition={{ duration: 0.7, delay: 0.12 }}
-            className="relative mx-auto w-full max-w-[460px]"
+            className="relative mx-auto w-full max-w-[420px] sm:max-w-[460px]"
           >
-            <div className="absolute -left-6 -top-6 h-full w-full rounded-[2rem] border border-brand-bronze/25" />
-            <div className="relative overflow-hidden rounded-[2rem] border border-brand-beige bg-white p-3 shadow-2xl shadow-brand-bronze/15">
-              <div className="absolute left-8 top-8 z-10 rounded-full border border-white/35 bg-black/35 px-5 py-2 text-xs font-bold uppercase tracking-[0.24em] text-brand-gold backdrop-blur-md">
+            <div className="absolute -left-3 -top-3 md:-left-6 md:-top-6 h-full w-full rounded-[1.5rem] md:rounded-[2rem] border border-brand-bronze/25" />
+            <div className="relative overflow-hidden rounded-[1.5rem] md:rounded-[2rem] border border-brand-beige bg-white p-3 shadow-2xl shadow-brand-bronze/15">
+              <div className="absolute left-6 top-6 z-10 rounded-full border border-white/35 bg-black/35 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-brand-gold backdrop-blur-md md:left-8 md:top-8 md:px-5 md:text-xs md:tracking-[0.24em]">
                 Miss Sankey
               </div>
               <img
                 src={missSankeyImage}
                 alt="Miss Sankey event showcase"
-                className="h-[520px] w-full rounded-[1.5rem] object-cover object-center"
+                className="h-[380px] w-full rounded-[1.1rem] object-cover object-center sm:h-[460px] md:h-[520px] md:rounded-[1.5rem]"
                 loading="lazy"
               />
-              <div className="absolute inset-x-3 bottom-3 rounded-b-[1.5rem] bg-gradient-to-t from-brand-black/70 via-brand-black/20 to-transparent p-8 pt-28">
-                <p className="max-w-xs font-serif text-2xl leading-tight text-white">
+              <div className="absolute inset-x-3 bottom-3 rounded-b-[1.1rem] bg-gradient-to-t from-brand-black/70 via-brand-black/20 to-transparent p-5 pt-24 md:rounded-b-[1.5rem] md:p-8 md:pt-28">
+                <p className="max-w-xs font-serif text-xl leading-tight md:text-2xl text-white">
                   Fashion, modelling and event experiences with a refined Sankey signature.
                 </p>
               </div>
@@ -83,4 +83,3 @@ export default function AboutPreviewSection() {
     </section>
   );
 }
-

@@ -4,6 +4,7 @@ import { Menu, X, ArrowRight } from 'lucide-react';
 import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
+import LogoMark from './LogoMark';
 
 const navLinks = [
   { name: 'Home', path: '/' },
@@ -29,89 +30,82 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={clsx(
-      'fixed w-full top-0 z-50 transition-all duration-300',
-      isScrolled ? 'bg-brand-ivory/95 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'
-    )}>
-      <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
-        
-        {/* Logo */}
-        <Link to="/" className="flex flex-col items-center">
-          <span className="text-3xl font-serif text-brand-black tracking-widest uppercase leading-none">Sankey</span>
-          <div className="flex items-center mt-2 w-full">
-            <div className="h-px bg-brand-bronze/50 flex-grow"></div>
-            <span className="text-[10px] font-sans tracking-[0.3em] text-brand-bronze px-2 uppercase">Events</span>
-            <div className="h-px bg-brand-bronze/50 flex-grow"></div>
-          </div>
+    <nav
+      className={clsx(
+        'fixed top-0 z-50 w-full transition-all duration-300',
+        isScrolled ? 'bg-brand-ivory/95 py-4 shadow-sm backdrop-blur-md' : 'bg-transparent py-6',
+      )}
+    >
+      <div className="container mx-auto flex items-center justify-between px-4 md:px-8">
+        <Link to="/" aria-label="Sankey Events home" className="shrink-0">
+          <LogoMark />
         </Link>
-        
-        {/* Desktop Nav Links */}
-        <div className="hidden xl:flex items-center space-x-6">
+
+        <div className="hidden items-center space-x-6 xl:flex">
           {navLinks.map((link) => (
-            <Link 
-              key={link.name} 
+            <Link
+              key={link.name}
               to={link.path}
               className={clsx(
-                "text-sm font-medium transition-colors hover:text-brand-bronze relative group",
-                location.pathname === link.path ? "text-brand-bronze" : "text-brand-black"
+                'group relative text-sm font-medium transition-colors hover:text-brand-bronze',
+                location.pathname === link.path ? 'text-brand-bronze' : 'text-brand-black',
               )}
             >
               {link.name}
               {location.pathname === link.path && (
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-brand-bronze rounded-full"></span>
+                <span className="absolute -bottom-1 left-0 h-0.5 w-full rounded-full bg-brand-bronze"></span>
               )}
             </Link>
           ))}
         </div>
 
-        {/* Social & CTA */}
-        <div className="hidden lg:flex items-center space-x-4">
-          <div className="flex space-x-2 mr-2">
-            <a href="#" className="w-8 h-8 rounded-full border border-brand-bronze/30 flex items-center justify-center text-brand-black hover:bg-brand-bronze hover:text-white transition-all"><FaFacebookF size={14} /></a>
-            <a href="#" className="w-8 h-8 rounded-full border border-brand-bronze/30 flex items-center justify-center text-brand-black hover:bg-brand-bronze hover:text-white transition-all"><FaInstagram size={14} /></a>
-            <a href="#" className="w-8 h-8 rounded-full border border-brand-bronze/30 flex items-center justify-center text-brand-black hover:bg-brand-bronze hover:text-white transition-all"><FaYoutube size={14} /></a>
+        <div className="hidden items-center space-x-4 lg:flex">
+          <div className="mr-2 flex space-x-2">
+            <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full border border-brand-bronze/30 text-brand-black transition-all hover:bg-brand-bronze hover:text-white"><FaFacebookF size={14} /></a>
+            <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full border border-brand-bronze/30 text-brand-black transition-all hover:bg-brand-bronze hover:text-white"><FaInstagram size={14} /></a>
+            <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full border border-brand-bronze/30 text-brand-black transition-all hover:bg-brand-bronze hover:text-white"><FaYoutube size={14} /></a>
           </div>
-          <Link to="/register" className="px-6 py-2.5 bg-gradient-to-r from-brand-gold to-brand-bronze text-white text-sm font-medium rounded-full hover:shadow-lg hover:shadow-brand-gold/20 transition-all flex items-center group">
-            Register Now <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+          <Link to="/register" className="group flex items-center rounded-full bg-gradient-to-r from-brand-gold to-brand-bronze px-6 py-2.5 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-brand-gold/20">
+            Register Now <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
 
-        {/* Mobile Toggle */}
-        <button 
-          className="xl:hidden text-brand-black"
+        <button
+          type="button"
+          className="text-brand-black xl:hidden"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle navigation menu"
         >
           {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile Nav */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="absolute top-full left-0 w-full bg-brand-ivory shadow-lg border-t border-brand-beige xl:hidden overflow-hidden"
+            className="absolute left-0 top-full w-full overflow-hidden border-t border-brand-beige bg-brand-ivory shadow-lg xl:hidden"
           >
-            <div className="flex flex-col py-4 px-6 space-y-4">
+            <div className="flex flex-col space-y-4 px-6 py-4">
               {navLinks.map((link) => (
-                <Link 
-                  key={link.name} 
+                <Link
+                  key={link.name}
                   to={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={clsx(
-                    "text-lg font-medium transition-colors",
-                    location.pathname === link.path ? "text-brand-bronze" : "text-brand-black"
+                    'text-lg font-medium transition-colors',
+                    location.pathname === link.path ? 'text-brand-bronze' : 'text-brand-black',
                   )}
                 >
                   {link.name}
                 </Link>
               ))}
-              <div className="pt-4 border-t border-brand-beige flex space-x-4">
-                <a href="#" className="w-10 h-10 rounded-full border border-brand-bronze/30 flex items-center justify-center text-brand-black"><FaFacebookF size={18} /></a>
-                <a href="#" className="w-10 h-10 rounded-full border border-brand-bronze/30 flex items-center justify-center text-brand-black"><FaInstagram size={18} /></a>
-                <a href="#" className="w-10 h-10 rounded-full border border-brand-bronze/30 flex items-center justify-center text-brand-black"><FaYoutube size={18} /></a>
+              <div className="flex space-x-4 border-t border-brand-beige pt-4">
+                <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-bronze/30 text-brand-black"><FaFacebookF size={18} /></a>
+                <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-bronze/30 text-brand-black"><FaInstagram size={18} /></a>
+                <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-bronze/30 text-brand-black"><FaYoutube size={18} /></a>
               </div>
             </div>
           </motion.div>

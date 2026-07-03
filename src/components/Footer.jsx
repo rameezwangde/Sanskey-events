@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import LogoMark from './LogoMark';
 
 export default function Footer() {
   return (
@@ -6,7 +7,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 text-center md:text-left">
           <div>
-            <h3 className="text-2xl font-serif tracking-widest uppercase mb-4 text-brand-ivory">Sankey<span className="block text-sm font-sans tracking-[0.3em] text-brand-bronze mt-1">Events</span></h3>
+            <LogoMark light className="mb-5 items-center md:items-start" />
             <p className="text-gray-400 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
               Crafting unforgettable experiences from corporate events to fashion shows, bringing your vision to life with creativity, precision & passion.
             </p>
@@ -40,3 +41,4 @@ export default function Footer() {
     </footer>
   );
 }
+

@@ -7,7 +7,8 @@ import somanyLogo from '../../../somany.png';
 import tydalLogo from '../../../tydal.png';
 import vanHeusenLogo from '../../../Van Heusen.png';
 
-const clients = [  { name: 'Havells', logo: havellsLogo },
+const clients = [
+  { name: 'Havells', logo: havellsLogo },
   { name: 'Tydal', logo: tydalLogo },
   { name: 'Van Heusen', logo: vanHeusenLogo },
   { name: 'Somany', logo: somanyLogo },
@@ -21,7 +22,7 @@ const scrollingClients = [...clients, ...clients];
 
 export default function ClienteleSection() {
   return (
-    <section className="pt-36 pb-20 bg-white border-t border-brand-beige overflow-hidden">
+    <section className="pt-20 pb-20 bg-white border-t border-brand-beige overflow-hidden">
       <style>
         {`
           @keyframes clientele-scroll {
@@ -67,4 +68,6 @@ export default function ClienteleSection() {
     </section>
   );
 }
+
+
 

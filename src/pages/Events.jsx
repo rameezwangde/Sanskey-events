@@ -83,6 +83,66 @@ const galleries = {
       '/raichur show 2012/image copy.png', '/raichur show 2012/image.png'
     ]
   },
+  amet2011: {
+    title: 'Amet Cruise Event 2011',
+    subtitle: 'Cruise Event',
+    images: [
+      '/Amet Cruise Event 2011/image copy 2.png', '/Amet Cruise Event 2011/image copy.png',
+      '/Amet Cruise Event 2011/image.png'
+    ]
+  },
+  acc2011: {
+    title: 'ACC Cement 2011',
+    subtitle: 'Corporate Event',
+    images: [
+      '/ACC Cement 2011/image copy 2.png', '/ACC Cement 2011/image copy 3.png',
+      '/ACC Cement 2011/image copy.png', '/ACC Cement 2011/image.png'
+    ]
+  },
+  sony2011: {
+    title: 'Sony Show 2011',
+    subtitle: 'Electronics Expo',
+    images: [
+      '/sony show 2011/image copy 2.png', '/sony show 2011/image copy 3.png',
+      '/sony show 2011/image copy 4.png', '/sony show 2011/image copy.png',
+      '/sony show 2011/image.png'
+    ]
+  },
+  misssouth2011: {
+    title: 'India Miss South 2011',
+    subtitle: 'Beauty Pageant',
+    images: [
+      '/INDIA MISS SOUTH 2011/image copy 2.png', '/INDIA MISS SOUTH 2011/image copy 3.png',
+      '/INDIA MISS SOUTH 2011/image copy 4.png', '/INDIA MISS SOUTH 2011/image copy 5.png',
+      '/INDIA MISS SOUTH 2011/image copy.png', '/INDIA MISS SOUTH 2011/image.png'
+    ]
+  },
+  newyearsalem2011: {
+    title: 'New Year Show Salem 2011',
+    subtitle: 'Celebration',
+    images: [
+      '/New year show salem 2011/image copy 2.png', '/New year show salem 2011/image copy 3.png',
+      '/New year show salem 2011/image copy 4.png', '/New year show salem 2011/image copy 5.png',
+      '/New year show salem 2011/image copy 6.png', '/New year show salem 2011/image copy 7.png',
+      '/New year show salem 2011/image copy.png', '/New year show salem 2011/image.png'
+    ]
+  },
+  django2011: {
+    title: 'Django Hubli 2011',
+    subtitle: 'Live Event',
+    images: [
+      '/Django Hubli 2011/image copy 2.png', '/Django Hubli 2011/image copy.png',
+      '/Django Hubli 2011/image.png'
+    ]
+  },
+  princess2011: {
+    title: 'Princess 2011 & Miss Sankey',
+    subtitle: 'Beauty Pageant',
+    images: [
+      '/princess 2011 & miss sankey/image copy 2.png', '/princess 2011 & miss sankey/image copy 3.png',
+      '/princess 2011 & miss sankey/image copy.png', '/princess 2011 & miss sankey/image.png'
+    ]
+  },
   salem2013: {
     title: 'Salem Show 2013',
     subtitle: 'Live Event',
@@ -263,8 +323,30 @@ export default function Events() {
         </div>
       </div>
 
-      {/* 2012 Events Section */}
+      {/* 2011 Events Section */}
       <div className="py-24 bg-brand-ivory relative border-t border-gray-200">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="mb-16 text-center">
+            <h2 className="text-3xl md:text-4xl font-serif text-brand-black relative inline-block">
+              Events from 2011
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 bg-brand-gold rounded-full"></div>
+            </h2>
+          </div>
+          
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <GalleryCard type="amet2011" delay={0} />
+            <GalleryCard type="acc2011" delay={0.1} />
+            <GalleryCard type="sony2011" delay={0.2} />
+            <GalleryCard type="misssouth2011" delay={0.3} />
+            <GalleryCard type="newyearsalem2011" delay={0.4} />
+            <GalleryCard type="django2011" delay={0.5} />
+            <GalleryCard type="princess2011" delay={0.6} />
+          </div>
+        </div>
+      </div>
+
+      {/* 2012 Events Section */}
+      <div className="py-24 bg-white relative border-t border-gray-200">
         <div className="container mx-auto px-4 md:px-8">
           <div className="mb-16 text-center">
             <h2 className="text-3xl md:text-4xl font-serif text-brand-black relative inline-block">
@@ -286,7 +368,7 @@ export default function Events() {
       </div>
 
       {/* 2013 Events Section */}
-      <div className="py-24 bg-white relative border-t border-gray-200">
+      <div className="py-24 bg-brand-ivory relative border-t border-gray-200">
         <div className="container mx-auto px-4 md:px-8">
           <div className="mb-16 text-center">
             <h2 className="text-3xl md:text-4xl font-serif text-brand-black relative inline-block">

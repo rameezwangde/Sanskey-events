@@ -9,18 +9,33 @@ const galleryModules = import.meta.glob('../../gallery/*.{png,jpg,jpeg,webp}', {
   import: 'default',
 });
 
+const thumbnailModules = import.meta.glob('../../gallery/thumbs/*.{jpg,jpeg,png,webp}', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+});
+
+const getBaseName = (path) => path.split('/').pop().replace(/\.[^.]+$/, '');
+
 const getImageNumber = (path) => {
-  const fileName = path.split('/').pop();
-  const match = fileName.match(/image(\d*)\./i);
+  const match = getBaseName(path).match(/^image(\d*)$/i);
   return match?.[1] ? Number(match[1]) : 1;
 };
 
+const thumbnailsByName = Object.fromEntries(
+  Object.entries(thumbnailModules).map(([path, src]) => [getBaseName(path), src]),
+);
+
 const images = Object.entries(galleryModules)
   .sort(([a], [b]) => getImageNumber(a) - getImageNumber(b))
-  .map(([, src], index) => ({
-    src,
-    alt: `Sankey Events gallery image ${index + 1}`,
-  }));
+  .map(([path, src], index) => {
+    const name = getBaseName(path);
+    return {
+      src,
+      thumb: thumbnailsByName[name] || src,
+      alt: `Sankey Events gallery image ${index + 1}`,
+    };
+  });
 
 export default function Gallery() {
   const [index, setIndex] = useState(-1);
@@ -45,14 +60,16 @@ export default function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: (idx % 3) * 0.1 }}
-              className="group relative break-inside-avoid cursor-pointer overflow-hidden rounded-xl border border-brand-beige shadow-md"
+              className="group relative break-inside-avoid cursor-pointer overflow-hidden rounded-xl border border-brand-beige bg-brand-beige/40 shadow-md"
               onClick={() => setIndex(idx)}
             >
               <img
-                src={image.src}
+                src={image.thumb}
                 alt={image.alt}
                 className="h-auto w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
+                loading={idx < 6 ? 'eager' : 'lazy'}
+                fetchPriority={idx < 3 ? 'high' : 'auto'}
+                decoding="async"
               />
               <div className="absolute inset-0 flex items-center justify-center bg-brand-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <span className="font-serif text-lg tracking-wider text-white">View Image</span>
@@ -71,4 +88,3 @@ export default function Gallery() {
     </div>
   );
 }
-

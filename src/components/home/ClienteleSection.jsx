@@ -10,7 +10,7 @@ export default function ClienteleSection() {
   const [emblaRef] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
 
   return (
-    <section className="py-20 bg-white border-t border-brand-beige overflow-hidden">
+    <section className="pt-36 pb-20 bg-white border-t border-brand-beige overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 mb-10 text-center">
         <p className="text-brand-bronze font-sans font-bold tracking-[0.2em] uppercase text-sm mb-2">
           Trusted By

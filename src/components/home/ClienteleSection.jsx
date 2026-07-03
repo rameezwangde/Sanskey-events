@@ -1,13 +1,32 @@
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
+import havellsLogo from '../../../havells.png';
+import heroHondaLogo from '../../../hero.png';
+import lionsLogo from '../../../Lions Clubs International.png';
+import mahindraLogo from '../../../mahindra.png';
+import rotaryLogo from '../../../rotary.png';
+import samsungLogo from '../../../samsung.png';
+import somanyLogo from '../../../somany.png';
+import tydalLogo from '../../../tydal.png';
+import vanHeusenLogo from '../../../Van Heusen.png';
 
 const clients = [
-  "Tydal", "Van Heusen", "Somany", "Mahindra", "Samsung", 
-  "Rotary Club", "Lions Club", "Koramangala", "Hero Honda", "Havells"
+  { name: 'Hero Honda', logo: heroHondaLogo },
+  { name: 'Havells', logo: havellsLogo },
+  { name: 'Tydal', logo: tydalLogo },
+  { name: 'Van Heusen', logo: vanHeusenLogo },
+  { name: 'Somany', logo: somanyLogo },
+  { name: 'Mahindra', logo: mahindraLogo },
+  { name: 'Samsung', logo: samsungLogo },
+  { name: 'Rotary Club', logo: rotaryLogo },
+  { name: 'Lions Club', logo: lionsLogo },
 ];
 
 export default function ClienteleSection() {
-  const [emblaRef] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
+  const [emblaRef] = useEmblaCarousel(
+    { loop: true, align: 'start' },
+    [Autoplay({ delay: 2200, stopOnInteraction: false })],
+  );
 
   return (
     <section className="pt-36 pb-20 bg-white border-t border-brand-beige overflow-hidden">
@@ -21,11 +40,14 @@ export default function ClienteleSection() {
       <div className="relative max-w-full mx-auto" ref={emblaRef}>
         <div className="flex touch-pan-y">
           {clients.concat(clients).map((client, index) => (
-            <div key={index} className="flex-[0_0_50%] md:flex-[0_0_25%] lg:flex-[0_0_20%] min-w-0 px-4">
-              <div className="bg-brand-ivory border border-brand-beige rounded-xl p-8 flex items-center justify-center h-24 hover:border-brand-bronze/50 transition-colors group grayscale hover:grayscale-0">
-                <span className="font-serif text-xl text-brand-black/60 group-hover:text-brand-bronze transition-colors font-bold tracking-wide">
-                  {client}
-                </span>
+            <div key={`${client.name}-${index}`} className="flex-[0_0_50%] md:flex-[0_0_25%] lg:flex-[0_0_20%] min-w-0 px-4">
+              <div className="bg-white border border-brand-beige rounded-xl px-8 py-6 flex items-center justify-center h-28 shadow-[0_14px_35px_rgba(184,134,72,0.08)] hover:border-brand-bronze/50 transition-colors">
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  className="max-h-14 max-w-[82%] object-contain"
+                  loading="lazy"
+                />
               </div>
             </div>
           ))}

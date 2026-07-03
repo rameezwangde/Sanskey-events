@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
-import ServicesSection from '../components/home/ServicesSection';
+import { X, ChevronLeft, ChevronRight, ArrowRight, Archive, Calendar, Images } from 'lucide-react';
 
 const galleries = {
   tydal: {
@@ -258,6 +257,45 @@ const galleries = {
   }
 };
 
+const eventSections = [
+  {
+    eyebrow: 'Our Journey',
+    title: 'Events from 2000 to 2010',
+    description: 'A decade of unforgettable moments, extraordinary experiences and successful celebrations.',
+    start: '2000',
+    end: '2010',
+    footer: 'Milestones that inspire. Memories that last.',
+    items: ['tydal', 'surge', 'dacss', 'eknirangan', 'tamanna']
+  },
+  {
+    eyebrow: 'Our Journey',
+    title: 'Events from 2011',
+    description: 'A year of energetic showcases, brand celebrations and memorable live experiences.',
+    start: '2011',
+    end: '2011',
+    footer: 'Celebrations shaped with precision.',
+    items: ['amet2011', 'acc2011', 'sony2011', 'misssouth2011', 'newyearsalem2011', 'django2011', 'princess2011']
+  },
+  {
+    eyebrow: 'Our Journey',
+    title: 'Events from 2012',
+    description: 'Distinctive launches, cultural evenings and corporate experiences across the year.',
+    start: '2012',
+    end: '2012',
+    footer: 'Experiences crafted to be remembered.',
+    items: ['sagascious', 'imark', 'iift', 'hassan', 'newyear', 'raichur', 'acc']
+  },
+  {
+    eyebrow: 'Our Journey',
+    title: 'Events from 2013',
+    description: 'Fashion, entertainment, exhibitions and brand moments brought together with care.',
+    start: '2013',
+    end: '2013',
+    footer: 'Every detail. Every occasion.',
+    items: ['salem2013', 'gardencity2013', 'hangyo2013', 'samsung2013', 'sony2013', 'kerala2013', 'itpl2013', 'iift2013', 'sriganesh2013', 'shravana2013', 'tripunithura2013']
+  }
+];
+
 export default function Events() {
   const [activeLightbox, setActiveLightbox] = useState(null);
 
@@ -280,193 +318,208 @@ export default function Events() {
     });
   };
 
-  const GalleryCard = ({ type, delay = 0 }) => {
+  const activeGallery = activeLightbox ? galleries[activeLightbox.type] : null;
+
+  const GalleryCard = ({ type, delay = 0, index = 0 }) => {
     const gallery = galleries[type];
+    const yearMatch = gallery.title.match(/\b(20\d{2})\b/) || gallery.subtitle.match(/\b(20\d{2})\b/);
+    const eventPeriod = gallery.subtitle === '2000 to 2010' ? gallery.subtitle : yearMatch?.[1] || 'Archive';
+    const Icon = [Calendar, ArrowRight, Archive, Images][index % 4];
+
     return (
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.7, delay }}
-        className="relative group cursor-pointer overflow-hidden rounded-3xl shadow-2xl shadow-brand-black/10 aspect-[4/3] border-4 border-white"
+        transition={{ duration: 0.6, delay }}
+        className="relative group cursor-pointer overflow-hidden rounded-xl border border-brand-gold/25 bg-brand-black shadow-2xl shadow-brand-black/15 aspect-[0.78]"
         onClick={() => openLightbox(type, 0)}
       >
         <img
           src={gallery.images[0]}
           alt={gallery.title}
-          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+          className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
-        
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-          <Maximize2 size={40} className="mb-4 opacity-0 group-hover:opacity-100 transform scale-50 group-hover:scale-100 transition-all duration-500 text-brand-gold drop-shadow-lg" />
-          <h3 className="text-3xl font-serif text-center drop-shadow-md">{gallery.title}</h3>
-          <p className="text-base font-sans tracking-wide mt-2 text-white/90">{gallery.subtitle}</p>
-          <div className="mt-6 px-6 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-xs uppercase tracking-widest font-medium">
-            {gallery.images.length} Photos
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/72 to-black/12"></div>
+        <div className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-brand-gold text-white shadow-lg shadow-brand-gold/25">
+          <Icon size={18} />
+        </div>
+
+        <div className="absolute inset-x-0 bottom-0 p-4 text-white">
+          <p className="mb-2 text-[8px] font-bold uppercase tracking-[0.16em] text-brand-gold">
+            Sankey Events Archive
+          </p>
+          <h3 className="text-lg font-serif leading-tight text-white md:text-xl">
+            {gallery.title}
+          </h3>
+
+          <div className="mt-3 space-y-1.5 text-[11px] font-medium text-white/90">
+            <div className="flex items-center gap-2">
+              <Archive size={12} className="shrink-0 text-brand-gold" />
+              <span>Event Gallery</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Images size={12} className="shrink-0 text-brand-gold" />
+              <span>{gallery.images.length} Photos</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Calendar size={12} className="shrink-0 text-brand-gold" />
+              <span>{eventPeriod}</span>
+            </div>
+          </div>
+
+          <div className="mt-4 inline-flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.18em] text-brand-gold transition-colors duration-300 group-hover:text-white">
+            Explore Gallery
+            <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
           </div>
         </div>
       </motion.div>
     );
   };
 
+  const TimelineSection = ({ section, sectionIndex }) => (
+    <section className={`relative overflow-hidden ${sectionIndex % 2 === 0 ? 'bg-brand-ivory' : 'bg-white'} px-4 py-14 md:px-8 md:py-16`}>
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(182,139,74,0.12),transparent_28%),radial-gradient(circle_at_92%_35%,rgba(182,139,74,0.10),transparent_24%)]"></div>
+      <div className="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full border border-brand-gold/10"></div>
+      <div className="pointer-events-none absolute -right-24 top-24 h-64 w-64 rounded-full border border-brand-gold/10"></div>
+
+      <div className="relative z-10 mx-auto max-w-[1600px]">
+        <div className="text-center">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.32em] text-brand-bronze">
+            {section.eyebrow}
+          </p>
+          <h2 className="text-4xl font-serif leading-none text-brand-black md:text-5xl">
+            {section.title}
+          </h2>
+          <div className="mx-auto my-4 flex w-24 items-center justify-center gap-2 text-brand-gold">
+            <span className="h-px flex-1 bg-brand-gold/70"></span>
+            <span className="h-2 w-2 rotate-45 bg-brand-gold"></span>
+            <span className="h-px flex-1 bg-brand-gold/70"></span>
+          </div>
+          <p className="mx-auto max-w-xl text-sm leading-7 text-brand-black/65">
+            {section.description}
+          </p>
+        </div>
+
+        <div className="mt-8 hidden items-center gap-5 text-sm font-bold text-brand-bronze md:flex">
+          <span>{section.start}</span>
+          <div className="relative h-8 flex-1">
+            <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-brand-gold/45"></div>
+            {section.items.map((type, index) => (
+              <div
+                key={type}
+                className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-gold shadow-sm shadow-brand-gold/40"
+                style={{ left: `${((index + 0.5) / section.items.length) * 100}%` }}
+              ></div>
+            ))}
+          </div>
+          <span>{section.end}</span>
+        </div>
+
+        <div className="mt-3 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          {section.items.map((type, index) => (
+            <GalleryCard key={type} type={type} index={index} delay={index * 0.08} />
+          ))}
+        </div>
+
+        <div className="mx-auto mt-8 flex max-w-lg flex-col items-center gap-3 text-center">
+          <div className="flex items-center gap-8 text-brand-gold/55">
+            <span className="h-px w-20 bg-brand-gold/35"></span>
+            <Calendar size={18} className="text-brand-gold" />
+            <span className="h-px w-20 bg-brand-gold/35"></span>
+          </div>
+          <p className="text-[11px] font-bold uppercase tracking-[0.34em] text-brand-black/45">
+            {section.footer}
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+
   return (
     <div className="min-h-screen bg-brand-ivory">
-      <div className="pt-32 pb-10">
-        <div className="container mx-auto px-4 md:px-8 text-center">
-          <p className="text-brand-bronze font-sans font-bold tracking-[0.2em] uppercase text-sm mb-2">
-            Our Expertise
-          </p>
-          <h1 className="text-4xl md:text-5xl font-serif text-brand-black mb-6">Events By Us</h1>
-          <p className="text-gray-600 max-w-2xl mx-auto font-sans">
-            We provide a comprehensive suite of services and top-notch integrated solutions for corporate, entertainment, and educational events.
-          </p>
-        </div>
-      </div>
-      
-      <div className="-mt-16">
-        <ServicesSection />
-      </div>
-
-      {/* 2000 to 2010 Archive */}
-      <div className="py-24 bg-white relative">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="mb-16 text-center">
-            <h2 className="text-3xl md:text-4xl font-serif text-brand-black relative inline-block">
-              Events from 2000 to 2010
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 bg-brand-gold rounded-full"></div>
-            </h2>
-          </div>
-          
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <GalleryCard type="tydal" delay={0} />
-            <GalleryCard type="surge" delay={0.2} />
-            <GalleryCard type="dacss" delay={0.3} />
-            <GalleryCard type="eknirangan" delay={0.4} />
-            <GalleryCard type="tamanna" delay={0.5} />
-          </div>
-        </div>
-      </div>
-
-      {/* 2011 Events Section */}
-      <div className="py-24 bg-brand-ivory relative border-t border-gray-200">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="mb-16 text-center">
-            <h2 className="text-3xl md:text-4xl font-serif text-brand-black relative inline-block">
-              Events from 2011
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 bg-brand-gold rounded-full"></div>
-            </h2>
-          </div>
-          
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <GalleryCard type="amet2011" delay={0} />
-            <GalleryCard type="acc2011" delay={0.1} />
-            <GalleryCard type="sony2011" delay={0.2} />
-            <GalleryCard type="misssouth2011" delay={0.3} />
-            <GalleryCard type="newyearsalem2011" delay={0.4} />
-            <GalleryCard type="django2011" delay={0.5} />
-            <GalleryCard type="princess2011" delay={0.6} />
-          </div>
-        </div>
-      </div>
-
-      {/* 2012 Events Section */}
-      <div className="py-24 bg-white relative border-t border-gray-200">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="mb-16 text-center">
-            <h2 className="text-3xl md:text-4xl font-serif text-brand-black relative inline-block">
-              Events from 2012
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 bg-brand-gold rounded-full"></div>
-            </h2>
-          </div>
-          
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <GalleryCard type="sagascious" delay={0} />
-            <GalleryCard type="imark" delay={0.1} />
-            <GalleryCard type="iift" delay={0.2} />
-            <GalleryCard type="hassan" delay={0.3} />
-            <GalleryCard type="newyear" delay={0.4} />
-            <GalleryCard type="raichur" delay={0.5} />
-            <GalleryCard type="acc" delay={0.6} />
-          </div>
-        </div>
-      </div>
-
-      {/* 2013 Events Section */}
-      <div className="py-24 bg-brand-ivory relative border-t border-gray-200">
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="mb-16 text-center">
-            <h2 className="text-3xl md:text-4xl font-serif text-brand-black relative inline-block">
-              Events from 2013
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-24 h-1 bg-brand-gold rounded-full"></div>
-            </h2>
-          </div>
-          
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <GalleryCard type="salem2013" delay={0} />
-            <GalleryCard type="gardencity2013" delay={0.1} />
-            <GalleryCard type="hangyo2013" delay={0.2} />
-            <GalleryCard type="samsung2013" delay={0.3} />
-            <GalleryCard type="sony2013" delay={0.4} />
-            <GalleryCard type="kerala2013" delay={0.5} />
-            <GalleryCard type="itpl2013" delay={0.6} />
-            <GalleryCard type="iift2013" delay={0.7} />
-            <GalleryCard type="sriganesh2013" delay={0.8} />
-            <GalleryCard type="shravana2013" delay={0.9} />
-            <GalleryCard type="tripunithura2013" delay={1.0} />
-          </div>
-        </div>
-      </div>
-
+      {eventSections.map((section, index) => (
+        <TimelineSection key={section.title} section={section} sectionIndex={index} />
+      ))}
       {/* Lightbox Modal */}
       <AnimatePresence>
-        {activeLightbox !== null && (
+        {activeLightbox !== null && activeGallery && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-xl p-4 md:p-12"
+            className="fixed inset-0 z-[100] overflow-hidden bg-brand-black/95 p-4 text-white backdrop-blur-2xl md:p-8"
             onClick={closeLightbox}
           >
-            <button
-              onClick={closeLightbox}
-              className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-50 backdrop-blur-md"
-            >
-              <X size={28} />
-            </button>
+            <img
+              src={activeGallery.images[activeLightbox.index]}
+              alt=""
+              className="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover opacity-20 blur-3xl"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black via-black/90 to-black/95"></div>
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(182,139,74,0.18),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(182,139,74,0.12),transparent_34%)]"></div>
 
-            <button
-              onClick={showPrev}
-              className="absolute left-4 md:left-12 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-50 backdrop-blur-md"
-            >
-              <ChevronLeft size={36} />
-            </button>
+            <div className="relative z-10 mx-auto flex h-full max-w-[1600px] flex-col" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-start justify-between gap-6 border-b border-white/10 pb-5 md:pb-7">
+                <div>
+                  <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.28em] text-brand-gold md:text-xs">
+                    {activeGallery.subtitle} - Gallery
+                  </p>
+                  <h2 className="text-2xl font-serif leading-tight text-white md:text-4xl">
+                    {activeGallery.title}
+                  </h2>
+                </div>
 
-            <motion.div
-              key={`${activeLightbox.type}-${activeLightbox.index}`}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative max-w-7xl max-h-[85vh] w-full flex items-center justify-center"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <img
-                src={galleries[activeLightbox.type].images[activeLightbox.index]}
-                alt={`Gallery image ${activeLightbox.index + 1}`}
-                className="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl"
-              />
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-black/50 backdrop-blur-md text-white text-sm font-sans">
-                {activeLightbox.index + 1} / {galleries[activeLightbox.type].images.length}
+                <div className="flex shrink-0 items-center gap-4">
+                  <div className="hidden text-xs font-bold tracking-[0.16em] text-brand-gold sm:block">
+                    {String(activeLightbox.index + 1).padStart(2, '0')} / {String(activeGallery.images.length).padStart(2, '0')}
+                  </div>
+                  <button
+                    onClick={closeLightbox}
+                    className="rounded-full border border-white/10 bg-white/10 p-3 text-brand-gold backdrop-blur-md transition-colors hover:border-brand-gold/50 hover:bg-brand-gold/15"
+                    aria-label="Close gallery"
+                  >
+                    <X size={28} />
+                  </button>
+                </div>
               </div>
-            </motion.div>
 
-            <button
-              onClick={showNext}
-              className="absolute right-4 md:right-12 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-50 backdrop-blur-md"
-            >
-              <ChevronRight size={36} />
-            </button>
+              <div className="relative flex min-h-0 flex-1 items-center justify-center py-6 md:py-8">
+                <button
+                  onClick={showPrev}
+                  className="absolute left-0 z-20 rounded-full border border-white/10 bg-black/45 p-3 text-brand-gold shadow-2xl backdrop-blur-md transition-colors hover:border-brand-gold/50 hover:bg-brand-gold/15 md:left-6 md:p-4"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft size={34} />
+                </button>
+
+                <motion.div
+                  key={`${activeLightbox.type}-${activeLightbox.index}`}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                  className="relative flex max-h-[72vh] w-full max-w-6xl items-center justify-center rounded-[20px] border border-white/10 bg-black/45 p-3 shadow-2xl shadow-black/50 md:p-5"
+                >
+                  <img
+                    src={activeGallery.images[activeLightbox.index]}
+                    alt={`${activeGallery.title} gallery image ${activeLightbox.index + 1}`}
+                    className="max-h-[66vh] max-w-full rounded-xl object-contain shadow-2xl"
+                  />
+                  <div className="absolute bottom-5 right-5 rounded-md border border-brand-gold/30 bg-black/60 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-brand-gold backdrop-blur-md sm:hidden">
+                    {activeLightbox.index + 1} / {activeGallery.images.length}
+                  </div>
+                </motion.div>
+
+                <button
+                  onClick={showNext}
+                  className="absolute right-0 z-20 rounded-full border border-white/10 bg-black/45 p-3 text-brand-gold shadow-2xl backdrop-blur-md transition-colors hover:border-brand-gold/50 hover:bg-brand-gold/15 md:right-6 md:p-4"
+                  aria-label="Next image"
+                >
+                  <ChevronRight size={34} />
+                </button>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

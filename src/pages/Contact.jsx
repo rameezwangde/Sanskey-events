@@ -1,109 +1,199 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { ArrowRight, CalendarDays, Clock, Mail, MapPin, Phone, Send, Star, Trophy, UsersRound, Handshake, User, Pencil } from 'lucide-react';
+
+const contactCards = [
+  {
+    icon: MapPin,
+    title: 'Our Address',
+    lines: ['#17, Sankey Road,', 'Bangalore 560 020', 'Karnataka, India']
+  },
+  {
+    icon: Phone,
+    title: 'Call Us',
+    lines: ['080 23349887', '9844000669']
+  },
+  {
+    icon: Mail,
+    title: 'Email Us',
+    lines: ['sankeyevents@gmail.com', 'sankeyindia@yahoo.com']
+  },
+  {
+    icon: Clock,
+    title: 'Working Hours',
+    lines: ['Mon - Sat: 10:00 AM - 7:00 PM', 'Sunday: By Appointment']
+  }
+];
+
+const stats = [
+  { icon: CalendarDays, value: '2000+', label: 'Events Executed' },
+  { icon: UsersRound, value: '15+', label: 'Years of Experience' },
+  { icon: Trophy, value: '100+', label: 'Happy Clients' },
+  { icon: Handshake, value: 'End-to-End', label: 'Event Solutions' }
+];
 
 export default function Contact() {
   return (
-    <div className="pt-32 pb-20 min-h-screen bg-brand-ivory">
-      <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center mb-16">
-          <p className="text-brand-bronze font-sans font-bold tracking-[0.2em] uppercase text-sm mb-2">
-            Get In Touch
-          </p>
-          <h1 className="text-4xl md:text-5xl font-serif text-brand-black mb-4">Contact Sankey Events</h1>
-          <p className="text-gray-600 max-w-2xl mx-auto font-sans">
-            Ready to craft an unforgettable experience? Reach out to us to discuss your upcoming event, show, or campaign.
-          </p>
-        </div>
+    <div className="min-h-screen bg-brand-ivory text-brand-black">
+      <section className="relative overflow-hidden pt-16 pb-0">
+        <img
+          src="/hero.png"
+          alt=""
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-[0.08]"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand-ivory via-brand-ivory/96 to-brand-ivory"></div>
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_18%,rgba(182,139,74,0.16),transparent_28%),radial-gradient(circle_at_86%_22%,rgba(182,139,74,0.12),transparent_28%)]"></div>
 
-        <div className="grid lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
-          {/* Contact Info */}
-          <div className="lg:col-span-1 space-y-8">
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-white p-8 rounded-2xl shadow-xl shadow-brand-black/5 border border-brand-beige"
-            >
-              <div className="flex items-start space-x-4 mb-6">
-                <div className="w-12 h-12 rounded-full bg-brand-beige flex flex-shrink-0 items-center justify-center text-brand-bronze">
-                  <MapPin size={24} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-serif font-bold text-brand-black mb-2">Visit Us</h3>
-                  <p className="text-gray-600 font-sans text-sm leading-relaxed">
-                    123 Luxury Avenue,<br />
-                    Indiranagar, Bengaluru,<br />
-                    Karnataka 560038
-                  </p>
-                </div>
-              </div>
+        <div className="relative z-10 mx-auto max-w-[1500px] px-4 pb-10 md:px-8">
+          <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-end">
+            <div>
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.24em] text-brand-bronze">
+                Get In Touch
+              </p>
+              <h1 className="max-w-3xl text-4xl font-serif leading-[0.95] text-brand-black md:text-6xl">
+                Let&apos;s Create Something
+                <span className="mt-1 block font-serif italic text-brand-gold">Extraordinary</span>
+              </h1>
+              <div className="mt-3 h-px w-80 max-w-full bg-gradient-to-r from-brand-gold via-brand-gold/75 to-transparent"></div>
+            </div>
 
-              <div className="flex items-start space-x-4 mb-6">
-                <div className="w-12 h-12 rounded-full bg-brand-beige flex flex-shrink-0 items-center justify-center text-brand-bronze">
-                  <Phone size={24} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-serif font-bold text-brand-black mb-2">Call Us</h3>
-                  <p className="text-gray-600 font-sans text-sm">
-                    +91 98765 43210<br />
-                    +91 80 1234 5678
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="w-12 h-12 rounded-full bg-brand-beige flex flex-shrink-0 items-center justify-center text-brand-bronze">
-                  <Mail size={24} />
-                </div>
-                <div>
-                  <h3 className="text-lg font-serif font-bold text-brand-black mb-2">Email Us</h3>
-                  <p className="text-gray-600 font-sans text-sm">
-                    info@sankeyevents.com<br />
-                    bookings@sankeyevents.com
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+            <div className="border-l border-brand-gold/55 pl-6 text-sm leading-7 text-brand-black/72 md:text-base">
+              <p>Have a question, idea, or event in mind?</p>
+              <p>We&apos;d love to hear from you. Reach out to our team and let&apos;s bring your vision to life.</p>
+            </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+          <div className="mt-8 grid gap-5 lg:grid-cols-[0.9fr_1.15fr]">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white p-8 md:p-10 rounded-2xl shadow-xl shadow-brand-black/5 border border-brand-beige"
+              transition={{ duration: 0.55 }}
+              className="rounded-2xl border border-brand-gold/35 bg-white/78 p-5 shadow-2xl shadow-brand-bronze/10 backdrop-blur-md md:p-7"
             >
-              <form className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-brand-black mb-2">Your Name</label>
-                    <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-brand-black mb-2">Email Address</label>
-                    <input type="email" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" />
-                  </div>
+              <div className="mb-5 flex items-center gap-4">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full border border-brand-gold/60 bg-brand-beige text-brand-bronze shadow-lg shadow-brand-bronze/10">
+                  <Send size={25} />
                 </div>
-
                 <div>
-                  <label className="block text-sm font-medium text-brand-black mb-2">Subject</label>
-                  <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" />
+                  <h2 className="text-2xl font-serif text-brand-black">Send us a Message</h2>
+                  <p className="text-sm text-brand-bronze">We&apos;ll get back to you shortly!</p>
+                </div>
+              </div>
+
+              <form className="space-y-4">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <label className="relative block">
+                    <User size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-bronze" />
+                    <input
+                      type="text"
+                      placeholder="Your Name"
+                      className="h-12 w-full rounded-md border border-brand-gold/20 bg-white/70 pl-11 pr-4 text-sm text-brand-black outline-none transition-colors placeholder:text-brand-black/45 focus:border-brand-gold/70"
+                    />
+                  </label>
+                  <label className="relative block">
+                    <Mail size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-bronze" />
+                    <input
+                      type="email"
+                      placeholder="Your Email"
+                      className="h-12 w-full rounded-md border border-brand-gold/20 bg-white/70 pl-11 pr-4 text-sm text-brand-black outline-none transition-colors placeholder:text-brand-black/45 focus:border-brand-gold/70"
+                    />
+                  </label>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-brand-black mb-2">Message</label>
-                  <textarea rows={5} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans resize-none"></textarea>
-                </div>
+                <label className="relative block">
+                  <Phone size={15} className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-bronze" />
+                  <input
+                    type="tel"
+                    placeholder="Phone Number"
+                    className="h-12 w-full rounded-md border border-brand-gold/20 bg-white/70 pl-11 pr-4 text-sm text-brand-black outline-none transition-colors placeholder:text-brand-black/45 focus:border-brand-gold/70"
+                  />
+                </label>
 
-                <button type="button" className="py-4 px-8 bg-brand-black text-white font-medium rounded-lg hover:bg-brand-bronze transition-all flex items-center group shadow-xl">
-                  Send Message <Send size={18} className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <label className="relative block">
+                  <Pencil size={15} className="absolute left-4 top-4 text-brand-bronze" />
+                  <textarea
+                    rows={5}
+                    placeholder="Type your message here..."
+                    className="w-full resize-none rounded-md border border-brand-gold/20 bg-white/70 py-4 pl-11 pr-4 text-sm text-brand-black outline-none transition-colors placeholder:text-brand-black/45 focus:border-brand-gold/70"
+                  ></textarea>
+                </label>
+
+                <button
+                  type="button"
+                  className="mx-auto flex h-12 min-w-56 items-center justify-center gap-4 rounded-md bg-brand-gold px-8 text-xs font-bold uppercase tracking-wide text-white shadow-xl shadow-brand-gold/20 transition-transform hover:-translate-y-0.5 hover:bg-brand-bronze"
+                >
+                  Send Message <ArrowRight size={16} />
                 </button>
               </form>
             </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: 0.08 }}
+              className="rounded-2xl border border-brand-gold/35 bg-white/78 p-4 shadow-2xl shadow-brand-bronze/10 backdrop-blur-md"
+            >
+              <div className="mb-3 flex items-center gap-3 text-brand-black">
+                <div className="flex h-7 w-7 items-center justify-center rounded-full border border-brand-gold text-brand-bronze">
+                  <MapPin size={16} />
+                </div>
+                <h2 className="text-xl font-serif">Find Us</h2>
+                <span className="h-px flex-1 bg-brand-gold/45"></span>
+                <span className="text-brand-gold">...</span>
+              </div>
+
+              <div className="overflow-hidden rounded-xl border border-brand-gold/20 grayscale-[45%]">
+                <iframe
+                  title="Sankey Events location"
+                  src="https://www.google.com/maps?q=Sankey%20Road%20Bangalore%20560020&output=embed"
+                  className="h-64 w-full border-0 md:h-72"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                {contactCards.map((card) => (
+                  <div key={card.title} className="rounded-lg border border-brand-gold/20 bg-brand-ivory/65 p-4">
+                    <div className="mb-2 flex items-center gap-2 text-brand-bronze">
+                      <card.icon size={18} />
+                      <h3 className="text-sm font-serif text-brand-bronze">{card.title}</h3>
+                    </div>
+                    <div className="space-y-1 text-xs leading-5 text-brand-black/70">
+                      {card.lines.map((line) => <p key={line}>{line}</p>)}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section className="border-t border-brand-gold/20 bg-brand-beige/55">
+        <div className="mx-auto grid max-w-[1500px] gap-6 px-4 py-6 md:grid-cols-[1.5fr_repeat(4,1fr)] md:px-8">
+          <div className="flex items-center gap-4 text-brand-black/85">
+            <Star size={34} className="shrink-0 text-brand-gold" />
+            <p className="text-lg font-serif leading-tight">
+              We don&apos;t just plan events,<br />
+              <span className="text-brand-bronze">we create unforgettable experiences.</span>
+            </p>
+          </div>
+
+          {stats.map((stat) => (
+            <div key={stat.label} className="flex items-center gap-4 border-brand-gold/25 md:border-l md:pl-6">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-brand-gold bg-white/50 text-brand-bronze">
+                <stat.icon size={22} />
+              </div>
+              <div>
+                <p className="text-2xl font-serif font-bold text-brand-bronze">{stat.value}</p>
+                <p className="text-xs text-brand-black/65">{stat.label}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

@@ -20,6 +20,28 @@ const galleries = {
       '/surge/image copy 3.png', '/surge/image copy 4.png'
     ]
   },
+  dacss: {
+    title: 'Dacss Granite',
+    subtitle: 'Corporate Event',
+    images: [
+      '/Dacss Granite/image copy 2.png', '/Dacss Granite/image copy.png', '/Dacss Granite/image.png'
+    ]
+  },
+  eknirangan: {
+    title: 'Ek Nirangan',
+    subtitle: 'Movie Launch',
+    images: [
+      '/Ek nirangan movie launch/image copy 2.png', '/Ek nirangan movie launch/image copy.png', '/Ek nirangan movie launch/image.png'
+    ]
+  },
+  tamanna: {
+    title: 'Tamanna Event',
+    subtitle: 'Live Event',
+    images: [
+      '/Tamanna Event/image copy 2.png', '/Tamanna Event/image copy 3.png',
+      '/Tamanna Event/image copy.png', '/Tamanna Event/image.png'
+    ]
+  },
   sagascious: {
     title: 'Sagascious Show 2012',
     subtitle: 'Live Event',
@@ -316,9 +338,12 @@ export default function Events() {
             </h2>
           </div>
           
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <GalleryCard type="tydal" delay={0} />
             <GalleryCard type="surge" delay={0.2} />
+            <GalleryCard type="dacss" delay={0.3} />
+            <GalleryCard type="eknirangan" delay={0.4} />
+            <GalleryCard type="tamanna" delay={0.5} />
           </div>
         </div>
       </div>

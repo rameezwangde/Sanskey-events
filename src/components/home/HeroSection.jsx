@@ -60,7 +60,7 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="container mx-auto"
         >
-          <div className="grid grid-cols-1 gap-4 rounded-2xl border border-brand-beige/60 bg-white/95 p-4 shadow-2xl shadow-brand-bronze/5 backdrop-blur-md sm:grid-cols-2 sm:p-6 md:grid-cols-4 md:gap-8 md:p-8 md:divide-x md:divide-brand-beige">
+          <div className="grid grid-cols-1 gap-4 rounded-2xl border border-brand-beige/60 p-4 shadow-2xl shadow-brand-bronze/5 sm:grid-cols-2 sm:p-6 md:grid-cols-4 md:gap-8 md:p-8 md:divide-x md:divide-brand-beige">
             {stats.map((stat, index) => (
               <div key={stat.label} className={`flex items-center gap-4 ${index === 0 ? 'md:pl-4' : 'md:pl-8'}`}>
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-beige text-brand-bronze sm:h-12 sm:w-12">

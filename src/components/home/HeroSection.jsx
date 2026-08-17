@@ -24,12 +24,12 @@ export default function HeroSection() {
             transition={{ duration: 0.8 }}
             className="flex flex-col items-center"
           >
-            <h2 className="mb-4 text-sm font-bold uppercase tracking-[0.25em] text-brand-bronze sm:mb-6 sm:text-base">
+            <h2 className="mb-4 text-sm font-bold uppercase tracking-[0.25em] text-black sm:mb-6 sm:text-base">
               We plan. You celebrate.
             </h2>
             <h1 className="mb-6 max-w-full font-serif text-[clamp(2.5rem,8vw,4rem)] leading-[1.1] text-brand-black sm:text-[clamp(3.5rem,8vw,5.5rem)] md:mb-8">
               CRAFTING <br className="hidden sm:block" />
-              <span className="text-brand-gold">UNFORGETTABLE</span> EXPERIENCES
+              <span className="text-black">UNFORGETTABLE</span> EXPERIENCES
             </h1>
             <p className="mb-8 max-w-2xl text-base leading-relaxed text-gray-800 sm:mb-10 sm:text-xl md:mb-12">
               From corporate events to fashion shows, we bring your vision to life with creativity, precision & passion. Let us craft the perfect moment for your special day.

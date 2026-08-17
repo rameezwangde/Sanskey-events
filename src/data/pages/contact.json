@@ -1,0 +1,37 @@
+{
+  "eyebrow": "Get In Touch",
+  "title": "Let's Create Something",
+  "titleHighlight": "Extraordinary",
+  "subtitle": "Have a question, idea, or event in mind?\nWe'd love to hear from you. Reach out to our team and let's bring your vision to life.",
+  "mapUrl": "https://www.google.com/maps?q=Sankey%20Road%20Bangalore%20560020&output=embed",
+  "contactCards": [
+    {
+      "icon": "MapPin",
+      "title": "Our Address",
+      "lines": ["#17, Sankey Road,", "Bangalore 560 020", "Karnataka, India"]
+    },
+    {
+      "icon": "Phone",
+      "title": "Call Us",
+      "lines": ["080 23349887", "9844000669"]
+    },
+    {
+      "icon": "Mail",
+      "title": "Email Us",
+      "lines": ["sankeyevents@gmail.com", "sankeyindia@yahoo.com"]
+    },
+    {
+      "icon": "Clock",
+      "title": "Working Hours",
+      "lines": ["Mon - Sat: 10:00 AM - 7:00 PM", "Sunday: By Appointment"]
+    }
+  ],
+  "footerText1": "We don't just plan events,",
+  "footerText2": "we create unforgettable experiences.",
+  "stats": [
+    { "icon": "CalendarDays", "value": "2000+", "label": "Events Executed" },
+    { "icon": "UsersRound", "value": "15+", "label": "Years of Experience" },
+    { "icon": "Trophy", "value": "100+", "label": "Happy Clients" },
+    { "icon": "Handshake", "value": "End-to-End", "label": "Event Solutions" }
+  ]
+}

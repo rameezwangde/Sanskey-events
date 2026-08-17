@@ -1,0 +1,17 @@
+{
+  "description": "Crafting unforgettable experiences from corporate events to fashion shows, bringing your vision to life with creativity, precision & passion.",
+  "quickLinks": [
+    { "label": "About Us", "url": "/about" },
+    { "label": "Our Services", "url": "/events" },
+    { "label": "Gallery", "url": "/gallery" },
+    { "label": "Contact", "url": "/contact" }
+  ],
+  "email": "info@sankeyevents.com",
+  "phone": "+91 98765 43210",
+  "location": "Bengaluru, India",
+  "copyright": "Sankey Events. All Rights Reserved.",
+  "legalLinks": [
+    { "label": "Privacy Policy", "url": "#" },
+    { "label": "Terms of Service", "url": "#" }
+  ]
+}

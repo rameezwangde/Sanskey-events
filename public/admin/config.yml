@@ -66,6 +66,19 @@ collections:
           - {label: "Eyebrow", name: "eyebrow", widget: "string"}
           - {label: "Title", name: "title", widget: "string"}
           - {label: "Images", name: "images", widget: "list", fields: [{label: "Image", name: "image", widget: "image"}, {label: "Thumbnail", name: "thumb", widget: "image", required: false}, {label: "Alt Text", name: "alt", widget: "string", required: false}]}
+      - file: "src/data/pages/contact.json"
+        label: "Contact Page"
+        name: "contact"
+        fields:
+          - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Title Highlight", name: "titleHighlight", widget: "string"}
+          - {label: "Subtitle", name: "subtitle", widget: "text"}
+          - {label: "Google Maps URL", name: "mapUrl", widget: "string"}
+          - {label: "Contact Cards", name: "contactCards", widget: "list", fields: [{label: "Icon", name: "icon", widget: "string"}, {label: "Title", name: "title", widget: "string"}, {label: "Lines", name: "lines", widget: "list", field: {label: "Line", name: "line", widget: "string"}}]}
+          - {label: "Footer Text Line 1", name: "footerText1", widget: "string"}
+          - {label: "Footer Text Line 2", name: "footerText2", widget: "string"}
+          - {label: "Stats", name: "stats", widget: "list", fields: [{label: "Icon", name: "icon", widget: "string"}, {label: "Value", name: "value", widget: "string"}, {label: "Label", name: "label", widget: "string"}]}
 
   - name: "globals"
     label: "Global Settings"
@@ -74,10 +87,21 @@ collections:
         label: "Footer Settings"
         name: "footer"
         fields:
-          - {label: "Company Name", name: "companyName", widget: "string"}
-          - {label: "Address", name: "address", widget: "string"}
-          - {label: "Phone", name: "phone", widget: "string"}
-          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Quick Links", name: "quickLinks", widget: "list", fields: [{label: "Label", name: "label", widget: "string"}, {label: "URL", name: "url", widget: "string"}]}
+          - {label: "Contact Email", name: "email", widget: "string"}
+          - {label: "Contact Phone", name: "phone", widget: "string"}
+          - {label: "Contact Location", name: "location", widget: "string"}
+          - {label: "Copyright Text", name: "copyright", widget: "string"}
+          - {label: "Legal Links", name: "legalLinks", widget: "list", fields: [{label: "Label", name: "label", widget: "string"}, {label: "URL", name: "url", widget: "string"}]}
+      - file: "src/data/globals/navbar.json"
+        label: "Navbar Settings"
+        name: "navbar"
+        fields:
+          - {label: "Navigation Links", name: "navLinks", widget: "list", fields: [{label: "Name", name: "name", widget: "string"}, {label: "Path", name: "path", widget: "string"}]}
+          - {label: "Social Links", name: "socialLinks", widget: "list", fields: [{label: "Platform", name: "platform", widget: "select", options: ["facebook", "instagram", "youtube"]}, {label: "URL", name: "url", widget: "string"}]}
+          - {label: "Call to Action Text", name: "ctaText", widget: "string"}
+          - {label: "Call to Action Link", name: "ctaLink", widget: "string"}
 
   - name: "event_sections"
     label: "Event Sections"

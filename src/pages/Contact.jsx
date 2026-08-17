@@ -1,35 +1,8 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, CalendarDays, Clock, Mail, MapPin, Phone, Send, Star, Trophy, UsersRound, Handshake, User, Pencil } from 'lucide-react';
+import contactData from '../data/pages/contact.json';
 
-const contactCards = [
-  {
-    icon: MapPin,
-    title: 'Our Address',
-    lines: ['#17, Sankey Road,', 'Bangalore 560 020', 'Karnataka, India']
-  },
-  {
-    icon: Phone,
-    title: 'Call Us',
-    lines: ['080 23349887', '9844000669']
-  },
-  {
-    icon: Mail,
-    title: 'Email Us',
-    lines: ['sankeyevents@gmail.com', 'sankeyindia@yahoo.com']
-  },
-  {
-    icon: Clock,
-    title: 'Working Hours',
-    lines: ['Mon - Sat: 10:00 AM - 7:00 PM', 'Sunday: By Appointment']
-  }
-];
-
-const stats = [
-  { icon: CalendarDays, value: '2000+', label: 'Events Executed' },
-  { icon: UsersRound, value: '15+', label: 'Years of Experience' },
-  { icon: Trophy, value: '100+', label: 'Happy Clients' },
-  { icon: Handshake, value: 'End-to-End', label: 'Event Solutions' }
-];
+const iconMap = { MapPin, Phone, Mail, Clock, CalendarDays, UsersRound, Trophy, Handshake };
 
 export default function Contact() {
   return (
@@ -47,18 +20,17 @@ export default function Contact() {
           <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-end">
             <div>
               <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.24em] text-brand-bronze">
-                Get In Touch
+                {contactData.eyebrow}
               </p>
               <h1 className="max-w-3xl font-serif text-3xl leading-tight text-brand-black sm:text-4xl md:text-6xl md:leading-[0.95]">
-                Let&apos;s Create Something
-                <span className="mt-1 block font-serif italic text-brand-gold">Extraordinary</span>
+                {contactData.title}
+                <span className="mt-1 block font-serif italic text-brand-gold">{contactData.titleHighlight}</span>
               </h1>
               <div className="mt-3 h-px w-80 max-w-full bg-gradient-to-r from-brand-gold via-brand-gold/75 to-transparent"></div>
             </div>
 
-            <div className="border-l-0 border-brand-gold/55 pl-0 text-sm sm:border-l sm:pl-6 leading-7 text-brand-black/72 md:text-base">
-              <p>Have a question, idea, or event in mind?</p>
-              <p>We&apos;d love to hear from you. Reach out to our team and let&apos;s bring your vision to life.</p>
+            <div className="border-l-0 border-brand-gold/55 pl-0 text-sm sm:border-l sm:pl-6 leading-7 text-brand-black/72 md:text-base whitespace-pre-wrap">
+              {contactData.subtitle}
             </div>
           </div>
 
@@ -146,7 +118,7 @@ export default function Contact() {
               <div className="overflow-hidden rounded-xl border border-brand-gold/20 grayscale-[45%]">
                 <iframe
                   title="Sankey Events location"
-                  src="https://www.google.com/maps?q=Sankey%20Road%20Bangalore%20560020&output=embed"
+                  src={contactData.mapUrl}
                   className="h-56 w-full border-0 sm:h-64 md:h-72"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -154,17 +126,20 @@ export default function Contact() {
               </div>
 
               <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
-                {contactCards.map((card) => (
+                {contactData.contactCards.map((card) => {
+                  const Icon = iconMap[card.icon] || MapPin;
+                  return (
                   <div key={card.title} className="rounded-lg border border-brand-gold/20 bg-brand-ivory/65 p-4">
                     <div className="mb-2 flex items-center gap-2 text-brand-bronze">
-                      <card.icon size={18} />
+                      <Icon size={18} />
                       <h3 className="text-sm font-serif text-brand-bronze">{card.title}</h3>
                     </div>
                     <div className="space-y-1 text-xs leading-5 text-brand-black/70">
-                      {card.lines.map((line) => <p key={line}>{line}</p>)}
+                      {card.lines.map((item) => <p key={item.line || item}>{item.line || item}</p>)}
                     </div>
                   </div>
-                ))}
+                  )
+                })}
               </div>
             </motion.div>
           </div>
@@ -176,22 +151,25 @@ export default function Contact() {
           <div className="flex items-center gap-4 text-brand-black/85">
             <Star size={34} className="shrink-0 text-brand-gold" />
             <p className="text-base font-serif sm:text-lg leading-tight">
-              We don&apos;t just plan events,<br />
-              <span className="text-brand-bronze">we create unforgettable experiences.</span>
+              {contactData.footerText1}<br />
+              <span className="text-brand-bronze">{contactData.footerText2}</span>
             </p>
           </div>
 
-          {stats.map((stat) => (
+          {contactData.stats.map((stat) => {
+            const Icon = iconMap[stat.icon] || CalendarDays;
+            return (
             <div key={stat.label} className="flex items-center gap-4 border-brand-gold/25 md:border-l md:pl-6">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-brand-gold bg-white/50 text-brand-bronze">
-                <stat.icon size={22} />
+                <Icon size={22} />
               </div>
               <div>
                 <p className="text-xl font-serif sm:text-2xl font-bold text-brand-bronze">{stat.value}</p>
                 <p className="text-xs text-brand-black/65">{stat.label}</p>
               </div>
             </div>
-          ))}
+            )
+          })}
         </div>
       </section>
     </div>

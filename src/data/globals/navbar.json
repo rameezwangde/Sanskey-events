@@ -1,0 +1,18 @@
+{
+  "navLinks": [
+    { "name": "Home", "path": "/" },
+    { "name": "About Sankey", "path": "/about" },
+    { "name": "Models", "path": "/models" },
+    { "name": "Register Here", "path": "/register" },
+    { "name": "Event by us", "path": "/events" },
+    { "name": "Gallery", "path": "/gallery" },
+    { "name": "Contact", "path": "/contact" }
+  ],
+  "socialLinks": [
+    { "platform": "facebook", "url": "#" },
+    { "platform": "instagram", "url": "#" },
+    { "platform": "youtube", "url": "#" }
+  ],
+  "ctaText": "Register Now",
+  "ctaLink": "/register"
+}

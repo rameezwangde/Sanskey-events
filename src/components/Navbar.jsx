@@ -5,16 +5,13 @@ import { FaFacebookF, FaInstagram, FaYoutube } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 import LogoMark from './LogoMark';
+import navbarData from '../data/globals/navbar.json';
 
-const navLinks = [
-  { name: 'Home', path: '/' },
-  { name: 'About Sankey', path: '/about' },
-  { name: 'Models', path: '/models' },
-  { name: 'Register Here', path: '/register' },
-  { name: 'Event by us', path: '/events' },
-  { name: 'Gallery', path: '/gallery' },
-  { name: 'Contact', path: '/contact' },
-];
+const socialIcons = {
+  facebook: FaFacebookF,
+  instagram: FaInstagram,
+  youtube: FaYoutube
+};
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -42,7 +39,7 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden items-center space-x-6 xl:flex">
-          {navLinks.map((link) => (
+          {navbarData.navLinks.map((link) => (
             <Link
               key={link.name}
               to={link.path}
@@ -61,12 +58,15 @@ export default function Navbar() {
 
         <div className="hidden items-center space-x-4 lg:flex">
           <div className="mr-2 flex space-x-2">
-            <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full border border-brand-bronze/30 text-brand-black transition-all hover:bg-brand-bronze hover:text-white"><FaFacebookF size={14} /></a>
-            <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full border border-brand-bronze/30 text-brand-black transition-all hover:bg-brand-bronze hover:text-white"><FaInstagram size={14} /></a>
-            <a href="#" className="flex h-8 w-8 items-center justify-center rounded-full border border-brand-bronze/30 text-brand-black transition-all hover:bg-brand-bronze hover:text-white"><FaYoutube size={14} /></a>
+            {navbarData.socialLinks.map((social) => {
+              const Icon = socialIcons[social.platform] || FaFacebookF;
+              return (
+                <a key={social.platform} href={social.url} className="flex h-8 w-8 items-center justify-center rounded-full border border-brand-bronze/30 text-brand-black transition-all hover:bg-brand-bronze hover:text-white"><Icon size={14} /></a>
+              );
+            })}
           </div>
-          <Link to="/register" className="group flex items-center rounded-full bg-gradient-to-r from-brand-gold to-brand-bronze px-6 py-2.5 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-brand-gold/20">
-            Register Now <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
+          <Link to={navbarData.ctaLink} className="group flex items-center rounded-full bg-gradient-to-r from-brand-gold to-brand-bronze px-6 py-2.5 text-sm font-medium text-white transition-all hover:shadow-lg hover:shadow-brand-gold/20">
+            {navbarData.ctaText} <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
 
@@ -89,7 +89,7 @@ export default function Navbar() {
             className="absolute left-0 top-full max-h-[calc(100vh-76px)] w-full overflow-y-auto border-t border-brand-beige bg-brand-ivory shadow-lg xl:hidden"
           >
             <div className="flex flex-col space-y-1 px-5 py-4">
-              {navLinks.map((link) => (
+              {navbarData.navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
@@ -103,9 +103,12 @@ export default function Navbar() {
                 </Link>
               ))}
               <div className="flex space-x-4 border-t border-brand-beige pt-4">
-                <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-bronze/30 text-brand-black"><FaFacebookF size={18} /></a>
-                <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-bronze/30 text-brand-black"><FaInstagram size={18} /></a>
-                <a href="#" className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-bronze/30 text-brand-black"><FaYoutube size={18} /></a>
+                {navbarData.socialLinks.map((social) => {
+                  const Icon = socialIcons[social.platform] || FaFacebookF;
+                  return (
+                    <a key={social.platform} href={social.url} className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-bronze/30 text-brand-black"><Icon size={18} /></a>
+                  );
+                })}
               </div>
             </div>
           </motion.div>

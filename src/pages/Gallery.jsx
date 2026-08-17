@@ -2,40 +2,13 @@ import { useState } from 'react';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
 import { motion } from 'framer-motion';
+import galleryData from '../data/pages/gallery.json';
 
-const galleryModules = import.meta.glob('../../gallery/*.{png,jpg,jpeg,webp}', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-});
-
-const thumbnailModules = import.meta.glob('../../gallery/thumbs/*.{jpg,jpeg,png,webp}', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-});
-
-const getBaseName = (path) => path.split('/').pop().replace(/\.[^.]+$/, '');
-
-const getImageNumber = (path) => {
-  const match = getBaseName(path).match(/^image(\d*)$/i);
-  return match?.[1] ? Number(match[1]) : 1;
-};
-
-const thumbnailsByName = Object.fromEntries(
-  Object.entries(thumbnailModules).map(([path, src]) => [getBaseName(path), src]),
-);
-
-const images = Object.entries(galleryModules)
-  .sort(([a], [b]) => getImageNumber(a) - getImageNumber(b))
-  .map(([path, src], index) => {
-    const name = getBaseName(path);
-    return {
-      src,
-      thumb: thumbnailsByName[name] || src,
-      alt: `Sankey Events gallery image ${index + 1}`,
-    };
-  });
+const images = galleryData.images.map((img, index) => ({
+  src: img.image,
+  thumb: img.thumb || img.image,
+  alt: img.alt || `Sankey Events gallery image ${index + 1}`
+}));
 
 export default function Gallery() {
   const [index, setIndex] = useState(-1);
@@ -45,10 +18,10 @@ export default function Gallery() {
       <div className="container mx-auto px-4 md:px-8">
         <div className="mb-8 text-center md:mb-12">
           <p className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-brand-bronze sm:text-sm">
-            Portfolio
+            {galleryData.eyebrow}
           </p>
           <h1 className="mb-4 font-serif text-3xl text-brand-black sm:text-4xl md:text-5xl">
-            Events & Shows Gallery
+            {galleryData.title}
           </h1>
         </div>
 

@@ -1,0 +1,24 @@
+{
+  "eyebrow": "Portfolio",
+  "title": "Events & Shows Gallery",
+  "images": [
+    { "image": "/gallery/image.png", "thumb": "/gallery/thumbs/image.jpg", "alt": "Sankey Events gallery image 1" },
+    { "image": "/gallery/image2.png", "thumb": "/gallery/thumbs/image2.jpg", "alt": "Sankey Events gallery image 2" },
+    { "image": "/gallery/image3.png", "thumb": "/gallery/thumbs/image3.jpg", "alt": "Sankey Events gallery image 3" },
+    { "image": "/gallery/image4.png", "thumb": "/gallery/thumbs/image4.jpg", "alt": "Sankey Events gallery image 4" },
+    { "image": "/gallery/image5.png", "thumb": "/gallery/thumbs/image5.jpg", "alt": "Sankey Events gallery image 5" },
+    { "image": "/gallery/image6.png", "thumb": "/gallery/thumbs/image6.jpg", "alt": "Sankey Events gallery image 6" },
+    { "image": "/gallery/image7.png", "thumb": "/gallery/thumbs/image7.jpg", "alt": "Sankey Events gallery image 7" },
+    { "image": "/gallery/image8.png", "thumb": "/gallery/thumbs/image8.jpg", "alt": "Sankey Events gallery image 8" },
+    { "image": "/gallery/image9.png", "thumb": "/gallery/thumbs/image9.jpg", "alt": "Sankey Events gallery image 9" },
+    { "image": "/gallery/image10.png", "thumb": "/gallery/thumbs/image10.jpg", "alt": "Sankey Events gallery image 10" },
+    { "image": "/gallery/image11.png", "thumb": "/gallery/thumbs/image11.jpg", "alt": "Sankey Events gallery image 11" },
+    { "image": "/gallery/image12.png", "thumb": "/gallery/thumbs/image12.jpg", "alt": "Sankey Events gallery image 12" },
+    { "image": "/gallery/image13.png", "thumb": "/gallery/thumbs/image13.jpg", "alt": "Sankey Events gallery image 13" },
+    { "image": "/gallery/image14.png", "thumb": "/gallery/thumbs/image14.jpg", "alt": "Sankey Events gallery image 14" },
+    { "image": "/gallery/image15.png", "thumb": "/gallery/thumbs/image15.jpg", "alt": "Sankey Events gallery image 15" },
+    { "image": "/gallery/image16.png", "thumb": "/gallery/thumbs/image16.jpg", "alt": "Sankey Events gallery image 16" },
+    { "image": "/gallery/image17.png", "thumb": "/gallery/thumbs/image17.jpg", "alt": "Sankey Events gallery image 17" },
+    { "image": "/gallery/image18.png", "thumb": "/gallery/thumbs/image18.jpg", "alt": "Sankey Events gallery image 18" }
+  ]
+}

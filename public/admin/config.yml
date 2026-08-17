@@ -59,6 +59,13 @@ collections:
           - {label: "Call to Action Text", name: "ctaText", widget: "string"}
           - {label: "Call to Action Link", name: "ctaLink", widget: "string"}
           - {label: "Models List", name: "models", widget: "list", fields: [{label: "Name", name: "name", widget: "string"}, {label: "Title/Role", name: "title", widget: "string"}, {label: "Cover Image", name: "image", widget: "image"}]}
+      - file: "src/data/pages/gallery.json"
+        label: "Gallery Page"
+        name: "gallery"
+        fields:
+          - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Images", name: "images", widget: "list", fields: [{label: "Image", name: "image", widget: "image"}, {label: "Thumbnail", name: "thumb", widget: "image", required: false}, {label: "Alt Text", name: "alt", widget: "string", required: false}]}
 
   - name: "globals"
     label: "Global Settings"

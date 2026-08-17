@@ -13,7 +13,7 @@ export default function HeroSection() {
   return (
     <section 
       ref={containerRef}
-      className="relative min-h-[100svh] w-full overflow-hidden bg-brand-ivory pt-20 flex items-center"
+      className="relative w-full overflow-hidden bg-brand-ivory pt-16 pb-16 md:pt-20 md:pb-24"
     >
       <div className="absolute inset-0 z-0">
         <motion.img 

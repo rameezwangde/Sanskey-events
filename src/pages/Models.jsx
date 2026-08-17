@@ -1,23 +1,20 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import modelsData from '../data/pages/models.json';
 
-const models = [
-  { name: 'Aisha Sharma', title: 'Miss Sankey 2023', image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920&auto=format&fit=crop' },
-  { name: 'Neha Reddy', title: 'Top Fashion Model', image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1920&auto=format&fit=crop' },
-  { name: 'Priya Patel', title: 'Commercial Model', image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1920&auto=format&fit=crop' }
-];
+const models = modelsData.models || [];
 
 export default function Models() {
   return (
     <div className="pt-12 pb-16 md:pt-20 md:pb-20 min-h-screen bg-brand-ivory">
       <div className="container mx-auto px-4 md:px-8 mb-10 text-center md:mb-16">
         <p className="text-brand-bronze font-sans font-bold tracking-[0.2em] uppercase text-xs sm:text-sm mb-2">
-          Sankey Modelling Agency
+          {modelsData.eyebrow}
         </p>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif text-brand-black mb-6">Our Top Models</h1>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif text-brand-black mb-6">{modelsData.title}</h1>
         <p className="text-gray-600 max-w-2xl mx-auto font-sans">
-          Showcasing the finest talent in the industry. Our premier modelling agency represents top-tier models for fashion shows, commercial shoots, and brand endorsements.
+          {modelsData.description}
         </p>
       </div>
 
@@ -45,8 +42,8 @@ export default function Models() {
       </div>
 
       <div className="mt-12 md:mt-20 container mx-auto px-4 md:px-8 text-center">
-         <Link to="/register" className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 bg-brand-gold text-white font-medium rounded-full hover:bg-brand-bronze transition-all shadow-xl shadow-brand-gold/20">
-            Apply as a Model <ArrowRight size={18} className="ml-2" />
+         <Link to={modelsData.ctaLink || "/register"} className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 bg-brand-gold text-white font-medium rounded-full hover:bg-brand-bronze transition-all shadow-xl shadow-brand-gold/20">
+            {modelsData.ctaText || "Apply as a Model"} <ArrowRight size={18} className="ml-2" />
          </Link>
       </div>
     </div>

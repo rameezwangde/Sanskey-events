@@ -1,0 +1,28 @@
+{
+  "heroEyebrow": "We plan. You celebrate.",
+  "heroTitle1": "CRAFTING",
+  "heroTitleHighlight": "UNFORGETTABLE",
+  "heroTitle2": "EXPERIENCES",
+  "heroDescription": "From corporate events to fashion shows, we bring your vision to life with creativity, precision & passion. Let us craft the perfect moment for your special day.",
+  "heroPrimaryButton": "Plan Your Event",
+  "heroSecondaryButton": "View Our Portfolio",
+  "heroBgImage": "/hero-bg.jpg",
+  "stats": [
+    { "value": "15+", "label": "Years of Experience", "icon": "Users" },
+    { "value": "500+", "label": "Events Executed", "icon": "Star" },
+    { "value": "100+", "label": "Happy Clients", "icon": "ShieldCheck" },
+    { "value": "50+", "label": "Brands Trust Us", "icon": "Award" }
+  ],
+  "clienteleEyebrow": "Trusted By",
+  "clienteleTitle": "Our Premium Clientele",
+  "clients": [
+    { "name": "Havells", "logo": "/havells.png" },
+    { "name": "Tydal", "logo": "/tydal.png" },
+    { "name": "Van Heusen", "logo": "/Van Heusen.png" },
+    { "name": "Somany", "logo": "/somany.png" },
+    { "name": "Mahindra", "logo": "/mahindra.png" },
+    { "name": "Samsung", "logo": "/samsung.png" },
+    { "name": "Rotary Club", "logo": "/rotary.png" },
+    { "name": "Lions Club", "logo": "/Lions Clubs International.png" }
+  ]
+}

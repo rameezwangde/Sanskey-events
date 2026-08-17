@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion';
 import { Users, Star, ShieldCheck, Award } from 'lucide-react';
+import homeData from '../../data/pages/home.json';
 
-const stats = [
-  { icon: Users, value: '15+', label: 'Years of Experience' },
-  { icon: Star, value: '500+', label: 'Events Executed' },
-  { icon: ShieldCheck, value: '100+', label: 'Happy Clients' },
-  { icon: Award, value: '50+', label: 'Brands Trust Us' },
-];
+const iconMap = {
+  Users,
+  Star,
+  ShieldCheck,
+  Award
+};
+
+const stats = homeData.stats || [];
 
 export default function StatsSection() {
   return (
@@ -19,17 +22,20 @@ export default function StatsSection() {
         className="container mx-auto"
       >
         <div className="grid grid-cols-1 gap-6 rounded-2xl border border-brand-beige/60 bg-white/80 p-6 shadow-xl shadow-brand-bronze/5 sm:grid-cols-2 lg:grid-cols-4 md:gap-8 md:p-8 md:divide-x md:divide-brand-beige backdrop-blur-sm">
-          {stats.map((stat, index) => (
+          {stats.map((stat, index) => {
+            const Icon = iconMap[stat.icon] || Users;
+            return (
             <div key={stat.label} className={`flex items-center justify-center gap-4 ${index !== 0 ? 'md:pl-8' : ''}`}>
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand-beige/50 text-brand-bronze">
-                <stat.icon size={26} />
+                <Icon size={26} />
               </div>
               <div className="min-w-0 text-left">
                 <h4 className="font-serif text-2xl font-bold text-brand-black">{stat.value}</h4>
                 <p className="text-sm font-medium leading-snug text-gray-700">{stat.label}</p>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       </motion.div>
     </section>

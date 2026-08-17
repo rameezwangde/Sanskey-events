@@ -27,15 +27,38 @@ collections:
         label: "Home Page"
         name: "home"
         fields:
-          - {label: "Hero Title", name: "heroTitle", widget: "string"}
-          - {label: "Hero Subtitle", name: "heroSubtitle", widget: "text"}
-          - {label: "Stats", name: "stats", widget: "list", fields: [{label: "Label", name: "label", widget: "string"}, {label: "Value", name: "value", widget: "string"}]}
+          - {label: "Hero Eyebrow", name: "heroEyebrow", widget: "string"}
+          - {label: "Hero Title Part 1", name: "heroTitle1", widget: "string"}
+          - {label: "Hero Title Highlight", name: "heroTitleHighlight", widget: "string"}
+          - {label: "Hero Title Part 2", name: "heroTitle2", widget: "string"}
+          - {label: "Hero Description", name: "heroDescription", widget: "text"}
+          - {label: "Hero Background Image", name: "heroBgImage", widget: "string"}
+          - {label: "Stats", name: "stats", widget: "list", fields: [{label: "Label", name: "label", widget: "string"}, {label: "Value", name: "value", widget: "string"}, {label: "Icon (Lucide name)", name: "icon", widget: "string"}]}
+          - {label: "Clientele Eyebrow", name: "clienteleEyebrow", widget: "string"}
+          - {label: "Clientele Title", name: "clienteleTitle", widget: "string"}
+          - {label: "Clients", name: "clients", widget: "list", fields: [{label: "Name", name: "name", widget: "string"}, {label: "Logo URL", name: "logo", widget: "string"}]}
       - file: "src/data/pages/about.json"
         label: "About Page"
         name: "about"
         fields:
+          - {label: "Eyebrow", name: "eyebrow", widget: "string"}
+          - {label: "Title Part 1", name: "title1", widget: "string"}
+          - {label: "Title Highlight", name: "titleHighlight", widget: "string"}
+          - {label: "Title Part 2", name: "title2", widget: "string"}
+          - {label: "Paragraph 1", name: "paragraph1", widget: "text"}
+          - {label: "Paragraph 2", name: "paragraph2", widget: "text"}
+          - {label: "Paragraph 3 (Highlighted)", name: "paragraph3", widget: "text"}
+          - {label: "Image URL", name: "image", widget: "string"}
+      - file: "src/data/pages/models.json"
+        label: "Models Page"
+        name: "models"
+        fields:
+          - {label: "Eyebrow", name: "eyebrow", widget: "string"}
           - {label: "Title", name: "title", widget: "string"}
-          - {label: "Content", name: "content", widget: "markdown"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Call to Action Text", name: "ctaText", widget: "string"}
+          - {label: "Call to Action Link", name: "ctaLink", widget: "string"}
+          - {label: "Models List", name: "models", widget: "list", fields: [{label: "Name", name: "name", widget: "string"}, {label: "Title/Role", name: "title", widget: "string"}, {label: "Cover Image", name: "image", widget: "image"}]}
 
   - name: "globals"
     label: "Global Settings"

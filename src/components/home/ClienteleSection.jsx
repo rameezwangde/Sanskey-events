@@ -1,23 +1,6 @@
-import havellsLogo from '../../../havells.png';
-import lionsLogo from '../../../Lions Clubs International.png';
-import mahindraLogo from '../../../mahindra.png';
-import rotaryLogo from '../../../rotary.png';
-import samsungLogo from '../../../samsung.png';
-import somanyLogo from '../../../somany.png';
-import tydalLogo from '../../../tydal.png';
-import vanHeusenLogo from '../../../Van Heusen.png';
+import homeData from '../../data/pages/home.json';
 
-const clients = [
-  { name: 'Havells', logo: havellsLogo },
-  { name: 'Tydal', logo: tydalLogo },
-  { name: 'Van Heusen', logo: vanHeusenLogo },
-  { name: 'Somany', logo: somanyLogo },
-  { name: 'Mahindra', logo: mahindraLogo },
-  { name: 'Samsung', logo: samsungLogo },
-  { name: 'Rotary Club', logo: rotaryLogo },
-  { name: 'Lions Club', logo: lionsLogo },
-];
-
+const clients = homeData.clients || [];
 const scrollingClients = [...clients, ...clients];
 
 export default function ClienteleSection() {
@@ -34,9 +17,9 @@ export default function ClienteleSection() {
 
       <div className="container mx-auto px-4 md:px-8 mb-10 text-center">
         <p className="text-brand-bronze font-sans font-bold tracking-[0.2em] uppercase text-xs sm:text-sm mb-2">
-          Trusted By
+          {homeData.clienteleEyebrow || "Trusted By"}
         </p>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-brand-black">Our Premium Clientele</h2>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif text-brand-black">{homeData.clienteleTitle || "Our Premium Clientele"}</h2>
       </div>
 
       <div className="relative max-w-full overflow-hidden">

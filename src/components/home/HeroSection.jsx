@@ -17,13 +17,13 @@ export default function HeroSection() {
     >
       <div className="absolute inset-0 z-0">
         <motion.img 
-          style={{ y: y1, opacity: 0.15 }}
-          src={homeData.heroBgImage || "/hero.png"}
+          style={{ y: y1, opacity: 1 }}
+          src="/hero.png"
           alt="Luxury Event Setup"
-          className="h-full w-full object-cover mix-blend-luminosity filter contrast-125 sepia-[.2]"
+          className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-ivory via-brand-ivory/80 to-brand-ivory"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(244,241,234,0.8)_100%)]"></div>
+        <div className="absolute inset-0 bg-brand-ivory/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand-ivory/70"></div>
       </div>
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6">
@@ -32,7 +32,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center drop-shadow-xl"
           >
             <h2 className="mb-4 text-sm font-bold uppercase tracking-[0.25em] text-black sm:mb-6 sm:text-base">
               {homeData.heroEyebrow}

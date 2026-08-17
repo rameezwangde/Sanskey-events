@@ -32,7 +32,6 @@ collections:
           - {label: "Hero Title Highlight", name: "heroTitleHighlight", widget: "string"}
           - {label: "Hero Title Part 2", name: "heroTitle2", widget: "string"}
           - {label: "Hero Description", name: "heroDescription", widget: "text"}
-          - {label: "Hero Background Image", name: "heroBgImage", widget: "string"}
           - {label: "Stats", name: "stats", widget: "list", fields: [{label: "Label", name: "label", widget: "string"}, {label: "Value", name: "value", widget: "string"}, {label: "Icon (Lucide name)", name: "icon", widget: "string"}]}
           - {label: "Clientele Eyebrow", name: "clienteleEyebrow", widget: "string"}
           - {label: "Clientele Title", name: "clienteleTitle", widget: "string"}

@@ -6,7 +6,6 @@
   "heroDescription": "From corporate events to fashion shows, we bring your vision to life with creativity, precision & passion. Let us craft the perfect moment for your special day.",
   "heroPrimaryButton": "Plan Your Event",
   "heroSecondaryButton": "View Our Portfolio",
-  "heroBgImage": "/hero-bg.jpg",
   "stats": [
     { "value": "15+", "label": "Years of Experience", "icon": "Users" },
     { "value": "500+", "label": "Events Executed", "icon": "Star" },

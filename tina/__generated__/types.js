@@ -5,120 +5,131 @@ export function gql(strings, ...args) {
   });
   return str;
 }
-export const PagesPartsFragmentDoc = gql`
-    fragment PagesParts on Pages {
+export const HomePartsFragmentDoc = gql`
+    fragment HomeParts on Home {
   __typename
-  ... on PagesHome {
-    heroEyebrow
-    heroTitle1
-    heroTitleHighlight
-    heroTitle2
-    heroDescription
-    heroPrimaryButton
-    heroSecondaryButton
-    stats {
-      __typename
-      value
-      label
-      icon
-    }
-    clienteleEyebrow
-    clienteleTitle
-    clients {
-      __typename
-      name
-      logo
-    }
+  heroEyebrow
+  heroTitle1
+  heroTitleHighlight
+  heroTitle2
+  heroDescription
+  heroPrimaryButton
+  heroSecondaryButton
+  stats {
+    __typename
+    value
+    label
+    icon
   }
-  ... on PagesAbout {
-    eyebrow
-    title1
-    titleHighlight
-    title2
-    paragraph1
-    paragraph2
-    paragraph3
-    image
-  }
-  ... on PagesContact {
-    eyebrow
-    title
-    titleHighlight
-    subtitle
-    mapUrl
-    contactCards {
-      __typename
-      icon
-      title
-      lines
-    }
-    footerText1
-    footerText2
-    stats {
-      __typename
-      icon
-      value
-      label
-    }
-  }
-  ... on PagesGallery {
-    eyebrow
-    title
-    images {
-      __typename
-      image
-      thumb
-      alt
-    }
-  }
-  ... on PagesModels {
-    eyebrow
-    title
-    description
-    ctaText
-    ctaLink
-    models {
-      __typename
-      name
-      title
-      image
-    }
+  clienteleEyebrow
+  clienteleTitle
+  clients {
+    __typename
+    name
+    logo
   }
 }
     `;
-export const GlobalsPartsFragmentDoc = gql`
-    fragment GlobalsParts on Globals {
+export const AboutPartsFragmentDoc = gql`
+    fragment AboutParts on About {
   __typename
-  ... on GlobalsNavbar {
-    navLinks {
-      __typename
-      name
-      path
-    }
-    socialLinks {
-      __typename
-      platform
-      url
-    }
-    ctaText
-    ctaLink
+  eyebrow
+  title1
+  titleHighlight
+  title2
+  paragraph1
+  paragraph2
+  paragraph3
+  image
+}
+    `;
+export const ContactPartsFragmentDoc = gql`
+    fragment ContactParts on Contact {
+  __typename
+  eyebrow
+  title
+  titleHighlight
+  subtitle
+  mapUrl
+  contactCards {
+    __typename
+    icon
+    title
+    lines
   }
-  ... on GlobalsFooter {
-    description
-    quickLinks {
-      __typename
-      label
-      url
-    }
-    email
-    phone
-    location
-    copyright
-    legalLinks {
-      __typename
-      label
-      url
-    }
+  footerText1
+  footerText2
+  stats {
+    __typename
+    icon
+    value
+    label
+  }
+}
+    `;
+export const GalleryPartsFragmentDoc = gql`
+    fragment GalleryParts on Gallery {
+  __typename
+  eyebrow
+  title
+  images {
+    __typename
+    image
+    thumb
+    alt
+  }
+}
+    `;
+export const ModelsPartsFragmentDoc = gql`
+    fragment ModelsParts on Models {
+  __typename
+  eyebrow
+  title
+  description
+  ctaText
+  ctaLink
+  models {
+    __typename
+    name
+    title
+    image
+  }
+}
+    `;
+export const NavbarPartsFragmentDoc = gql`
+    fragment NavbarParts on Navbar {
+  __typename
+  navLinks {
+    __typename
+    name
+    path
+  }
+  socialLinks {
+    __typename
+    platform
+    url
+  }
+  ctaText
+  ctaLink
+}
+    `;
+export const FooterPartsFragmentDoc = gql`
+    fragment FooterParts on Footer {
+  __typename
+  description
+  quickLinks {
+    __typename
+    label
+    url
+  }
+  email
+  phone
+  location
+  copyright
+  legalLinks {
+    __typename
+    label
+    url
   }
 }
     `;
@@ -142,9 +153,9 @@ export const Event_SectionsPartsFragmentDoc = gql`
   items
 }
     `;
-export const PagesDocument = gql`
-    query pages($relativePath: String!) {
-  pages(relativePath: $relativePath) {
+export const HomeDocument = gql`
+    query home($relativePath: String!) {
+  home(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -157,13 +168,13 @@ export const PagesDocument = gql`
       }
       id
     }
-    ...PagesParts
+    ...HomeParts
   }
 }
-    ${PagesPartsFragmentDoc}`;
-export const PagesConnectionDocument = gql`
-    query pagesConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PagesFilter) {
-  pagesConnection(
+    ${HomePartsFragmentDoc}`;
+export const HomeConnectionDocument = gql`
+    query homeConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: HomeFilter) {
+  homeConnection(
     before: $before
     after: $after
     first: $first
@@ -193,15 +204,15 @@ export const PagesConnectionDocument = gql`
           }
           id
         }
-        ...PagesParts
+        ...HomeParts
       }
     }
   }
 }
-    ${PagesPartsFragmentDoc}`;
-export const GlobalsDocument = gql`
-    query globals($relativePath: String!) {
-  globals(relativePath: $relativePath) {
+    ${HomePartsFragmentDoc}`;
+export const AboutDocument = gql`
+    query about($relativePath: String!) {
+  about(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -214,13 +225,13 @@ export const GlobalsDocument = gql`
       }
       id
     }
-    ...GlobalsParts
+    ...AboutParts
   }
 }
-    ${GlobalsPartsFragmentDoc}`;
-export const GlobalsConnectionDocument = gql`
-    query globalsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: GlobalsFilter) {
-  globalsConnection(
+    ${AboutPartsFragmentDoc}`;
+export const AboutConnectionDocument = gql`
+    query aboutConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: AboutFilter) {
+  aboutConnection(
     before: $before
     after: $after
     first: $first
@@ -250,12 +261,297 @@ export const GlobalsConnectionDocument = gql`
           }
           id
         }
-        ...GlobalsParts
+        ...AboutParts
       }
     }
   }
 }
-    ${GlobalsPartsFragmentDoc}`;
+    ${AboutPartsFragmentDoc}`;
+export const ContactDocument = gql`
+    query contact($relativePath: String!) {
+  contact(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ContactParts
+  }
+}
+    ${ContactPartsFragmentDoc}`;
+export const ContactConnectionDocument = gql`
+    query contactConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ContactFilter) {
+  contactConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ContactParts
+      }
+    }
+  }
+}
+    ${ContactPartsFragmentDoc}`;
+export const GalleryDocument = gql`
+    query gallery($relativePath: String!) {
+  gallery(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...GalleryParts
+  }
+}
+    ${GalleryPartsFragmentDoc}`;
+export const GalleryConnectionDocument = gql`
+    query galleryConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: GalleryFilter) {
+  galleryConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...GalleryParts
+      }
+    }
+  }
+}
+    ${GalleryPartsFragmentDoc}`;
+export const ModelsDocument = gql`
+    query models($relativePath: String!) {
+  models(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ModelsParts
+  }
+}
+    ${ModelsPartsFragmentDoc}`;
+export const ModelsConnectionDocument = gql`
+    query modelsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ModelsFilter) {
+  modelsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ModelsParts
+      }
+    }
+  }
+}
+    ${ModelsPartsFragmentDoc}`;
+export const NavbarDocument = gql`
+    query navbar($relativePath: String!) {
+  navbar(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...NavbarParts
+  }
+}
+    ${NavbarPartsFragmentDoc}`;
+export const NavbarConnectionDocument = gql`
+    query navbarConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: NavbarFilter) {
+  navbarConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...NavbarParts
+      }
+    }
+  }
+}
+    ${NavbarPartsFragmentDoc}`;
+export const FooterDocument = gql`
+    query footer($relativePath: String!) {
+  footer(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...FooterParts
+  }
+}
+    ${FooterPartsFragmentDoc}`;
+export const FooterConnectionDocument = gql`
+    query footerConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: FooterFilter) {
+  footerConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...FooterParts
+      }
+    }
+  }
+}
+    ${FooterPartsFragmentDoc}`;
 export const EventsDocument = gql`
     query events($relativePath: String!) {
   events(relativePath: $relativePath) {
@@ -372,17 +668,47 @@ export const Event_SectionsConnectionDocument = gql`
     ${Event_SectionsPartsFragmentDoc}`;
 export function getSdk(requester) {
   return {
-    pages(variables, options) {
-      return requester(PagesDocument, variables, options);
+    home(variables, options) {
+      return requester(HomeDocument, variables, options);
     },
-    pagesConnection(variables, options) {
-      return requester(PagesConnectionDocument, variables, options);
+    homeConnection(variables, options) {
+      return requester(HomeConnectionDocument, variables, options);
     },
-    globals(variables, options) {
-      return requester(GlobalsDocument, variables, options);
+    about(variables, options) {
+      return requester(AboutDocument, variables, options);
     },
-    globalsConnection(variables, options) {
-      return requester(GlobalsConnectionDocument, variables, options);
+    aboutConnection(variables, options) {
+      return requester(AboutConnectionDocument, variables, options);
+    },
+    contact(variables, options) {
+      return requester(ContactDocument, variables, options);
+    },
+    contactConnection(variables, options) {
+      return requester(ContactConnectionDocument, variables, options);
+    },
+    gallery(variables, options) {
+      return requester(GalleryDocument, variables, options);
+    },
+    galleryConnection(variables, options) {
+      return requester(GalleryConnectionDocument, variables, options);
+    },
+    models(variables, options) {
+      return requester(ModelsDocument, variables, options);
+    },
+    modelsConnection(variables, options) {
+      return requester(ModelsConnectionDocument, variables, options);
+    },
+    navbar(variables, options) {
+      return requester(NavbarDocument, variables, options);
+    },
+    navbarConnection(variables, options) {
+      return requester(NavbarConnectionDocument, variables, options);
+    },
+    footer(variables, options) {
+      return requester(FooterDocument, variables, options);
+    },
+    footerConnection(variables, options) {
+      return requester(FooterConnectionDocument, variables, options);
     },
     events(variables, options) {
       return requester(EventsDocument, variables, options);

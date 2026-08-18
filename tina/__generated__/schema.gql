@@ -54,10 +54,20 @@ type Query {
   collections: [Collection!]!
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
-  pages(relativePath: String): Pages!
-  pagesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PagesFilter): PagesConnection!
-  globals(relativePath: String): Globals!
-  globalsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GlobalsFilter): GlobalsConnection!
+  home(relativePath: String): Home!
+  homeConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomeFilter): HomeConnection!
+  about(relativePath: String): About!
+  aboutConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AboutFilter): AboutConnection!
+  contact(relativePath: String): Contact!
+  contactConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactFilter): ContactConnection!
+  gallery(relativePath: String): Gallery!
+  galleryConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GalleryFilter): GalleryConnection!
+  models(relativePath: String): Models!
+  modelsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ModelsFilter): ModelsConnection!
+  navbar(relativePath: String): Navbar!
+  navbarConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NavbarFilter): NavbarConnection!
+  footer(relativePath: String): Footer!
+  footerConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FooterFilter): FooterConnection!
   events(relativePath: String): Events!
   eventsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: EventsFilter): EventsConnection!
   event_sections(relativePath: String): Event_sections!
@@ -65,8 +75,13 @@ type Query {
 }
 
 input DocumentFilter {
-  pages: PagesFilter
-  globals: GlobalsFilter
+  home: HomeFilter
+  about: AboutFilter
+  contact: ContactFilter
+  gallery: GalleryFilter
+  models: ModelsFilter
+  navbar: NavbarFilter
+  footer: FooterFilter
   events: EventsFilter
   event_sections: Event_sectionsFilter
 }
@@ -94,20 +109,20 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = PagesHome | PagesAbout | PagesContact | PagesGallery | PagesModels | GlobalsNavbar | GlobalsFooter | Events | Event_sections | Folder
+union DocumentNode = Home | About | Contact | Gallery | Models | Navbar | Footer | Events | Event_sections | Folder
 
-type PagesHomeStats {
+type HomeStats {
   value: String
   label: String
   icon: String
 }
 
-type PagesHomeClients {
+type HomeClients {
   name: String
   logo: String
 }
 
-type PagesHome implements Node & Document {
+type Home implements Node & Document {
   heroEyebrow: String
   heroTitle1: String
   heroTitleHighlight: String
@@ -115,16 +130,66 @@ type PagesHome implements Node & Document {
   heroDescription: String
   heroPrimaryButton: String
   heroSecondaryButton: String
-  stats: [PagesHomeStats]
+  stats: [HomeStats]
   clienteleEyebrow: String
   clienteleTitle: String
-  clients: [PagesHomeClients]
+  clients: [HomeClients]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
-type PagesAbout implements Node & Document {
+input StringFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input HomeStatsFilter {
+  value: StringFilter
+  label: StringFilter
+  icon: StringFilter
+}
+
+input ImageFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
+input HomeClientsFilter {
+  name: StringFilter
+  logo: ImageFilter
+}
+
+input HomeFilter {
+  heroEyebrow: StringFilter
+  heroTitle1: StringFilter
+  heroTitleHighlight: StringFilter
+  heroTitle2: StringFilter
+  heroDescription: StringFilter
+  heroPrimaryButton: StringFilter
+  heroSecondaryButton: StringFilter
+  stats: HomeStatsFilter
+  clienteleEyebrow: StringFilter
+  clienteleTitle: StringFilter
+  clients: HomeClientsFilter
+}
+
+type HomeConnectionEdges {
+  cursor: String!
+  node: Home
+}
+
+type HomeConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [HomeConnectionEdges]
+}
+
+type About implements Node & Document {
   eyebrow: String
   title1: String
   titleHighlight: String
@@ -138,108 +203,7 @@ type PagesAbout implements Node & Document {
   _values: JSON!
 }
 
-type PagesContactContactCards {
-  icon: String
-  title: String
-  lines: [String]
-}
-
-type PagesContactStats {
-  icon: String
-  value: String
-  label: String
-}
-
-type PagesContact implements Node & Document {
-  eyebrow: String
-  title: String
-  titleHighlight: String
-  subtitle: String
-  mapUrl: String
-  contactCards: [PagesContactContactCards]
-  footerText1: String
-  footerText2: String
-  stats: [PagesContactStats]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-type PagesGalleryImages {
-  image: String
-  thumb: String
-  alt: String
-}
-
-type PagesGallery implements Node & Document {
-  eyebrow: String
-  title: String
-  images: [PagesGalleryImages]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-type PagesModelsModels {
-  name: String
-  title: String
-  image: String
-}
-
-type PagesModels implements Node & Document {
-  eyebrow: String
-  title: String
-  description: String
-  ctaText: String
-  ctaLink: String
-  models: [PagesModelsModels]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-union Pages = PagesHome | PagesAbout | PagesContact | PagesGallery | PagesModels
-
-input StringFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
-}
-
-input PagesHomeStatsFilter {
-  value: StringFilter
-  label: StringFilter
-  icon: StringFilter
-}
-
-input ImageFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
-}
-
-input PagesHomeClientsFilter {
-  name: StringFilter
-  logo: ImageFilter
-}
-
-input PagesHomeFilter {
-  heroEyebrow: StringFilter
-  heroTitle1: StringFilter
-  heroTitleHighlight: StringFilter
-  heroTitle2: StringFilter
-  heroDescription: StringFilter
-  heroPrimaryButton: StringFilter
-  heroSecondaryButton: StringFilter
-  stats: PagesHomeStatsFilter
-  clienteleEyebrow: StringFilter
-  clienteleTitle: StringFilter
-  clients: PagesHomeClientsFilter
-}
-
-input PagesAboutFilter {
+input AboutFilter {
   eyebrow: StringFilter
   title1: StringFilter
   titleHighlight: StringFilter
@@ -250,89 +214,174 @@ input PagesAboutFilter {
   image: ImageFilter
 }
 
-input PagesContactContactCardsFilter {
+type AboutConnectionEdges {
+  cursor: String!
+  node: About
+}
+
+type AboutConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [AboutConnectionEdges]
+}
+
+type ContactContactCards {
+  icon: String
+  title: String
+  lines: [String]
+}
+
+type ContactStats {
+  icon: String
+  value: String
+  label: String
+}
+
+type Contact implements Node & Document {
+  eyebrow: String
+  title: String
+  titleHighlight: String
+  subtitle: String
+  mapUrl: String
+  contactCards: [ContactContactCards]
+  footerText1: String
+  footerText2: String
+  stats: [ContactStats]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ContactContactCardsFilter {
   icon: StringFilter
   title: StringFilter
   lines: StringFilter
 }
 
-input PagesContactStatsFilter {
+input ContactStatsFilter {
   icon: StringFilter
   value: StringFilter
   label: StringFilter
 }
 
-input PagesContactFilter {
+input ContactFilter {
   eyebrow: StringFilter
   title: StringFilter
   titleHighlight: StringFilter
   subtitle: StringFilter
   mapUrl: StringFilter
-  contactCards: PagesContactContactCardsFilter
+  contactCards: ContactContactCardsFilter
   footerText1: StringFilter
   footerText2: StringFilter
-  stats: PagesContactStatsFilter
+  stats: ContactStatsFilter
 }
 
-input PagesGalleryImagesFilter {
+type ContactConnectionEdges {
+  cursor: String!
+  node: Contact
+}
+
+type ContactConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ContactConnectionEdges]
+}
+
+type GalleryImages {
+  image: String
+  thumb: String
+  alt: String
+}
+
+type Gallery implements Node & Document {
+  eyebrow: String
+  title: String
+  images: [GalleryImages]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input GalleryImagesFilter {
   image: ImageFilter
   thumb: ImageFilter
   alt: StringFilter
 }
 
-input PagesGalleryFilter {
+input GalleryFilter {
   eyebrow: StringFilter
   title: StringFilter
-  images: PagesGalleryImagesFilter
+  images: GalleryImagesFilter
 }
 
-input PagesModelsModelsFilter {
+type GalleryConnectionEdges {
+  cursor: String!
+  node: Gallery
+}
+
+type GalleryConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [GalleryConnectionEdges]
+}
+
+type ModelsModels {
+  name: String
+  title: String
+  image: String
+}
+
+type Models implements Node & Document {
+  eyebrow: String
+  title: String
+  description: String
+  ctaText: String
+  ctaLink: String
+  models: [ModelsModels]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ModelsModelsFilter {
   name: StringFilter
   title: StringFilter
   image: ImageFilter
 }
 
-input PagesModelsFilter {
+input ModelsFilter {
   eyebrow: StringFilter
   title: StringFilter
   description: StringFilter
   ctaText: StringFilter
   ctaLink: StringFilter
-  models: PagesModelsModelsFilter
+  models: ModelsModelsFilter
 }
 
-input PagesFilter {
-  home: PagesHomeFilter
-  about: PagesAboutFilter
-  contact: PagesContactFilter
-  gallery: PagesGalleryFilter
-  models: PagesModelsFilter
-}
-
-type PagesConnectionEdges {
+type ModelsConnectionEdges {
   cursor: String!
-  node: Pages
+  node: Models
 }
 
-type PagesConnection implements Connection {
+type ModelsConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
-  edges: [PagesConnectionEdges]
+  edges: [ModelsConnectionEdges]
 }
 
-type GlobalsNavbarNavLinks {
+type NavbarNavLinks {
   name: String
   path: String
 }
 
-type GlobalsNavbarSocialLinks {
+type NavbarSocialLinks {
   platform: String
   url: String
 }
 
-type GlobalsNavbar implements Node & Document {
-  navLinks: [GlobalsNavbarNavLinks]
-  socialLinks: [GlobalsNavbarSocialLinks]
+type Navbar implements Node & Document {
+  navLinks: [NavbarNavLinks]
+  socialLinks: [NavbarSocialLinks]
   ctaText: String
   ctaLink: String
   id: ID!
@@ -340,82 +389,86 @@ type GlobalsNavbar implements Node & Document {
   _values: JSON!
 }
 
-type GlobalsFooterQuickLinks {
+input NavbarNavLinksFilter {
+  name: StringFilter
+  path: StringFilter
+}
+
+input NavbarSocialLinksFilter {
+  platform: StringFilter
+  url: StringFilter
+}
+
+input NavbarFilter {
+  navLinks: NavbarNavLinksFilter
+  socialLinks: NavbarSocialLinksFilter
+  ctaText: StringFilter
+  ctaLink: StringFilter
+}
+
+type NavbarConnectionEdges {
+  cursor: String!
+  node: Navbar
+}
+
+type NavbarConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [NavbarConnectionEdges]
+}
+
+type FooterQuickLinks {
   label: String
   url: String
 }
 
-type GlobalsFooterLegalLinks {
+type FooterLegalLinks {
   label: String
   url: String
 }
 
-type GlobalsFooter implements Node & Document {
+type Footer implements Node & Document {
   description: String
-  quickLinks: [GlobalsFooterQuickLinks]
+  quickLinks: [FooterQuickLinks]
   email: String
   phone: String
   location: String
   copyright: String
-  legalLinks: [GlobalsFooterLegalLinks]
+  legalLinks: [FooterLegalLinks]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
-union Globals = GlobalsNavbar | GlobalsFooter
-
-input GlobalsNavbarNavLinksFilter {
-  name: StringFilter
-  path: StringFilter
-}
-
-input GlobalsNavbarSocialLinksFilter {
-  platform: StringFilter
-  url: StringFilter
-}
-
-input GlobalsNavbarFilter {
-  navLinks: GlobalsNavbarNavLinksFilter
-  socialLinks: GlobalsNavbarSocialLinksFilter
-  ctaText: StringFilter
-  ctaLink: StringFilter
-}
-
-input GlobalsFooterQuickLinksFilter {
+input FooterQuickLinksFilter {
   label: StringFilter
   url: StringFilter
 }
 
-input GlobalsFooterLegalLinksFilter {
+input FooterLegalLinksFilter {
   label: StringFilter
   url: StringFilter
 }
 
-input GlobalsFooterFilter {
+input FooterFilter {
   description: StringFilter
-  quickLinks: GlobalsFooterQuickLinksFilter
+  quickLinks: FooterQuickLinksFilter
   email: StringFilter
   phone: StringFilter
   location: StringFilter
   copyright: StringFilter
-  legalLinks: GlobalsFooterLegalLinksFilter
+  legalLinks: FooterLegalLinksFilter
 }
 
-input GlobalsFilter {
-  navbar: GlobalsNavbarFilter
-  footer: GlobalsFooterFilter
-}
-
-type GlobalsConnectionEdges {
+type FooterConnectionEdges {
   cursor: String!
-  node: Globals
+  node: Footer
 }
 
-type GlobalsConnection implements Connection {
+type FooterConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
-  edges: [GlobalsConnectionEdges]
+  edges: [FooterConnectionEdges]
 }
 
 type Events implements Node & Document {
@@ -484,10 +537,20 @@ type Mutation {
   deleteDocument(collection: String, relativePath: String!): DocumentNode!
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   createFolder(collection: String, relativePath: String!): DocumentNode!
-  updatePages(relativePath: String!, params: PagesMutation!): Pages!
-  createPages(relativePath: String!, params: PagesMutation!): Pages!
-  updateGlobals(relativePath: String!, params: GlobalsMutation!): Globals!
-  createGlobals(relativePath: String!, params: GlobalsMutation!): Globals!
+  updateHome(relativePath: String!, params: HomeMutation!): Home!
+  createHome(relativePath: String!, params: HomeMutation!): Home!
+  updateAbout(relativePath: String!, params: AboutMutation!): About!
+  createAbout(relativePath: String!, params: AboutMutation!): About!
+  updateContact(relativePath: String!, params: ContactMutation!): Contact!
+  createContact(relativePath: String!, params: ContactMutation!): Contact!
+  updateGallery(relativePath: String!, params: GalleryMutation!): Gallery!
+  createGallery(relativePath: String!, params: GalleryMutation!): Gallery!
+  updateModels(relativePath: String!, params: ModelsMutation!): Models!
+  createModels(relativePath: String!, params: ModelsMutation!): Models!
+  updateNavbar(relativePath: String!, params: NavbarMutation!): Navbar!
+  createNavbar(relativePath: String!, params: NavbarMutation!): Navbar!
+  updateFooter(relativePath: String!, params: FooterMutation!): Footer!
+  createFooter(relativePath: String!, params: FooterMutation!): Footer!
   updateEvents(relativePath: String!, params: EventsMutation!): Events!
   createEvents(relativePath: String!, params: EventsMutation!): Events!
   updateEvent_sections(relativePath: String!, params: Event_sectionsMutation!): Event_sections!
@@ -495,32 +558,42 @@ type Mutation {
 }
 
 input DocumentUpdateMutation {
-  pages: PagesMutation
-  globals: GlobalsMutation
+  home: HomeMutation
+  about: AboutMutation
+  contact: ContactMutation
+  gallery: GalleryMutation
+  models: ModelsMutation
+  navbar: NavbarMutation
+  footer: FooterMutation
   events: EventsMutation
   event_sections: Event_sectionsMutation
   relativePath: String
 }
 
 input DocumentMutation {
-  pages: PagesMutation
-  globals: GlobalsMutation
+  home: HomeMutation
+  about: AboutMutation
+  contact: ContactMutation
+  gallery: GalleryMutation
+  models: ModelsMutation
+  navbar: NavbarMutation
+  footer: FooterMutation
   events: EventsMutation
   event_sections: Event_sectionsMutation
 }
 
-input PagesHomeStatsMutation {
+input HomeStatsMutation {
   value: String
   label: String
   icon: String
 }
 
-input PagesHomeClientsMutation {
+input HomeClientsMutation {
   name: String
   logo: String
 }
 
-input PagesHomeMutation {
+input HomeMutation {
   heroEyebrow: String
   heroTitle1: String
   heroTitleHighlight: String
@@ -528,13 +601,13 @@ input PagesHomeMutation {
   heroDescription: String
   heroPrimaryButton: String
   heroSecondaryButton: String
-  stats: [PagesHomeStatsMutation]
+  stats: [HomeStatsMutation]
   clienteleEyebrow: String
   clienteleTitle: String
-  clients: [PagesHomeClientsMutation]
+  clients: [HomeClientsMutation]
 }
 
-input PagesAboutMutation {
+input AboutMutation {
   eyebrow: String
   title1: String
   titleHighlight: String
@@ -545,105 +618,92 @@ input PagesAboutMutation {
   image: String
 }
 
-input PagesContactContactCardsMutation {
+input ContactContactCardsMutation {
   icon: String
   title: String
   lines: [String]
 }
 
-input PagesContactStatsMutation {
+input ContactStatsMutation {
   icon: String
   value: String
   label: String
 }
 
-input PagesContactMutation {
+input ContactMutation {
   eyebrow: String
   title: String
   titleHighlight: String
   subtitle: String
   mapUrl: String
-  contactCards: [PagesContactContactCardsMutation]
+  contactCards: [ContactContactCardsMutation]
   footerText1: String
   footerText2: String
-  stats: [PagesContactStatsMutation]
+  stats: [ContactStatsMutation]
 }
 
-input PagesGalleryImagesMutation {
+input GalleryImagesMutation {
   image: String
   thumb: String
   alt: String
 }
 
-input PagesGalleryMutation {
+input GalleryMutation {
   eyebrow: String
   title: String
-  images: [PagesGalleryImagesMutation]
+  images: [GalleryImagesMutation]
 }
 
-input PagesModelsModelsMutation {
+input ModelsModelsMutation {
   name: String
   title: String
   image: String
 }
 
-input PagesModelsMutation {
+input ModelsMutation {
   eyebrow: String
   title: String
   description: String
   ctaText: String
   ctaLink: String
-  models: [PagesModelsModelsMutation]
+  models: [ModelsModelsMutation]
 }
 
-input PagesMutation {
-  home: PagesHomeMutation
-  about: PagesAboutMutation
-  contact: PagesContactMutation
-  gallery: PagesGalleryMutation
-  models: PagesModelsMutation
-}
-
-input GlobalsNavbarNavLinksMutation {
+input NavbarNavLinksMutation {
   name: String
   path: String
 }
 
-input GlobalsNavbarSocialLinksMutation {
+input NavbarSocialLinksMutation {
   platform: String
   url: String
 }
 
-input GlobalsNavbarMutation {
-  navLinks: [GlobalsNavbarNavLinksMutation]
-  socialLinks: [GlobalsNavbarSocialLinksMutation]
+input NavbarMutation {
+  navLinks: [NavbarNavLinksMutation]
+  socialLinks: [NavbarSocialLinksMutation]
   ctaText: String
   ctaLink: String
 }
 
-input GlobalsFooterQuickLinksMutation {
+input FooterQuickLinksMutation {
   label: String
   url: String
 }
 
-input GlobalsFooterLegalLinksMutation {
+input FooterLegalLinksMutation {
   label: String
   url: String
 }
 
-input GlobalsFooterMutation {
+input FooterMutation {
   description: String
-  quickLinks: [GlobalsFooterQuickLinksMutation]
+  quickLinks: [FooterQuickLinksMutation]
   email: String
   phone: String
   location: String
   copyright: String
-  legalLinks: [GlobalsFooterLegalLinksMutation]
-}
-
-input GlobalsMutation {
-  navbar: GlobalsNavbarMutation
-  footer: GlobalsFooterMutation
+  legalLinks: [FooterLegalLinksMutation]
 }
 
 input EventsMutation {

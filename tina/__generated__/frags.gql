@@ -1,115 +1,121 @@
-fragment PagesParts on Pages {
+fragment HomeParts on Home {
   __typename
-  ... on PagesHome {
-    heroEyebrow
-    heroTitle1
-    heroTitleHighlight
-    heroTitle2
-    heroDescription
-    heroPrimaryButton
-    heroSecondaryButton
-    stats {
-      __typename
-      value
-      label
-      icon
-    }
-    clienteleEyebrow
-    clienteleTitle
-    clients {
-      __typename
-      name
-      logo
-    }
+  heroEyebrow
+  heroTitle1
+  heroTitleHighlight
+  heroTitle2
+  heroDescription
+  heroPrimaryButton
+  heroSecondaryButton
+  stats {
+    __typename
+    value
+    label
+    icon
   }
-  ... on PagesAbout {
-    eyebrow
-    title1
-    titleHighlight
-    title2
-    paragraph1
-    paragraph2
-    paragraph3
-    image
-  }
-  ... on PagesContact {
-    eyebrow
-    title
-    titleHighlight
-    subtitle
-    mapUrl
-    contactCards {
-      __typename
-      icon
-      title
-      lines
-    }
-    footerText1
-    footerText2
-    stats {
-      __typename
-      icon
-      value
-      label
-    }
-  }
-  ... on PagesGallery {
-    eyebrow
-    title
-    images {
-      __typename
-      image
-      thumb
-      alt
-    }
-  }
-  ... on PagesModels {
-    eyebrow
-    title
-    description
-    ctaText
-    ctaLink
-    models {
-      __typename
-      name
-      title
-      image
-    }
+  clienteleEyebrow
+  clienteleTitle
+  clients {
+    __typename
+    name
+    logo
   }
 }
 
-fragment GlobalsParts on Globals {
+fragment AboutParts on About {
   __typename
-  ... on GlobalsNavbar {
-    navLinks {
-      __typename
-      name
-      path
-    }
-    socialLinks {
-      __typename
-      platform
-      url
-    }
-    ctaText
-    ctaLink
+  eyebrow
+  title1
+  titleHighlight
+  title2
+  paragraph1
+  paragraph2
+  paragraph3
+  image
+}
+
+fragment ContactParts on Contact {
+  __typename
+  eyebrow
+  title
+  titleHighlight
+  subtitle
+  mapUrl
+  contactCards {
+    __typename
+    icon
+    title
+    lines
   }
-  ... on GlobalsFooter {
-    description
-    quickLinks {
-      __typename
-      label
-      url
-    }
-    email
-    phone
-    location
-    copyright
-    legalLinks {
-      __typename
-      label
-      url
-    }
+  footerText1
+  footerText2
+  stats {
+    __typename
+    icon
+    value
+    label
+  }
+}
+
+fragment GalleryParts on Gallery {
+  __typename
+  eyebrow
+  title
+  images {
+    __typename
+    image
+    thumb
+    alt
+  }
+}
+
+fragment ModelsParts on Models {
+  __typename
+  eyebrow
+  title
+  description
+  ctaText
+  ctaLink
+  models {
+    __typename
+    name
+    title
+    image
+  }
+}
+
+fragment NavbarParts on Navbar {
+  __typename
+  navLinks {
+    __typename
+    name
+    path
+  }
+  socialLinks {
+    __typename
+    platform
+    url
+  }
+  ctaText
+  ctaLink
+}
+
+fragment FooterParts on Footer {
+  __typename
+  description
+  quickLinks {
+    __typename
+    label
+    url
+  }
+  email
+  phone
+  location
+  copyright
+  legalLinks {
+    __typename
+    label
+    url
   }
 }
 

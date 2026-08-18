@@ -1,0 +1,132 @@
+fragment PagesParts on Pages {
+  __typename
+  ... on PagesHome {
+    heroEyebrow
+    heroTitle1
+    heroTitleHighlight
+    heroTitle2
+    heroDescription
+    heroPrimaryButton
+    heroSecondaryButton
+    stats {
+      __typename
+      value
+      label
+      icon
+    }
+    clienteleEyebrow
+    clienteleTitle
+    clients {
+      __typename
+      name
+      logo
+    }
+  }
+  ... on PagesAbout {
+    eyebrow
+    title1
+    titleHighlight
+    title2
+    paragraph1
+    paragraph2
+    paragraph3
+    image
+  }
+  ... on PagesContact {
+    eyebrow
+    title
+    titleHighlight
+    subtitle
+    mapUrl
+    contactCards {
+      __typename
+      icon
+      title
+      lines
+    }
+    footerText1
+    footerText2
+    stats {
+      __typename
+      icon
+      value
+      label
+    }
+  }
+  ... on PagesGallery {
+    eyebrow
+    title
+    images {
+      __typename
+      image
+      thumb
+      alt
+    }
+  }
+  ... on PagesModels {
+    eyebrow
+    title
+    description
+    ctaText
+    ctaLink
+    models {
+      __typename
+      name
+      title
+      image
+    }
+  }
+}
+
+fragment GlobalsParts on Globals {
+  __typename
+  ... on GlobalsNavbar {
+    navLinks {
+      __typename
+      name
+      path
+    }
+    socialLinks {
+      __typename
+      platform
+      url
+    }
+    ctaText
+    ctaLink
+  }
+  ... on GlobalsFooter {
+    description
+    quickLinks {
+      __typename
+      label
+      url
+    }
+    email
+    phone
+    location
+    copyright
+    legalLinks {
+      __typename
+      label
+      url
+    }
+  }
+}
+
+fragment EventsParts on Events {
+  __typename
+  title
+  subtitle
+  images
+}
+
+fragment Event_sectionsParts on Event_sections {
+  __typename
+  eyebrow
+  title
+  description
+  start
+  end
+  footer
+  items
+}

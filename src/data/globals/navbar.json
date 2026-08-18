@@ -1,4 +1,5 @@
 {
+  "_template": "navbar",
   "navLinks": [
     { "name": "Home", "path": "/" },
     { "name": "About Sankey", "path": "/about" },

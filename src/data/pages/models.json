@@ -1,13 +1,24 @@
 {
-  "_template": "models",
   "eyebrow": "Sankey Modelling Agency",
   "title": "Our Top Models",
   "description": "Showcasing the finest talent in the industry. Our premier modelling agency represents top-tier models for fashion shows, commercial shoots, and brand endorsements.",
   "ctaText": "Apply as a Model",
   "ctaLink": "/register",
   "models": [
-    { "name": "Aisha Sharma", "title": "Miss Sankey 2023", "image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920&auto=format&fit=crop" },
-    { "name": "Neha Reddy", "title": "Top Fashion Model", "image": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1920&auto=format&fit=crop" },
-    { "name": "Priya Patel", "title": "Commercial Model", "image": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1920&auto=format&fit=crop" }
+    {
+      "name": "Sushmitha Nair",
+      "title": "Miss Sankey 2017 - 2026",
+      "image": "/uploads/SUN_4511.JPG"
+    },
+    {
+      "name": "Neha Reddy",
+      "title": "Top Fashion Model",
+      "image": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1920&auto=format&fit=crop"
+    },
+    {
+      "name": "Priya Patel",
+      "title": "Commercial Model",
+      "image": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1920&auto=format&fit=crop"
+    }
   ]
 }

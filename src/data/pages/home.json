@@ -1,5 +1,4 @@
 {
-  "_template": "home",
   "heroEyebrow": "We plan. You celebrate.",
   "heroTitle1": "CRAFTING",
   "heroTitleHighlight": "UNFORGETTABLE",
@@ -8,21 +7,61 @@
   "heroPrimaryButton": "Plan Your Event",
   "heroSecondaryButton": "View Our Portfolio",
   "stats": [
-    { "value": "15+", "label": "Years of Experience", "icon": "Users" },
-    { "value": "500+", "label": "Events Executed", "icon": "Star" },
-    { "value": "100+", "label": "Happy Clients", "icon": "ShieldCheck" },
-    { "value": "50+", "label": "Brands Trust Us", "icon": "Award" }
+    {
+      "value": "30+",
+      "label": "Years of Experience",
+      "icon": "Users"
+    },
+    {
+      "value": "1500+",
+      "label": "Events Executed",
+      "icon": "Star"
+    },
+    {
+      "value": "1000+",
+      "label": "Happy Clients",
+      "icon": "ShieldCheck"
+    },
+    {
+      "value": "500+",
+      "label": "Brands Trust Us",
+      "icon": "Award"
+    }
   ],
   "clienteleEyebrow": "Trusted By",
   "clienteleTitle": "Our Premium Clientele",
   "clients": [
-    { "name": "Havells", "logo": "/havells.png" },
-    { "name": "Tydal", "logo": "/tydal.png" },
-    { "name": "Van Heusen", "logo": "/Van Heusen.png" },
-    { "name": "Somany", "logo": "/somany.png" },
-    { "name": "Mahindra", "logo": "/mahindra.png" },
-    { "name": "Samsung", "logo": "/samsung.png" },
-    { "name": "Rotary Club", "logo": "/rotary.png" },
-    { "name": "Lions Club", "logo": "/Lions Clubs International.png" }
+    {
+      "name": "Havells",
+      "logo": "/uploads/havells.png"
+    },
+    {
+      "name": "Tydal",
+      "logo": "/uploads/tydal.png"
+    },
+    {
+      "name": "Van Heusen",
+      "logo": "/uploads/Van Heusen.png"
+    },
+    {
+      "name": "Somany",
+      "logo": "/uploads/somany.png"
+    },
+    {
+      "name": "Mahindra",
+      "logo": "/uploads/mahindra.png"
+    },
+    {
+      "name": "Samsung",
+      "logo": "/uploads/samsung.png"
+    },
+    {
+      "name": "Rotary Club",
+      "logo": "/uploads/rotary.png"
+    },
+    {
+      "name": "Lions Club",
+      "logo": "/uploads/Lions Clubs International.png"
+    }
   ]
 }

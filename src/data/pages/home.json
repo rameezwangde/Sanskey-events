@@ -33,35 +33,35 @@
   "clients": [
     {
       "name": "Havells",
-      "logo": "/uploads/havells.png"
+      "logo": "/havells.png"
     },
     {
       "name": "Tydal",
-      "logo": "/uploads/tydal.png"
+      "logo": "/tydal.png"
     },
     {
       "name": "Van Heusen",
-      "logo": "/uploads/Van Heusen.png"
+      "logo": "/Van Heusen.png"
     },
     {
       "name": "Somany",
-      "logo": "/uploads/somany.png"
+      "logo": "/somany.png"
     },
     {
       "name": "Mahindra",
-      "logo": "/uploads/mahindra.png"
+      "logo": "/mahindra.png"
     },
     {
       "name": "Samsung",
-      "logo": "/uploads/samsung.png"
+      "logo": "/samsung.png"
     },
     {
       "name": "Rotary Club",
-      "logo": "/uploads/rotary.png"
+      "logo": "/rotary.png"
     },
     {
       "name": "Lions Club",
-      "logo": "/uploads/Lions Clubs International.png"
+      "logo": "/Lions Clubs International.png"
     }
   ]
 }

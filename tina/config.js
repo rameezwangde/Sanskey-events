@@ -24,6 +24,7 @@ export default defineConfig({
         format: "json",
         ui: { allowedActions: { create: false, delete: false } },
         fields: [
+          { type: "image", name: "heroImage", label: "Hero Image" },
           { type: "string", name: "heroEyebrow", label: "Hero Eyebrow" },
           { type: "string", name: "heroTitle1", label: "Hero Title 1" },
           { type: "string", name: "heroTitleHighlight", label: "Hero Title Highlight" },

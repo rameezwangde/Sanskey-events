@@ -18,7 +18,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-0">
         <motion.img 
           style={{ y: y1, opacity: 1 }}
-          src="/hero.png"
+          src={homeData.heroImage || "/hero.png"}
           alt="Luxury Event Setup"
           className="h-full w-full object-cover"
         />

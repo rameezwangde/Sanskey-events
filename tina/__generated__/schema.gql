@@ -126,6 +126,7 @@ type HomeClients {
 }
 
 type Home implements Node & Document {
+  heroImage: String
   heroEyebrow: String
   heroTitle1: String
   heroTitleHighlight: String
@@ -142,6 +143,13 @@ type Home implements Node & Document {
   _values: JSON!
 }
 
+input ImageFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+  in: [String]
+}
+
 input StringFilter {
   startsWith: String
   eq: String
@@ -155,19 +163,13 @@ input HomeStatsFilter {
   icon: StringFilter
 }
 
-input ImageFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
-  in: [String]
-}
-
 input HomeClientsFilter {
   name: StringFilter
   logo: ImageFilter
 }
 
 input HomeFilter {
+  heroImage: ImageFilter
   heroEyebrow: StringFilter
   heroTitle1: StringFilter
   heroTitleHighlight: StringFilter
@@ -645,6 +647,7 @@ input HomeClientsMutation {
 }
 
 input HomeMutation {
+  heroImage: String
   heroEyebrow: String
   heroTitle1: String
   heroTitleHighlight: String

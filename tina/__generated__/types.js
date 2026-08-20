@@ -8,6 +8,7 @@ export function gql(strings, ...args) {
 export const HomePartsFragmentDoc = gql`
     fragment HomeParts on Home {
   __typename
+  heroImage
   heroEyebrow
   heroTitle1
   heroTitleHighlight

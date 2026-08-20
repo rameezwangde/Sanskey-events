@@ -341,6 +341,7 @@ export type HomeClients = {
 
 export type Home = Node & Document & {
   __typename?: 'Home';
+  heroImage?: Maybe<Scalars['String']['output']>;
   heroEyebrow?: Maybe<Scalars['String']['output']>;
   heroTitle1?: Maybe<Scalars['String']['output']>;
   heroTitleHighlight?: Maybe<Scalars['String']['output']>;
@@ -357,6 +358,13 @@ export type Home = Node & Document & {
   _values: Scalars['JSON']['output'];
 };
 
+export type ImageFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
 export type StringFilter = {
   startsWith?: InputMaybe<Scalars['String']['input']>;
   eq?: InputMaybe<Scalars['String']['input']>;
@@ -370,19 +378,13 @@ export type HomeStatsFilter = {
   icon?: InputMaybe<StringFilter>;
 };
 
-export type ImageFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-};
-
 export type HomeClientsFilter = {
   name?: InputMaybe<StringFilter>;
   logo?: InputMaybe<ImageFilter>;
 };
 
 export type HomeFilter = {
+  heroImage?: InputMaybe<ImageFilter>;
   heroEyebrow?: InputMaybe<StringFilter>;
   heroTitle1?: InputMaybe<StringFilter>;
   heroTitleHighlight?: InputMaybe<StringFilter>;
@@ -1052,6 +1054,7 @@ export type HomeClientsMutation = {
 };
 
 export type HomeMutation = {
+  heroImage?: InputMaybe<Scalars['String']['input']>;
   heroEyebrow?: InputMaybe<Scalars['String']['input']>;
   heroTitle1?: InputMaybe<Scalars['String']['input']>;
   heroTitleHighlight?: InputMaybe<Scalars['String']['input']>;
@@ -1195,6 +1198,13 @@ export type Event_SectionsMutation = {
   items?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type ImageFilter = {
+  startsWith?: string | null | undefined;
+  eq?: string | null | undefined;
+  exists?: boolean | null | undefined;
+  in?: Array<string | null | undefined> | null | undefined;
+};
+
 export type StringFilter = {
   startsWith?: string | null | undefined;
   eq?: string | null | undefined;
@@ -1208,19 +1218,13 @@ export type HomeStatsFilter = {
   icon?: StringFilter | null | undefined;
 };
 
-export type ImageFilter = {
-  startsWith?: string | null | undefined;
-  eq?: string | null | undefined;
-  exists?: boolean | null | undefined;
-  in?: Array<string | null | undefined> | null | undefined;
-};
-
 export type HomeClientsFilter = {
   name?: StringFilter | null | undefined;
   logo?: ImageFilter | null | undefined;
 };
 
 export type HomeFilter = {
+  heroImage?: ImageFilter | null | undefined;
   heroEyebrow?: StringFilter | null | undefined;
   heroTitle1?: StringFilter | null | undefined;
   heroTitleHighlight?: StringFilter | null | undefined;
@@ -1364,7 +1368,7 @@ export type Event_SectionsFilter = {
   items?: StringFilter | null | undefined;
 };
 
-export type HomePartsFragment = { __typename: 'Home', heroEyebrow: string | null, heroTitle1: string | null, heroTitleHighlight: string | null, heroTitle2: string | null, heroDescription: string | null, heroPrimaryButton: string | null, heroSecondaryButton: string | null, clienteleEyebrow: string | null, clienteleTitle: string | null, stats: Array<{ __typename: 'HomeStats', value: string | null, label: string | null, icon: string | null } | null> | null, clients: Array<{ __typename: 'HomeClients', name: string | null, logo: string | null } | null> | null };
+export type HomePartsFragment = { __typename: 'Home', heroImage: string | null, heroEyebrow: string | null, heroTitle1: string | null, heroTitleHighlight: string | null, heroTitle2: string | null, heroDescription: string | null, heroPrimaryButton: string | null, heroSecondaryButton: string | null, clienteleEyebrow: string | null, clienteleTitle: string | null, stats: Array<{ __typename: 'HomeStats', value: string | null, label: string | null, icon: string | null } | null> | null, clients: Array<{ __typename: 'HomeClients', name: string | null, logo: string | null } | null> | null };
 
 export type AboutPartsFragment = { __typename: 'About', eyebrow: string | null, title1: string | null, titleHighlight: string | null, title2: string | null, paragraph1: string | null, paragraph2: string | null, paragraph3: string | null, image: string | null };
 
@@ -1389,7 +1393,7 @@ export type HomeQueryVariables = Exact<{
 }>;
 
 
-export type HomeQuery = { home: { __typename: 'Home', id: string, heroEyebrow: string | null, heroTitle1: string | null, heroTitleHighlight: string | null, heroTitle2: string | null, heroDescription: string | null, heroPrimaryButton: string | null, heroSecondaryButton: string | null, clienteleEyebrow: string | null, clienteleTitle: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, stats: Array<{ __typename: 'HomeStats', value: string | null, label: string | null, icon: string | null } | null> | null, clients: Array<{ __typename: 'HomeClients', name: string | null, logo: string | null } | null> | null } };
+export type HomeQuery = { home: { __typename: 'Home', id: string, heroImage: string | null, heroEyebrow: string | null, heroTitle1: string | null, heroTitleHighlight: string | null, heroTitle2: string | null, heroDescription: string | null, heroPrimaryButton: string | null, heroSecondaryButton: string | null, clienteleEyebrow: string | null, clienteleTitle: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, stats: Array<{ __typename: 'HomeStats', value: string | null, label: string | null, icon: string | null } | null> | null, clients: Array<{ __typename: 'HomeClients', name: string | null, logo: string | null } | null> | null } };
 
 export type HomeConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -1401,7 +1405,7 @@ export type HomeConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomeConnectionQuery = { homeConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Home', id: string, heroEyebrow: string | null, heroTitle1: string | null, heroTitleHighlight: string | null, heroTitle2: string | null, heroDescription: string | null, heroPrimaryButton: string | null, heroSecondaryButton: string | null, clienteleEyebrow: string | null, clienteleTitle: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, stats: Array<{ __typename: 'HomeStats', value: string | null, label: string | null, icon: string | null } | null> | null, clients: Array<{ __typename: 'HomeClients', name: string | null, logo: string | null } | null> | null } | null } | null> | null } };
+export type HomeConnectionQuery = { homeConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Home', id: string, heroImage: string | null, heroEyebrow: string | null, heroTitle1: string | null, heroTitleHighlight: string | null, heroTitle2: string | null, heroDescription: string | null, heroPrimaryButton: string | null, heroSecondaryButton: string | null, clienteleEyebrow: string | null, clienteleTitle: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, stats: Array<{ __typename: 'HomeStats', value: string | null, label: string | null, icon: string | null } | null> | null, clients: Array<{ __typename: 'HomeClients', name: string | null, logo: string | null } | null> | null } | null } | null> | null } };
 
 export type AboutQueryVariables = Exact<{
   relativePath: string;
@@ -1577,6 +1581,7 @@ export type Event_SectionsConnectionQuery = { event_sectionsConnection: { totalC
 export const HomePartsFragmentDoc = gql`
     fragment HomeParts on Home {
   __typename
+  heroImage
   heroEyebrow
   heroTitle1
   heroTitleHighlight

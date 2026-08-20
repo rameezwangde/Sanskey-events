@@ -84,6 +84,21 @@ fragment ModelsParts on Models {
   }
 }
 
+fragment RegisterParts on Register {
+  __typename
+  eyebrow
+  title
+  description
+  formFields {
+    __typename
+    name
+    label
+    type
+    placeholder
+    options
+  }
+}
+
 fragment NavbarParts on Navbar {
   __typename
   navLinks {

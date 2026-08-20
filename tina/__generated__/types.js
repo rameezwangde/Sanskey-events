@@ -96,6 +96,22 @@ export const ModelsPartsFragmentDoc = gql`
   }
 }
     `;
+export const RegisterPartsFragmentDoc = gql`
+    fragment RegisterParts on Register {
+  __typename
+  eyebrow
+  title
+  description
+  formFields {
+    __typename
+    name
+    label
+    type
+    placeholder
+    options
+  }
+}
+    `;
 export const NavbarPartsFragmentDoc = gql`
     fragment NavbarParts on Navbar {
   __typename
@@ -438,6 +454,63 @@ export const ModelsConnectionDocument = gql`
   }
 }
     ${ModelsPartsFragmentDoc}`;
+export const RegisterDocument = gql`
+    query register($relativePath: String!) {
+  register(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...RegisterParts
+  }
+}
+    ${RegisterPartsFragmentDoc}`;
+export const RegisterConnectionDocument = gql`
+    query registerConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: RegisterFilter) {
+  registerConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...RegisterParts
+      }
+    }
+  }
+}
+    ${RegisterPartsFragmentDoc}`;
 export const NavbarDocument = gql`
     query navbar($relativePath: String!) {
   navbar(relativePath: $relativePath) {
@@ -697,6 +770,12 @@ export function getSdk(requester) {
     },
     modelsConnection(variables, options) {
       return requester(ModelsConnectionDocument, variables, options);
+    },
+    register(variables, options) {
+      return requester(RegisterDocument, variables, options);
+    },
+    registerConnection(variables, options) {
+      return requester(RegisterConnectionDocument, variables, options);
     },
     navbar(variables, options) {
       return requester(NavbarDocument, variables, options);

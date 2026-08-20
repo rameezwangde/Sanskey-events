@@ -64,6 +64,8 @@ type Query {
   galleryConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GalleryFilter): GalleryConnection!
   models(relativePath: String): Models!
   modelsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ModelsFilter): ModelsConnection!
+  register(relativePath: String): Register!
+  registerConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: RegisterFilter): RegisterConnection!
   navbar(relativePath: String): Navbar!
   navbarConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NavbarFilter): NavbarConnection!
   footer(relativePath: String): Footer!
@@ -80,6 +82,7 @@ input DocumentFilter {
   contact: ContactFilter
   gallery: GalleryFilter
   models: ModelsFilter
+  register: RegisterFilter
   navbar: NavbarFilter
   footer: FooterFilter
   events: EventsFilter
@@ -109,7 +112,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Home | About | Contact | Gallery | Models | Navbar | Footer | Events | Event_sections | Folder
+union DocumentNode = Home | About | Contact | Gallery | Models | Register | Navbar | Footer | Events | Event_sections | Folder
 
 type HomeStats {
   value: String
@@ -369,6 +372,50 @@ type ModelsConnection implements Connection {
   edges: [ModelsConnectionEdges]
 }
 
+type RegisterFormFields {
+  name: String
+  label: String
+  type: String
+  placeholder: String
+  options: [String]
+}
+
+type Register implements Node & Document {
+  eyebrow: String
+  title: String
+  description: String
+  formFields: [RegisterFormFields]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input RegisterFormFieldsFilter {
+  name: StringFilter
+  label: StringFilter
+  type: StringFilter
+  placeholder: StringFilter
+  options: StringFilter
+}
+
+input RegisterFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  description: StringFilter
+  formFields: RegisterFormFieldsFilter
+}
+
+type RegisterConnectionEdges {
+  cursor: String!
+  node: Register
+}
+
+type RegisterConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [RegisterConnectionEdges]
+}
+
 type NavbarNavLinks {
   name: String
   path: String
@@ -547,6 +594,8 @@ type Mutation {
   createGallery(relativePath: String!, params: GalleryMutation!): Gallery!
   updateModels(relativePath: String!, params: ModelsMutation!): Models!
   createModels(relativePath: String!, params: ModelsMutation!): Models!
+  updateRegister(relativePath: String!, params: RegisterMutation!): Register!
+  createRegister(relativePath: String!, params: RegisterMutation!): Register!
   updateNavbar(relativePath: String!, params: NavbarMutation!): Navbar!
   createNavbar(relativePath: String!, params: NavbarMutation!): Navbar!
   updateFooter(relativePath: String!, params: FooterMutation!): Footer!
@@ -563,6 +612,7 @@ input DocumentUpdateMutation {
   contact: ContactMutation
   gallery: GalleryMutation
   models: ModelsMutation
+  register: RegisterMutation
   navbar: NavbarMutation
   footer: FooterMutation
   events: EventsMutation
@@ -576,6 +626,7 @@ input DocumentMutation {
   contact: ContactMutation
   gallery: GalleryMutation
   models: ModelsMutation
+  register: RegisterMutation
   navbar: NavbarMutation
   footer: FooterMutation
   events: EventsMutation
@@ -667,6 +718,21 @@ input ModelsMutation {
   ctaText: String
   ctaLink: String
   models: [ModelsModelsMutation]
+}
+
+input RegisterFormFieldsMutation {
+  name: String
+  label: String
+  type: String
+  placeholder: String
+  options: [String]
+}
+
+input RegisterMutation {
+  eyebrow: String
+  title: String
+  description: String
+  formFields: [RegisterFormFieldsMutation]
 }
 
 input NavbarNavLinksMutation {

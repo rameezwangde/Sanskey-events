@@ -1,18 +1,20 @@
 import { motion } from 'framer-motion';
 import { Send, Upload } from 'lucide-react';
 import { useState } from 'react';
+import registerData from '../data/pages/register.json';
 
 export default function Register() {
   const [portfolioFiles, setPortfolioFiles] = useState([]);
   const [fileError, setFileError] = useState('');
   
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    applyingFor: 'South India Queen',
-    additionalInfo: ''
+  const [formData, setFormData] = useState(() => {
+    const initial = {};
+    if (registerData.formFields) {
+      registerData.formFields.forEach(field => {
+        initial[field.name] = field.type === 'select' && field.options?.length > 0 ? field.options[0] : '';
+      });
+    }
+    return initial;
   });
 
   const handleChange = (e) => {
@@ -43,12 +45,15 @@ export default function Register() {
     setPortfolioFiles(files);
   };
 
-  const subject = `New Application: ${formData.applyingFor} - ${formData.firstName} ${formData.lastName}`;
-  let body = `Name: ${formData.firstName} ${formData.lastName}\n`;
-  body += `Email: ${formData.email}\n`;
-  body += `Phone: ${formData.phone}\n`;
-  body += `Applying For: ${formData.applyingFor}\n\n`;
-  body += `Additional Information:\n${formData.additionalInfo}\n\n`;
+  const subject = `New Application - ${registerData.title}`;
+  let body = '';
+  
+  if (registerData.formFields) {
+    registerData.formFields.forEach(field => {
+      body += `${field.label}: ${formData[field.name] || ''}\n`;
+    });
+  }
+  body += '\n';
   
   if (portfolioFiles.length > 0) {
     body += `Note: ${portfolioFiles.length} portfolio image(s) selected (Please attach them manually to this email, as browsers cannot attach files automatically).\n`;
@@ -56,16 +61,70 @@ export default function Register() {
 
   const mailtoUrl = `mailto:Sankeyevents@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
+  const renderField = (field) => {
+    const isFullWidth = ['textarea', 'email', 'tel', 'select'].includes(field.type);
+    
+    const Wrapper = ({ children }) => (
+      <div className={isFullWidth ? "md:col-span-2" : ""}>
+        <label className="block text-sm font-medium text-brand-black mb-2">{field.label}</label>
+        {children}
+      </div>
+    );
+
+    if (field.type === 'textarea') {
+      return (
+        <Wrapper key={field.name}>
+          <textarea 
+            name={field.name} 
+            value={formData[field.name] || ''} 
+            onChange={handleChange} 
+            rows={4} 
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans resize-none" 
+            placeholder={field.placeholder}
+          />
+        </Wrapper>
+      );
+    }
+    
+    if (field.type === 'select') {
+      return (
+        <Wrapper key={field.name}>
+          <select 
+            name={field.name} 
+            value={formData[field.name] || ''} 
+            onChange={handleChange} 
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans bg-white"
+          >
+            {field.options?.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+          </select>
+        </Wrapper>
+      );
+    }
+
+    return (
+      <Wrapper key={field.name}>
+        <input 
+          type={field.type} 
+          name={field.name} 
+          value={formData[field.name] || ''} 
+          onChange={handleChange} 
+          className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" 
+          placeholder={field.placeholder} 
+        />
+      </Wrapper>
+    );
+  };
+
   return (
     <div className="pt-12 pb-16 md:pt-20 md:pb-20 min-h-screen bg-brand-ivory">
       <div className="container mx-auto px-4 md:px-8">
         <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
           <p className="text-brand-bronze font-sans font-bold tracking-[0.2em] uppercase text-xs sm:text-sm mb-2">
-            Join the Journey
+            {registerData.eyebrow}
           </p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif text-brand-black mb-6">Register Here</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif text-brand-black mb-6">{registerData.title}</h1>
           <p className="text-gray-600 font-sans">
-            Apply now for the upcoming South India Queen & Mrs. Garden City pageants, or register for our modeling agency.
+            {registerData.description}
           </p>
         </div>
 
@@ -76,43 +135,11 @@ export default function Register() {
         >
           <form className="space-y-5 md:space-y-6" onSubmit={(e) => e.preventDefault()}>
             <div className="grid gap-5 md:grid-cols-2 md:gap-6">
-              <div>
-                <label className="block text-sm font-medium text-brand-black mb-2">First Name</label>
-                <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" placeholder="John" />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-brand-black mb-2">Last Name</label>
-                <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" placeholder="Doe" />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-brand-black mb-2">Email Address</label>
-              <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" placeholder="john@example.com" />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-brand-black mb-2">Phone Number</label>
-              <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" placeholder="+91 98765 43210" />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-brand-black mb-2">Applying For</label>
-              <select name="applyingFor" value={formData.applyingFor} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans bg-white">
-                <option>South India Queen</option>
-                <option>Mrs. Garden City</option>
-                <option>Modelling Agency</option>
-                <option>General Event Inquiry</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-brand-black mb-2">Additional Information</label>
-              <textarea name="additionalInfo" value={formData.additionalInfo} onChange={handleChange} rows={4} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans resize-none" placeholder="Tell us more about yourself..."></textarea>
+              {registerData.formFields?.map(field => renderField(field))}
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-brand-black mb-2">Portfolio Images (Max 3)</label>
+              <label className="block text-sm font-medium text-brand-black mb-2 mt-6">Portfolio Images (Max 3)</label>
               <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-6 hover:border-brand-gold transition-colors text-center cursor-pointer bg-gray-50/50">
                 <input 
                   type="file" 

@@ -163,6 +163,37 @@ export default defineConfig({
         ]
       },
       {
+        name: "register",
+        label: "Register Page",
+        path: "src/data/pages",
+        match: { include: "register" },
+        format: "json",
+        ui: { allowedActions: { create: false, delete: false } },
+        fields: [
+          { type: "string", name: "eyebrow", label: "Eyebrow" },
+          { type: "string", name: "title", label: "Title" },
+          { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+          {
+            type: "object",
+            list: true,
+            name: "formFields",
+            label: "Form Fields",
+            fields: [
+              { type: "string", name: "name", label: "Field ID (no spaces)" },
+              { type: "string", name: "label", label: "Label" },
+              { 
+                type: "string", 
+                name: "type", 
+                label: "Input Type", 
+                options: ["text", "email", "tel", "select", "textarea"] 
+              },
+              { type: "string", name: "placeholder", label: "Placeholder" },
+              { type: "string", list: true, name: "options", label: "Dropdown Options (only if type is select)" },
+            ]
+          }
+        ]
+      },
+      {
         name: "navbar",
         label: "Navbar",
         path: "src/data/globals",

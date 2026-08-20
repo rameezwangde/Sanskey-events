@@ -1,0 +1,48 @@
+{
+  "eyebrow": "Join the Journey",
+  "title": "Register Here",
+  "description": "Apply now for the upcoming South India Queen & Mrs. Garden City pageants, or register for our modeling agency.",
+  "formFields": [
+    {
+      "name": "firstName",
+      "label": "First Name",
+      "type": "text",
+      "placeholder": "John"
+    },
+    {
+      "name": "lastName",
+      "label": "Last Name",
+      "type": "text",
+      "placeholder": "Doe"
+    },
+    {
+      "name": "email",
+      "label": "Email Address",
+      "type": "email",
+      "placeholder": "john@example.com"
+    },
+    {
+      "name": "phone",
+      "label": "Phone Number",
+      "type": "tel",
+      "placeholder": "+91 98765 43210"
+    },
+    {
+      "name": "applyingFor",
+      "label": "Applying For",
+      "type": "select",
+      "options": [
+        "South India Queen",
+        "Mrs. Garden City",
+        "Modelling Agency",
+        "General Event Inquiry"
+      ]
+    },
+    {
+      "name": "additionalInfo",
+      "label": "Additional Information",
+      "type": "textarea",
+      "placeholder": "Tell us more about yourself..."
+    }
+  ]
+}

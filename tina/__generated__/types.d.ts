@@ -91,6 +91,8 @@ export type Query = {
   galleryConnection: GalleryConnection;
   models: Models;
   modelsConnection: ModelsConnection;
+  register: Register;
+  registerConnection: RegisterConnection;
   navbar: Navbar;
   navbarConnection: NavbarConnection;
   footer: Footer;
@@ -198,6 +200,21 @@ export type QueryModelsConnectionArgs = {
 };
 
 
+export type QueryRegisterArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryRegisterConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<RegisterFilter>;
+};
+
+
 export type QueryNavbarArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -263,6 +280,7 @@ export type DocumentFilter = {
   contact?: InputMaybe<ContactFilter>;
   gallery?: InputMaybe<GalleryFilter>;
   models?: InputMaybe<ModelsFilter>;
+  register?: InputMaybe<RegisterFilter>;
   navbar?: InputMaybe<NavbarFilter>;
   footer?: InputMaybe<FooterFilter>;
   events?: InputMaybe<EventsFilter>;
@@ -306,7 +324,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Home | About | Contact | Gallery | Models | Navbar | Footer | Events | Event_Sections | Folder;
+export type DocumentNode = Home | About | Contact | Gallery | Models | Register | Navbar | Footer | Events | Event_Sections | Folder;
 
 export type HomeStats = {
   __typename?: 'HomeStats';
@@ -587,6 +605,54 @@ export type ModelsConnection = Connection & {
   edges?: Maybe<Array<Maybe<ModelsConnectionEdges>>>;
 };
 
+export type RegisterFormFields = {
+  __typename?: 'RegisterFormFields';
+  name?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
+  placeholder?: Maybe<Scalars['String']['output']>;
+  options?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type Register = Node & Document & {
+  __typename?: 'Register';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  formFields?: Maybe<Array<Maybe<RegisterFormFields>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type RegisterFormFieldsFilter = {
+  name?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+  type?: InputMaybe<StringFilter>;
+  placeholder?: InputMaybe<StringFilter>;
+  options?: InputMaybe<StringFilter>;
+};
+
+export type RegisterFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  formFields?: InputMaybe<RegisterFormFieldsFilter>;
+};
+
+export type RegisterConnectionEdges = {
+  __typename?: 'RegisterConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Register>;
+};
+
+export type RegisterConnection = Connection & {
+  __typename?: 'RegisterConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<RegisterConnectionEdges>>>;
+};
+
 export type NavbarNavLinks = {
   __typename?: 'NavbarNavLinks';
   name?: Maybe<Scalars['String']['output']>;
@@ -782,6 +848,8 @@ export type Mutation = {
   createGallery: Gallery;
   updateModels: Models;
   createModels: Models;
+  updateRegister: Register;
+  createRegister: Register;
   updateNavbar: Navbar;
   createNavbar: Navbar;
   updateFooter: Footer;
@@ -886,6 +954,18 @@ export type MutationCreateModelsArgs = {
 };
 
 
+export type MutationUpdateRegisterArgs = {
+  relativePath: Scalars['String']['input'];
+  params: RegisterMutation;
+};
+
+
+export type MutationCreateRegisterArgs = {
+  relativePath: Scalars['String']['input'];
+  params: RegisterMutation;
+};
+
+
 export type MutationUpdateNavbarArgs = {
   relativePath: Scalars['String']['input'];
   params: NavbarMutation;
@@ -939,6 +1019,7 @@ export type DocumentUpdateMutation = {
   contact?: InputMaybe<ContactMutation>;
   gallery?: InputMaybe<GalleryMutation>;
   models?: InputMaybe<ModelsMutation>;
+  register?: InputMaybe<RegisterMutation>;
   navbar?: InputMaybe<NavbarMutation>;
   footer?: InputMaybe<FooterMutation>;
   events?: InputMaybe<EventsMutation>;
@@ -952,6 +1033,7 @@ export type DocumentMutation = {
   contact?: InputMaybe<ContactMutation>;
   gallery?: InputMaybe<GalleryMutation>;
   models?: InputMaybe<ModelsMutation>;
+  register?: InputMaybe<RegisterMutation>;
   navbar?: InputMaybe<NavbarMutation>;
   footer?: InputMaybe<FooterMutation>;
   events?: InputMaybe<EventsMutation>;
@@ -1043,6 +1125,21 @@ export type ModelsMutation = {
   ctaText?: InputMaybe<Scalars['String']['input']>;
   ctaLink?: InputMaybe<Scalars['String']['input']>;
   models?: InputMaybe<Array<InputMaybe<ModelsModelsMutation>>>;
+};
+
+export type RegisterFormFieldsMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
+  placeholder?: InputMaybe<Scalars['String']['input']>;
+  options?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type RegisterMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  formFields?: InputMaybe<Array<InputMaybe<RegisterFormFieldsMutation>>>;
 };
 
 export type NavbarNavLinksMutation = {
@@ -1199,6 +1296,21 @@ export type ModelsFilter = {
   models?: ModelsModelsFilter | null | undefined;
 };
 
+export type RegisterFormFieldsFilter = {
+  name?: StringFilter | null | undefined;
+  label?: StringFilter | null | undefined;
+  type?: StringFilter | null | undefined;
+  placeholder?: StringFilter | null | undefined;
+  options?: StringFilter | null | undefined;
+};
+
+export type RegisterFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  formFields?: RegisterFormFieldsFilter | null | undefined;
+};
+
 export type NavbarNavLinksFilter = {
   name?: StringFilter | null | undefined;
   path?: StringFilter | null | undefined;
@@ -1261,6 +1373,8 @@ export type ContactPartsFragment = { __typename: 'Contact', eyebrow: string | nu
 export type GalleryPartsFragment = { __typename: 'Gallery', eyebrow: string | null, title: string | null, images: Array<{ __typename: 'GalleryImages', image: string | null, thumb: string | null, alt: string | null } | null> | null };
 
 export type ModelsPartsFragment = { __typename: 'Models', eyebrow: string | null, title: string | null, description: string | null, ctaText: string | null, ctaLink: string | null, models: Array<{ __typename: 'ModelsModels', name: string | null, title: string | null, image: string | null } | null> | null };
+
+export type RegisterPartsFragment = { __typename: 'Register', eyebrow: string | null, title: string | null, description: string | null, formFields: Array<{ __typename: 'RegisterFormFields', name: string | null, label: string | null, type: string | null, placeholder: string | null, options: Array<string | null> | null } | null> | null };
 
 export type NavbarPartsFragment = { __typename: 'Navbar', ctaText: string | null, ctaLink: string | null, navLinks: Array<{ __typename: 'NavbarNavLinks', name: string | null, path: string | null } | null> | null, socialLinks: Array<{ __typename: 'NavbarSocialLinks', platform: string | null, url: string | null } | null> | null };
 
@@ -1364,6 +1478,25 @@ export type ModelsConnectionQueryVariables = Exact<{
 
 
 export type ModelsConnectionQuery = { modelsConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Models', id: string, eyebrow: string | null, title: string | null, description: string | null, ctaText: string | null, ctaLink: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, models: Array<{ __typename: 'ModelsModels', name: string | null, title: string | null, image: string | null } | null> | null } | null } | null> | null } };
+
+export type RegisterQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type RegisterQuery = { register: { __typename: 'Register', id: string, eyebrow: string | null, title: string | null, description: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, formFields: Array<{ __typename: 'RegisterFormFields', name: string | null, label: string | null, type: string | null, placeholder: string | null, options: Array<string | null> | null } | null> | null } };
+
+export type RegisterConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: RegisterFilter | null | undefined;
+}>;
+
+
+export type RegisterConnectionQuery = { registerConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Register', id: string, eyebrow: string | null, title: string | null, description: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, formFields: Array<{ __typename: 'RegisterFormFields', name: string | null, label: string | null, type: string | null, placeholder: string | null, options: Array<string | null> | null } | null> | null } | null } | null> | null } };
 
 export type NavbarQueryVariables = Exact<{
   relativePath: string;
@@ -1529,6 +1662,22 @@ export const ModelsPartsFragmentDoc = gql`
     name
     title
     image
+  }
+}
+    `;
+export const RegisterPartsFragmentDoc = gql`
+    fragment RegisterParts on Register {
+  __typename
+  eyebrow
+  title
+  description
+  formFields {
+    __typename
+    name
+    label
+    type
+    placeholder
+    options
   }
 }
     `;
@@ -1874,6 +2023,63 @@ export const ModelsConnectionDocument = gql`
   }
 }
     ${ModelsPartsFragmentDoc}`;
+export const RegisterDocument = gql`
+    query register($relativePath: String!) {
+  register(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...RegisterParts
+  }
+}
+    ${RegisterPartsFragmentDoc}`;
+export const RegisterConnectionDocument = gql`
+    query registerConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: RegisterFilter) {
+  registerConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...RegisterParts
+      }
+    }
+  }
+}
+    ${RegisterPartsFragmentDoc}`;
 export const NavbarDocument = gql`
     query navbar($relativePath: String!) {
   navbar(relativePath: $relativePath) {
@@ -2134,6 +2340,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     modelsConnection(variables?: ModelsConnectionQueryVariables, options?: C): Promise<{data: ModelsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ModelsConnectionQueryVariables, query: string}> {
         return requester<{data: ModelsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ModelsConnectionQueryVariables, query: string}, ModelsConnectionQueryVariables>(ModelsConnectionDocument, variables, options);
+      },
+    register(variables: RegisterQueryVariables, options?: C): Promise<{data: RegisterQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RegisterQueryVariables, query: string}> {
+        return requester<{data: RegisterQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RegisterQueryVariables, query: string}, RegisterQueryVariables>(RegisterDocument, variables, options);
+      },
+    registerConnection(variables?: RegisterConnectionQueryVariables, options?: C): Promise<{data: RegisterConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RegisterConnectionQueryVariables, query: string}> {
+        return requester<{data: RegisterConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RegisterConnectionQueryVariables, query: string}, RegisterConnectionQueryVariables>(RegisterConnectionDocument, variables, options);
       },
     navbar(variables: NavbarQueryVariables, options?: C): Promise<{data: NavbarQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavbarQueryVariables, query: string}> {
         return requester<{data: NavbarQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavbarQueryVariables, query: string}, NavbarQueryVariables>(NavbarDocument, variables, options);

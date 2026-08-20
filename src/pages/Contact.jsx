@@ -135,7 +135,28 @@ export default function Contact() {
                       <h3 className="text-sm font-serif text-brand-bronze">{card.title}</h3>
                     </div>
                     <div className="space-y-1 text-xs leading-5 text-brand-black/70">
-                      {card.lines.map((item) => <p key={item.line || item}>{item.line || item}</p>)}
+                      {card.lines.map((item) => {
+                        const text = item.line || item;
+                        if (typeof text === 'string' && text.includes('@')) {
+                          return (
+                            <p key={text}>
+                              <a href={`mailto:${text}`} className="hover:text-brand-gold transition-colors">
+                                {text}
+                              </a>
+                            </p>
+                          );
+                        }
+                        if (typeof text === 'string' && text.match(/^[\d\+\s\-]+$/) && text.length > 7) {
+                          return (
+                            <p key={text}>
+                              <a href={`tel:${text.replace(/[\s\-]/g, '')}`} className="hover:text-brand-gold transition-colors">
+                                {text}
+                              </a>
+                            </p>
+                          );
+                        }
+                        return <p key={text}>{text}</p>;
+                      })}
                     </div>
                   </div>
                   )

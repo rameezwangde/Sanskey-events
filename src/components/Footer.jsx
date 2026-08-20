@@ -24,8 +24,8 @@ export default function Footer() {
           <div>
             <h4 className="mb-4 text-lg font-serif text-brand-gold">Contact</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li>Email: {footerData.email}</li>
-              <li>Phone: {footerData.phone}</li>
+              <li>Email: <a href={`mailto:${footerData.email}`} className="hover:text-brand-ivory transition-colors">{footerData.email}</a></li>
+              <li>Phone: <a href={`tel:${footerData.phone.replace(/[\s\-]/g, '')}`} className="hover:text-brand-ivory transition-colors">{footerData.phone}</a></li>
               <li>Location: {footerData.location}</li>
             </ul>
           </div>

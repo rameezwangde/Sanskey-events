@@ -5,6 +5,20 @@ import { useState } from 'react';
 export default function Register() {
   const [portfolioFiles, setPortfolioFiles] = useState([]);
   const [fileError, setFileError] = useState('');
+  
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    applyingFor: 'South India Queen',
+    additionalInfo: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
@@ -29,6 +43,19 @@ export default function Register() {
     setPortfolioFiles(files);
   };
 
+  const subject = `New Application: ${formData.applyingFor} - ${formData.firstName} ${formData.lastName}`;
+  let body = `Name: ${formData.firstName} ${formData.lastName}\n`;
+  body += `Email: ${formData.email}\n`;
+  body += `Phone: ${formData.phone}\n`;
+  body += `Applying For: ${formData.applyingFor}\n\n`;
+  body += `Additional Information:\n${formData.additionalInfo}\n\n`;
+  
+  if (portfolioFiles.length > 0) {
+    body += `Note: ${portfolioFiles.length} portfolio image(s) selected (Please attach them manually to this email, as browsers cannot attach files automatically).\n`;
+  }
+
+  const mailtoUrl = `mailto:Sankeyevents@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
   return (
     <div className="pt-12 pb-16 md:pt-20 md:pb-20 min-h-screen bg-brand-ivory">
       <div className="container mx-auto px-4 md:px-8">
@@ -47,31 +74,31 @@ export default function Register() {
           animate={{ opacity: 1, y: 0 }}
           className="max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl shadow-brand-bronze/10 border border-brand-beige p-5 sm:p-8 md:p-12"
         >
-          <form className="space-y-5 md:space-y-6">
+          <form className="space-y-5 md:space-y-6" onSubmit={(e) => e.preventDefault()}>
             <div className="grid gap-5 md:grid-cols-2 md:gap-6">
               <div>
                 <label className="block text-sm font-medium text-brand-black mb-2">First Name</label>
-                <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" placeholder="John" />
+                <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" placeholder="John" />
               </div>
               <div>
                 <label className="block text-sm font-medium text-brand-black mb-2">Last Name</label>
-                <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" placeholder="Doe" />
+                <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" placeholder="Doe" />
               </div>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-brand-black mb-2">Email Address</label>
-              <input type="email" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" placeholder="john@example.com" />
+              <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" placeholder="john@example.com" />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-brand-black mb-2">Phone Number</label>
-              <input type="tel" className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" placeholder="+91 98765 43210" />
+              <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" placeholder="+91 98765 43210" />
             </div>
 
             <div>
               <label className="block text-sm font-medium text-brand-black mb-2">Applying For</label>
-              <select className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans bg-white">
+              <select name="applyingFor" value={formData.applyingFor} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans bg-white">
                 <option>South India Queen</option>
                 <option>Mrs. Garden City</option>
                 <option>Modelling Agency</option>
@@ -81,7 +108,7 @@ export default function Register() {
 
             <div>
               <label className="block text-sm font-medium text-brand-black mb-2">Additional Information</label>
-              <textarea rows={4} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans resize-none" placeholder="Tell us more about yourself..."></textarea>
+              <textarea name="additionalInfo" value={formData.additionalInfo} onChange={handleChange} rows={4} className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans resize-none" placeholder="Tell us more about yourself..."></textarea>
             </div>
             
             <div>
@@ -116,7 +143,22 @@ export default function Register() {
               )}
             </div>
 
-            <button type="button" className="w-full min-h-12 py-3 bg-brand-gold sm:py-4 text-white font-medium rounded-lg hover:bg-brand-bronze transition-all flex items-center justify-center group shadow-xl shadow-brand-gold/20 mt-4">
+            <button 
+              type="button" 
+              onClick={(e) => {
+                e.preventDefault();
+                
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                
+                if (isMobile) {
+                  window.location.href = mailtoUrl;
+                } else {
+                  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=Sankeyevents@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                  window.open(gmailUrl, '_blank');
+                }
+              }}
+              className="w-full min-h-12 py-3 bg-brand-gold sm:py-4 text-white font-medium rounded-lg hover:bg-brand-bronze transition-all flex items-center justify-center group shadow-xl shadow-brand-gold/20 mt-4 relative z-10 cursor-pointer"
+            >
               Submit Application <Send size={18} className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </button>
           </form>

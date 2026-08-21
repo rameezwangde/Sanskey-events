@@ -1,5 +1,5 @@
 {
-  "heroImage": "/hero.png",
+  "heroImage": "/uploads/as.jpg",
   "heroEyebrow": "We plan. You celebrate.",
   "heroTitle1": "CRAFTING",
   "heroTitleHighlight": "UNFORGETTABLE",
@@ -34,35 +34,35 @@
   "clients": [
     {
       "name": "Havells",
-      "logo": "/havells.png"
+      "logo": "/uploads/havells.png"
     },
     {
       "name": "Tydal",
-      "logo": "/tydal.png"
+      "logo": "/uploads/tydal.png"
     },
     {
       "name": "Van Heusen",
-      "logo": "/Van Heusen.png"
+      "logo": "/uploads/Van Heusen.png"
     },
     {
       "name": "Somany",
-      "logo": "/somany.png"
+      "logo": "/uploads/somany.png"
     },
     {
       "name": "Mahindra",
-      "logo": "/mahindra.png"
+      "logo": "/uploads/mahindra.png"
     },
     {
       "name": "Samsung",
-      "logo": "/samsung.png"
+      "logo": "/uploads/samsung.png"
     },
     {
       "name": "Rotary Club",
-      "logo": "/rotary.png"
+      "logo": "/uploads/rotary.png"
     },
     {
       "name": "Lions Club",
-      "logo": "/Lions Clubs International.png"
+      "logo": "/uploads/Lions Clubs International.png"
     }
   ]
 }

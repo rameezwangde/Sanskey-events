@@ -127,16 +127,10 @@ export default function Register() {
   const renderField = (field) => {
     const isFullWidth = ['textarea', 'email', 'tel', 'select'].includes(field.type);
     
-    const Wrapper = ({ children }) => (
-      <div className={isFullWidth ? "md:col-span-2" : ""}>
-        <label className="block text-sm font-medium text-brand-black mb-2">{field.label}</label>
-        {children}
-      </div>
-    );
-
     if (field.type === 'textarea') {
       return (
-        <Wrapper key={field.name}>
+        <div key={field.name} className={isFullWidth ? "md:col-span-2" : ""}>
+          <label className="block text-sm font-medium text-brand-black mb-2">{field.label}</label>
           <textarea 
             name={field.name} 
             value={formData[field.name] || ''} 
@@ -145,13 +139,14 @@ export default function Register() {
             className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans resize-none" 
             placeholder={field.placeholder}
           />
-        </Wrapper>
+        </div>
       );
     }
     
     if (field.type === 'select') {
       return (
-        <Wrapper key={field.name}>
+        <div key={field.name} className={isFullWidth ? "md:col-span-2" : ""}>
+          <label className="block text-sm font-medium text-brand-black mb-2">{field.label}</label>
           <select 
             name={field.name} 
             value={formData[field.name] || ''} 
@@ -160,12 +155,13 @@ export default function Register() {
           >
             {field.options?.map(opt => <option key={opt} value={opt}>{opt}</option>)}
           </select>
-        </Wrapper>
+        </div>
       );
     }
 
     return (
-      <Wrapper key={field.name}>
+      <div key={field.name} className={isFullWidth ? "md:col-span-2" : ""}>
+        <label className="block text-sm font-medium text-brand-black mb-2">{field.label}</label>
         <input 
           type={field.type} 
           name={field.name} 
@@ -174,7 +170,7 @@ export default function Register() {
           className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/20 outline-none transition-all font-sans" 
           placeholder={field.placeholder} 
         />
-      </Wrapper>
+      </div>
     );
   };
 

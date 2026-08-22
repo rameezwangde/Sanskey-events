@@ -3,9 +3,14 @@ import { Send, Upload } from 'lucide-react';
 import { useState } from 'react';
 import registerData from '../data/pages/register.json';
 
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwOgVOR-saK-1hstlDqg2UR3GVXydrOCs8AaXSW7r3Ps5yRRbfD0617nR6Yg4Ex9iKVWA/exec";
+
 export default function Register() {
   const [portfolioFiles, setPortfolioFiles] = useState([]);
   const [fileError, setFileError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState('');
   
   const [formData, setFormData] = useState(() => {
     const initial = {};
@@ -45,21 +50,79 @@ export default function Register() {
     setPortfolioFiles(files);
   };
 
-  const subject = `New Application - ${registerData.title}`;
-  let body = '';
-  
-  if (registerData.formFields) {
-    registerData.formFields.forEach(field => {
-      body += `${field.label}: ${formData[field.name] || ''}\n`;
+  const fileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = error => reject(error);
     });
-  }
-  body += '\n';
-  
-  if (portfolioFiles.length > 0) {
-    body += `Note: ${portfolioFiles.length} portfolio image(s) selected (Please attach them manually to this email, as browsers cannot attach files automatically).\n`;
-  }
+  };
 
-  const mailtoUrl = `mailto:Sankeyevents@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+    
+    setIsSubmitting(true);
+    setSubmitError('');
+    setSubmitSuccess(false);
+
+    try {
+      const subject = `New Application - ${registerData.title}`;
+      let body = '';
+      if (registerData.formFields) {
+        registerData.formFields.forEach(field => {
+          body += `${field.label}: ${formData[field.name] || ''}\n`;
+        });
+      }
+      
+      const base64Files = await Promise.all(
+        portfolioFiles.map(async (file) => {
+          const base64 = await fileToBase64(file);
+          return {
+            name: file.name,
+            type: file.type,
+            base64: base64
+          };
+        })
+      );
+
+      const payload = {
+        subject,
+        body,
+        files: base64Files
+      };
+
+      const response = await fetch(SCRIPT_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+      
+      if (result.status === 'success') {
+        setSubmitSuccess(true);
+        setPortfolioFiles([]);
+        const initial = {};
+        if (registerData.formFields) {
+          registerData.formFields.forEach(field => {
+            initial[field.name] = field.type === 'select' && field.options?.length > 0 ? field.options[0] : '';
+          });
+        }
+        setFormData(initial);
+      } else {
+        throw new Error(result.message || 'Failed to submit application.');
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      setSubmitError('An error occurred while submitting your application. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const renderField = (field) => {
     const isFullWidth = ['textarea', 'email', 'tel', 'select'].includes(field.type);
@@ -133,7 +196,21 @@ export default function Register() {
           animate={{ opacity: 1, y: 0 }}
           className="max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl shadow-brand-bronze/10 border border-brand-beige p-5 sm:p-8 md:p-12"
         >
-          <form className="space-y-5 md:space-y-6" onSubmit={(e) => e.preventDefault()}>
+          {submitSuccess && (
+            <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg text-center font-sans">
+              <h3 className="font-bold text-lg mb-1">Application Submitted!</h3>
+              <p>Thank you for applying. We have received your details and portfolio.</p>
+              <button 
+                onClick={() => setSubmitSuccess(false)}
+                className="mt-3 text-sm text-green-600 hover:text-green-800 underline"
+              >
+                Submit another application
+              </button>
+            </div>
+          )}
+          
+          {!submitSuccess && (
+          <form className="space-y-5 md:space-y-6" onSubmit={handleSubmit}>
             <div className="grid gap-5 md:grid-cols-2 md:gap-6">
               {registerData.formFields?.map(field => renderField(field))}
             </div>
@@ -170,25 +247,23 @@ export default function Register() {
               )}
             </div>
 
+              {submitError && <p className="text-red-500 text-sm mt-4 font-sans text-center">{submitError}</p>}
+
             <button 
-              type="button" 
-              onClick={(e) => {
-                e.preventDefault();
-                
-                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-                
-                if (isMobile) {
-                  window.location.href = mailtoUrl;
-                } else {
-                  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=Sankeyevents@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                  window.open(gmailUrl, '_blank');
-                }
-              }}
-              className="w-full min-h-12 py-3 bg-brand-gold sm:py-4 text-white font-medium rounded-lg hover:bg-brand-bronze transition-all flex items-center justify-center group shadow-xl shadow-brand-gold/20 mt-4 relative z-10 cursor-pointer"
+              type="submit" 
+              disabled={isSubmitting}
+              className="w-full min-h-12 py-3 bg-brand-gold sm:py-4 text-white font-medium rounded-lg hover:bg-brand-bronze transition-all flex items-center justify-center group shadow-xl shadow-brand-gold/20 mt-4 relative z-10 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Submit Application <Send size={18} className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              {isSubmitting ? (
+                <span>Sending Application...</span>
+              ) : (
+                <>
+                  Submit Application <Send size={18} className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </>
+              )}
             </button>
           </form>
+          )}
         </motion.div>
       </div>
     </div>

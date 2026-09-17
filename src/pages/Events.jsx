@@ -5,9 +5,10 @@ import { X, ChevronLeft, ChevronRight, ArrowRight, Archive, Calendar, Images } f
 const eventFiles = import.meta.glob('../data/events/*.json', { eager: true });
 const sectionFiles = import.meta.glob('../data/event_sections/*.json', { eager: true });
 
-const galleries = Object.values(eventFiles).reduce((acc, file) => {
+const galleries = Object.entries(eventFiles).reduce((acc, [path, file]) => {
   const data = file.default || file;
-  if (data.id) acc[data.id] = data;
+  const id = data.id || path.split('/').pop().replace('.json', '');
+  acc[id] = data;
   return acc;
 }, {});
 

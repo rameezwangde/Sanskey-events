@@ -9,6 +9,8 @@ import Register from './pages/Register';
 import Events from './pages/Events';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
+import Voting from './pages/Voting';
+import ModelVote from './pages/ModelVote';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/models" element={<Models />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/vote" element={<Voting />} />
+            <Route path="/vote/:modelId" element={<ModelVote />} />
             <Route path="/events" element={<Events />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />

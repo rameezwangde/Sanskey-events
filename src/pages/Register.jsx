@@ -1,11 +1,16 @@
 import { motion } from 'framer-motion';
 import { Send, Upload } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import registerData from '../data/pages/register.json';
 
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwOgVOR-saK-1hstlDqg2UR3GVXydrOCs8AaXSW7r3Ps5yRRbfD0617nR6Yg4Ex9iKVWA/exec";
 
 export default function Register() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const voteFor = searchParams.get('voteFor');
+
   const [portfolioFiles, setPortfolioFiles] = useState([]);
   const [fileError, setFileError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,6 +26,17 @@ export default function Register() {
     }
     return initial;
   });
+
+  useEffect(() => {
+    if (voteFor) {
+      setFormData(prev => ({
+        ...prev,
+        additionalInfo: prev.additionalInfo 
+          ? prev.additionalInfo + `\n\nVoting for: ${voteFor}` 
+          : `Voting for: ${voteFor}`
+      }));
+    }
+  }, [voteFor]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -1,15 +1,44 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaFacebookF } from 'react-icons/fa';
 import { Vote, Share2 } from 'lucide-react';
 import modelsData from '../data/pages/models.json';
 import { generateSlug } from './Voting';
+import OtpModal from '../components/OtpModal';
+import { submitVote, getVoteCount } from '../utils/voteHandling';
 
 export default function ModelVote() {
   const { modelId } = useParams();
+  const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
+  const [voteCount, setVoteCount] = useState(0);
+  const [isCounting, setIsCounting] = useState(true);
   
   const models = modelsData.models || [];
   const model = models.find(m => generateSlug(m.name) === modelId);
+
+  useEffect(() => {
+    const fetchVotes = async () => {
+      if (model) {
+        setIsCounting(true);
+        const count = await getVoteCount(modelId);
+        setVoteCount(count);
+        setIsCounting(false);
+      }
+    };
+    fetchVotes();
+  }, [model, modelId]);
+  
+  const handleVoteSubmit = async (user) => {
+    try {
+      await submitVote(user, modelId, model.name);
+      // Immediately increment the local vote count so the UI updates
+      setVoteCount(prev => prev + 1);
+    } catch (error) {
+      console.error("Error submitting vote:", error);
+      throw error;
+    }
+  };
 
   if (!model) {
     return <Navigate to="/vote" replace />;
@@ -45,7 +74,14 @@ export default function ModelVote() {
                 Official Voting Page
               </p>
               <h1 className="text-4xl lg:text-5xl font-serif text-brand-black mb-3">{model.name}</h1>
-              <p className="text-gray-500 font-sans text-sm uppercase tracking-wider">{model.title}</p>
+              <p className="text-gray-500 font-sans text-sm uppercase tracking-wider mb-2">{model.title}</p>
+              
+              <div className="inline-flex items-center mt-2 px-4 py-2 bg-brand-gold/10 rounded-full border border-brand-gold/20">
+                <Vote size={16} className="text-brand-gold mr-2" />
+                <span className="font-sans font-semibold text-brand-black">
+                  {isCounting ? '...' : voteCount} <span className="font-normal text-gray-600">Votes</span>
+                </span>
+              </div>
             </div>
 
             <p className="text-gray-600 font-sans mb-8 leading-relaxed">
@@ -53,13 +89,13 @@ export default function ModelVote() {
             </p>
 
             <div className="space-y-4">
-              <Link 
-                to={`/register?voteFor=${encodeURIComponent(model.name)}`}
-                className="w-full flex items-center justify-center px-8 py-4 bg-brand-gold text-white font-medium rounded-xl hover:bg-brand-bronze transition-all shadow-lg shadow-brand-gold/20 group"
+              <button 
+                onClick={() => setIsOtpModalOpen(true)}
+                className="w-full flex items-center justify-center px-8 py-4 bg-brand-gold text-white font-medium rounded-xl hover:bg-brand-bronze transition-all shadow-lg shadow-brand-gold/20 group cursor-pointer"
               >
                 <Vote className="mr-2 group-hover:scale-110 transition-transform" size={20} />
                 Register to Vote
-              </Link>
+              </button>
               
               <a 
                 href={shareUrl}
@@ -74,6 +110,15 @@ export default function ModelVote() {
           </div>
         </motion.div>
       </div>
+      
+      {model && (
+        <OtpModal 
+          isOpen={isOtpModalOpen} 
+          onClose={() => setIsOtpModalOpen(false)} 
+          modelName={model.name}
+          onSubmitSuccess={handleVoteSubmit}
+        />
+      )}
     </div>
   );
 }

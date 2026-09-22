@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Vote } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import modelsData from '../data/pages/models.json';
+import { getVoteCount } from '../utils/voteHandling';
 
 const models = modelsData.models || [];
 
@@ -11,6 +13,23 @@ export const generateSlug = (name) => {
 };
 
 export default function Voting() {
+  const [voteCounts, setVoteCounts] = useState({});
+  const [isCounting, setIsCounting] = useState(true);
+
+  useEffect(() => {
+    const fetchAllVotes = async () => {
+      setIsCounting(true);
+      const counts = {};
+      for (const model of models) {
+        const slug = generateSlug(model.name);
+        counts[slug] = await getVoteCount(slug);
+      }
+      setVoteCounts(counts);
+      setIsCounting(false);
+    };
+    fetchAllVotes();
+  }, []);
+
   return (
     <div className="pt-12 pb-16 md:pt-20 md:pb-20 min-h-screen bg-brand-ivory">
       <div className="container mx-auto px-4 md:px-8 mb-10 text-center md:mb-16">
@@ -35,6 +54,14 @@ export default function Voting() {
               transition={{ delay: idx * 0.2, duration: 0.6 }}
               className="group relative overflow-hidden rounded-2xl shadow-xl shadow-brand-black/5 aspect-[3/4]"
             >
+              <div className="absolute top-4 right-4 z-10 transition-opacity duration-300">
+                <div className="inline-flex items-center px-3 py-1.5 bg-black/60 backdrop-blur-md rounded-full border border-white/10 shadow-lg">
+                  <Vote size={14} className="text-brand-gold mr-1.5" />
+                  <span className="font-sans font-medium text-xs text-white">
+                    {isCounting ? '...' : (voteCounts[slug] || 0)} Votes
+                  </span>
+                </div>
+              </div>
               <img src={model.image} alt={model.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-brand-black/20 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100"></div>
               <div className="absolute bottom-0 left-0 w-full p-5 sm:p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">

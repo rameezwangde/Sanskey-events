@@ -4,8 +4,8 @@ import { X, CheckCircle2 } from 'lucide-react';
 import { signInWithRedirect } from "firebase/auth";
 import { auth, googleProvider } from "../firebase";
 
-export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubmitSuccess, initialStep = 1 }) {
-  const [step, setStep] = useState(initialStep); // 1: Login, 3: Success
+export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubmitSuccess, initialStep = 1, currentUser = null }) {
+  const [step, setStep] = useState(initialStep); // 1: Login, 2: Confirm, 3: Success
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -28,12 +28,26 @@ export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubm
     setError('');
     
     try {
-      // Save pending vote so we remember after the page redirects back
-      sessionStorage.setItem('pendingVote', modelSlug);
       await signInWithRedirect(auth, googleProvider);
     } catch (err) {
       console.error("Google Sign-In Error:", err);
       setError('Authentication failed. Please try again.');
+      setIsLoading(false);
+    }
+  };
+
+  const handleConfirmVote = async () => {
+    setIsLoading(true);
+    setError('');
+    
+    try {
+      if (onSubmitSuccess) {
+        await onSubmitSuccess(currentUser);
+        setStep(3);
+      }
+    } catch (err) {
+      setError('Failed to submit vote. Please try again.');
+    } finally {
       setIsLoading(false);
     }
   };
@@ -71,6 +85,7 @@ export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubm
                   Voting for {modelName}
                 </h2>
                 {step === 1 && <p className="text-gray-500 font-sans text-sm">Sign in securely with Google to register your vote.</p>}
+                {step === 2 && <p className="text-gray-500 font-sans text-sm">Please confirm your vote to proceed.</p>}
               </div>
 
               {step === 1 && (
@@ -88,6 +103,25 @@ export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubm
                       <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
                     </svg>
                     {isLoading ? 'Signing in...' : 'Sign in with Google'}
+                  </button>
+                </div>
+              )}
+
+              {step === 2 && currentUser && (
+                <div className="space-y-4 mt-4">
+                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-100 mb-4">
+                    <p className="text-gray-600 font-sans text-sm text-center">
+                      Logged in securely as:<br/>
+                      <strong className="text-brand-black">{currentUser.email}</strong>
+                    </p>
+                  </div>
+                  {error && <p className="text-red-500 text-sm mt-2 font-sans text-center">{error}</p>}
+                  <button 
+                    onClick={handleConfirmVote} 
+                    disabled={isLoading}
+                    className="w-full flex items-center justify-center px-8 py-3 bg-brand-gold text-white font-medium rounded-xl hover:bg-brand-bronze transition-all shadow-lg shadow-brand-gold/20 disabled:opacity-70"
+                  >
+                    {isLoading ? 'Confirming...' : 'Confirm Vote'}
                   </button>
                 </div>
               )}

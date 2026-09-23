@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaFacebookF } from 'react-icons/fa';
 import { Vote, Share2 } from 'lucide-react';
-import { getRedirectResult } from "firebase/auth";
+import { getRedirectResult, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
 import modelsData from '../data/pages/models.json';
 import { generateSlug } from './Voting';
@@ -20,36 +20,33 @@ export default function ModelVote() {
   const models = modelsData.models || [];
   const model = models.find(m => generateSlug(m.name) === modelId);
 
+  const [currentUser, setCurrentUser] = useState(null);
+
   useEffect(() => {
-    // Check for returning from Google Sign-In redirect
+    // Listen for auth state changes
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    // Check if they just returned from Google Login redirect
     const checkRedirect = async () => {
       try {
         const result = await getRedirectResult(auth);
         if (result && result.user) {
-          const pendingVote = sessionStorage.getItem('pendingVote');
-          
-          if (pendingVote === modelId) {
-            // They just successfully logged in and wanted to vote for this model
-            setIsCounting(true); // show loading state while submitting
-            await submitVote(result.user, modelId, model.name);
-            setVoteCount(prev => prev + 1);
-            
-            // Clean up and show success modal
-            sessionStorage.removeItem('pendingVote');
-            setModalStep(3); // Start directly at Success screen
-            setIsOtpModalOpen(true);
-          }
+          // They just successfully logged in. 
+          // Open the modal directly to the Confirmation step so they can cast their vote.
+          setModalStep(2);
+          setIsOtpModalOpen(true);
         }
       } catch (error) {
         console.error("Redirect Error:", error);
-        sessionStorage.removeItem('pendingVote');
       }
     };
-    
-    if (model) {
-      checkRedirect();
-    }
-  }, [modelId, model]);
+    checkRedirect();
+  }, []);
 
   useEffect(() => {
     const fetchVotes = async () => {
@@ -124,7 +121,10 @@ export default function ModelVote() {
 
             <div className="space-y-4">
               <button 
-                onClick={() => setIsOtpModalOpen(true)}
+                onClick={() => {
+                  setModalStep(currentUser ? 2 : 1);
+                  setIsOtpModalOpen(true);
+                }}
                 className="w-full flex items-center justify-center px-8 py-4 bg-brand-gold text-white font-medium rounded-xl hover:bg-brand-bronze transition-all shadow-lg shadow-brand-gold/20 group cursor-pointer"
               >
                 <Vote className="mr-2 group-hover:scale-110 transition-transform" size={20} />
@@ -155,6 +155,8 @@ export default function ModelVote() {
           modelName={model.name}
           modelSlug={modelId}
           initialStep={modalStep}
+          currentUser={currentUser}
+          onSubmitSuccess={handleVoteSubmit}
         />
       )}
     </div>

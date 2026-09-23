@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle2 } from 'lucide-react';
-import { signInWithPopup } from "firebase/auth";
+import { signInWithRedirect } from "firebase/auth";
 import { auth, googleProvider } from "../firebase";
 
-export default function OtpModal({ isOpen, onClose, modelName, onSubmitSuccess }) {
-  const [step, setStep] = useState(1); // 1: Login, 3: Success
+export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubmitSuccess, initialStep = 1 }) {
+  const [step, setStep] = useState(initialStep); // 1: Login, 3: Success
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -13,11 +13,13 @@ export default function OtpModal({ isOpen, onClose, modelName, onSubmitSuccess }
   React.useEffect(() => {
     if (!isOpen) {
       setTimeout(() => {
-        setStep(1);
+        setStep(initialStep);
         setError('');
       }, 300);
+    } else {
+      setStep(initialStep);
     }
-  }, [isOpen]);
+  }, [isOpen, initialStep]);
 
   if (!isOpen) return null;
 
@@ -26,27 +28,12 @@ export default function OtpModal({ isOpen, onClose, modelName, onSubmitSuccess }
     setError('');
     
     try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const user = result.user;
-      
-      // Call external success handler to submit vote
-      if (onSubmitSuccess) {
-        try {
-          await onSubmitSuccess(user);
-          setStep(3);
-        } catch (err) {
-          setError('Failed to submit vote. Please try again.');
-        }
-      } else {
-        setStep(3);
-      }
+      // Save pending vote so we remember after the page redirects back
+      sessionStorage.setItem('pendingVote', modelSlug);
+      await signInWithRedirect(auth, googleProvider);
     } catch (err) {
       console.error("Google Sign-In Error:", err);
-      // Ignore user cancellation errors
-      if (err.code !== 'auth/popup-closed-by-user') {
-        setError('Authentication failed. Please try again.');
-      }
-    } finally {
+      setError('Authentication failed. Please try again.');
       setIsLoading(false);
     }
   };

@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaFacebookF } from 'react-icons/fa';
 import { Vote, Share2 } from 'lucide-react';
+import { getRedirectResult } from "firebase/auth";
+import { auth } from "../firebase";
 import modelsData from '../data/pages/models.json';
 import { generateSlug } from './Voting';
 import OtpModal from '../components/OtpModal';
@@ -11,11 +13,43 @@ import { submitVote, getVoteCount } from '../utils/voteHandling';
 export default function ModelVote() {
   const { modelId } = useParams();
   const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
+  const [modalStep, setModalStep] = useState(1);
   const [voteCount, setVoteCount] = useState(0);
   const [isCounting, setIsCounting] = useState(true);
   
   const models = modelsData.models || [];
   const model = models.find(m => generateSlug(m.name) === modelId);
+
+  useEffect(() => {
+    // Check for returning from Google Sign-In redirect
+    const checkRedirect = async () => {
+      try {
+        const result = await getRedirectResult(auth);
+        if (result && result.user) {
+          const pendingVote = sessionStorage.getItem('pendingVote');
+          
+          if (pendingVote === modelId) {
+            // They just successfully logged in and wanted to vote for this model
+            setIsCounting(true); // show loading state while submitting
+            await submitVote(result.user, modelId, model.name);
+            setVoteCount(prev => prev + 1);
+            
+            // Clean up and show success modal
+            sessionStorage.removeItem('pendingVote');
+            setModalStep(3); // Start directly at Success screen
+            setIsOtpModalOpen(true);
+          }
+        }
+      } catch (error) {
+        console.error("Redirect Error:", error);
+        sessionStorage.removeItem('pendingVote');
+      }
+    };
+    
+    if (model) {
+      checkRedirect();
+    }
+  }, [modelId, model]);
 
   useEffect(() => {
     const fetchVotes = async () => {
@@ -114,9 +148,13 @@ export default function ModelVote() {
       {model && (
         <OtpModal 
           isOpen={isOtpModalOpen} 
-          onClose={() => setIsOtpModalOpen(false)} 
+          onClose={() => {
+            setIsOtpModalOpen(false);
+            setModalStep(1); // Reset for next time
+          }} 
           modelName={model.name}
-          onSubmitSuccess={handleVoteSubmit}
+          modelSlug={modelId}
+          initialStep={modalStep}
         />
       )}
     </div>

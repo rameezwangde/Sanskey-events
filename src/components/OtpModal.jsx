@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle2 } from 'lucide-react';
 import { signInWithRedirect } from "firebase/auth";
 import { auth, googleProvider } from "../firebase";
+import confetti from 'canvas-confetti';
 
 export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubmitSuccess, initialStep = 1, currentUser = null }) {
   const [step, setStep] = useState(initialStep); // 1: Login, 2: Confirm, 3: Success
@@ -44,6 +45,13 @@ export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubm
       if (onSubmitSuccess) {
         await onSubmitSuccess(currentUser);
         setStep(3);
+        // Trigger confetti animation
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ['#D4AF37', '#000000', '#ffffff', '#b8860b'] // Brand colors: Gold, Black, White, Bronze
+        });
       }
     } catch (err) {
       setError('Failed to submit vote. Please try again.');

@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
@@ -13,6 +13,25 @@ import Voting from './pages/Voting';
 import ModelVote from './pages/ModelVote';
 
 function App() {
+  const isVotingApp = import.meta.env.VITE_APP_MODE === 'voting';
+
+  if (isVotingApp) {
+    return (
+      <Router>
+        <div className="flex flex-col min-h-screen">
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Events />} />
+              <Route path="/vote" element={<Voting />} />
+              <Route path="/vote/:modelId" element={<ModelVote />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </main>
+        </div>
+      </Router>
+    );
+  }
+
   return (
     <Router>
       <div className="flex flex-col min-h-screen">

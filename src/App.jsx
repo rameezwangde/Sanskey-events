@@ -21,8 +21,7 @@ function App() {
         <div className="flex flex-col min-h-screen">
           <main className="flex-grow">
             <Routes>
-              <Route path="/" element={<Events />} />
-              <Route path="/vote" element={<Voting />} />
+              <Route path="/" element={<Voting />} />
               <Route path="/vote/:modelId" element={<ModelVote />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

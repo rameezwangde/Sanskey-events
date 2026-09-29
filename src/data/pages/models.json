@@ -1,24 +1,114 @@
 {
-  "eyebrow": "Sankey Modelling Agency",
-  "title": "Our Team",
-  "description": "Showcasing the finest talent in the industry. Our premier team brings together top-tier professionals for fashion shows, commercial shoots, and prestigious brand endorsements. ",
-  "ctaText": "Apply as a Model",
-  "ctaLink": "/register",
-  "models": [
-    {
-      "name": "Sushmitha Nair",
-      "title": "Miss Sankey 2017 - 2026 Model/Choreographer Founder Cindy's Nail Studio",
-      "image": "/uploads/SUN_4511.JPG"
-    },
-    {
-      "name": "Pradeep Kumar",
-      "title": "CEO (Sankey Events)",
-      "image": "/uploads/baac9c5e-c4cd-46fd-9a5a-ad811244df5a.jpg"
-    },
-    {
-      "name": "Priya Patel",
-      "title": "Commercial Model",
-      "image": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1920&auto=format&fit=crop"
-    }
-  ]
+    "description":  "Vote for your favorite South India Queen contestant!",
+    "eyebrow":  "South India Queen Voting",
+    "ctaText":  "Register",
+    "ctaLink":  "/register",
+    "title":  "Contestants",
+    "models":  [
+                   {
+                       "name":  "Contestant 1",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_1.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 2",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_2.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 3",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_3.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 4",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_4.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 5",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_5.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 6",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_6.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 7",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_7.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 8",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_8.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 9",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_9.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 10",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_10.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 11",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_11.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 12",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_12.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 13",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_13.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 14",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_14.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 15",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_15.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 16",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_16.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 17",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_17.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 18",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_18.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 19",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_19.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 20",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_20.jpeg"
+                   },
+                   {
+                       "name":  "Contestant 21",
+                       "title":  "South India Queen Contestant",
+                       "image":  "/models/model_21.jpeg"
+                   }
+               ]
 }

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Vote } from 'lucide-react';
+import { Crown, Sparkles, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import modelsData from '../data/pages/models.json';
@@ -38,44 +38,86 @@ export default function Voting() {
   });
 
   return (
-    <div className="pt-12 pb-16 md:pt-20 md:pb-20 min-h-screen bg-brand-ivory">
-      <div className="container mx-auto px-4 md:px-8 mb-10 text-center md:mb-16">
-        <p className="text-brand-bronze font-sans font-bold tracking-[0.2em] uppercase text-xs sm:text-sm mb-2">
-          Cast Your Vote
-        </p>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif text-brand-black mb-6">Vote For Your Favorite</h1>
-        <p className="text-gray-600 max-w-2xl mx-auto font-sans">
-          Support your favorite model by voting. Click on a model to view their voting page and register your vote.
-        </p>
+    <div className="pt-12 pb-16 md:pt-24 md:pb-24 min-h-screen bg-[#FCFAf5] relative overflow-hidden font-sans">
+      
+      {/* --- UNIQUE BACKGROUND DESIGN --- */}
+      {/* 1. Subtle Luxury Pattern Overlay */}
+      <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: 'radial-gradient(#d4af37 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+      
+      {/* 2. Soft Gold Spotlights */}
+      <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[80%] bg-brand-gold/15 blur-[120px] rounded-full rotate-[-45deg] pointer-events-none"></div>
+      <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[80%] bg-[#FFDF73]/10 blur-[100px] rounded-full rotate-[45deg] pointer-events-none"></div>
+
+      <div className="container relative z-10 mx-auto px-4 md:px-8 mb-16 text-center mt-8">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="flex flex-col items-center"
+        >
+          <Crown className="text-brand-gold w-12 h-12 mb-6 drop-shadow-sm" strokeWidth={1.5} />
+          <h1 className="text-5xl md:text-7xl font-serif text-[#1a1a1a] mb-4 tracking-wider uppercase">
+            The <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-[#b5952f] to-brand-gold">Royal</span> Court
+          </h1>
+          <p className="text-brand-gold tracking-[0.3em] uppercase text-xs md:text-sm mb-8 font-semibold">
+            South India Queen 2026
+          </p>
+          <p className="text-gray-600 max-w-xl mx-auto text-sm md:text-base leading-relaxed border-t border-brand-gold/20 pt-6">
+            The stage is set. The crown awaits. Cast your vote for the contestant who truly embodies grace, intellect, and beauty.
+          </p>
+        </motion.div>
       </div>
 
-      <div className="container mx-auto px-4 md:px-8 grid gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-8">
+      {/* --- UNIQUE CONTESTANT CARDS (Arched/Regal Style) --- */}
+      <div className="container relative z-10 mx-auto px-4 md:px-8 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center">
         {models.map((model, idx) => {
           const slug = generateSlug(model.name);
           return (
             <motion.div 
               key={slug}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.2, duration: 0.6 }}
-              className="group relative overflow-hidden rounded-2xl shadow-xl shadow-brand-black/5 aspect-[3/4]"
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: (idx % 4) * 0.15, duration: 0.8, ease: "easeOut" }}
+              whileHover={{ y: -10 }}
+              className="group relative w-full max-w-[320px] aspect-[1/1.6] rounded-t-[160px] rounded-b-2xl overflow-hidden border border-brand-gold/20 bg-white shadow-[0_15px_40px_rgba(0,0,0,0.06)]"
             >
-              <div className="absolute top-4 right-4 z-10 transition-opacity duration-300">
-                <div className="inline-flex items-center px-3 py-1.5 bg-black/60 backdrop-blur-md rounded-full border border-white/10 shadow-lg">
-                  <Vote size={14} className="text-brand-gold mr-1.5" />
-                  <span className="font-sans font-medium text-xs text-white">
-                    {isCounting ? '...' : (voteCounts[slug] || 0)} Votes
+              {/* Image Container with Arch */}
+              <div className="absolute inset-[4px] rounded-t-[156px] rounded-b-xl overflow-hidden bg-white">
+                <img 
+                  src={model.image} 
+                  alt={model.name} 
+                  className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
+
+              {/* Vote Count Badge (Floating top) */}
+              <div className="absolute top-8 left-1/2 -translate-x-1/2 z-20">
+                <div className="flex flex-col items-center justify-center w-16 h-16 rounded-full bg-white/90 backdrop-blur-md border border-brand-gold/40 shadow-lg">
+                  <span className="text-brand-gold text-lg font-serif font-bold leading-none">
+                    {isCounting ? '-' : (voteCounts[slug] || 0)}
                   </span>
+                  <span className="text-[9px] uppercase tracking-widest text-gray-500 mt-1">Votes</span>
                 </div>
               </div>
-              <img src={model.image} alt={model.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-black/90 via-brand-black/20 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-100"></div>
-              <div className="absolute bottom-0 left-0 w-full p-5 sm:p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                <h3 className="text-xl font-serif sm:text-2xl text-white mb-1">{model.name}</h3>
-                <p className="text-brand-gold font-sans text-sm tracking-wider uppercase mb-4">{model.title}</p>
-                <Link to={`/vote/${slug}`} className="inline-flex items-center text-brand-gold hover:text-white text-sm font-medium transition-colors">
-                  Vote for {model.name.split(' ')[0]} <ArrowRight size={16} className="ml-2" />
+
+              {/* Content (Bottom) */}
+              <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col items-center text-center z-20">
+                <Crown className="w-6 h-6 text-brand-gold mb-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500" />
+                <h3 className="text-2xl font-serif text-[#1a1a1a] mb-2 tracking-wide">{model.name}</h3>
+                <p className="text-brand-gold/90 text-[10px] tracking-[0.2em] uppercase font-semibold mb-6">
+                  {model.title}
+                </p>
+                
+                <Link 
+                  to={`/vote/${slug}`} 
+                  className="relative overflow-hidden w-full py-3 rounded-full border border-brand-gold/50 flex items-center justify-center group/btn transition-all duration-300 hover:bg-brand-gold bg-white"
+                >
+                  <span className="text-brand-gold group-hover/btn:text-white font-semibold text-xs tracking-[0.15em] uppercase z-10 transition-colors">
+                    Cast Vote
+                  </span>
+                  <ChevronRight size={14} className="ml-2 text-brand-gold group-hover/btn:text-white z-10 transition-colors" />
                 </Link>
               </div>
             </motion.div>
@@ -83,59 +125,68 @@ export default function Voting() {
         })}
       </div>
 
-      {/* Live Leaderboard Section */}
-      <div className="container mx-auto px-4 md:px-8 mt-24 max-w-4xl">
-        <div className="text-center mb-10">
-          <p className="text-brand-bronze font-sans font-bold tracking-[0.2em] uppercase text-xs sm:text-sm mb-2">
-            Live Standings
-          </p>
-          <h2 className="text-3xl font-serif text-brand-black">Current Leaderboard</h2>
-        </div>
+      {/* --- LEADERBOARD (Premium Pedestal Style) --- */}
+      <div className="container relative z-10 mx-auto px-4 md:px-8 mt-32 max-w-4xl">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex flex-col items-center text-center mb-16"
+        >
+          <Sparkles className="text-brand-gold w-6 h-6 mb-4" />
+          <h2 className="text-3xl md:text-5xl font-serif text-[#1a1a1a] mb-4 uppercase tracking-widest">Live Standings</h2>
+          <div className="w-px h-16 bg-gradient-to-b from-brand-gold to-transparent"></div>
+        </motion.div>
 
-        <div className="bg-white rounded-3xl shadow-xl p-6 md:p-10 border border-brand-beige">
-          <div className="space-y-6">
+        <div className="bg-white rounded-[40px] shadow-xl p-6 md:p-12 border border-brand-beige relative">
+          <div className="space-y-8">
             {sortedModels.map((model, idx) => {
               const slug = generateSlug(model.name);
               const votes = voteCounts[slug] || 0;
-              // If there are literally 0 total votes across the board, default to 0% width, otherwise calculate relative to top spot.
-              // We set a minimum 2% width if they have > 0 votes so it's a visible sliver.
               const percentage = maxVotes === 1 && Object.values(voteCounts).every(v => v === 0) 
                 ? 0 
                 : votes === 0 ? 0 : Math.max((votes / maxVotes) * 100, 2);
 
+              const isTop3 = idx < 3;
+              const rankColor = idx === 0 ? 'text-brand-gold' : idx === 1 ? 'text-gray-400' : idx === 2 ? 'text-[#cd7f32]' : 'text-gray-500';
+              const barGradient = idx === 0 ? 'from-brand-gold to-[#FFDF73]' : idx === 1 ? 'from-gray-300 to-gray-200' : idx === 2 ? 'from-[#cd7f32] to-[#e69f58]' : 'from-gray-300 to-gray-200';
+
               return (
-                <div key={slug} className="flex flex-col sm:flex-row sm:items-center gap-4 group">
-                  <div className="flex items-center gap-4 sm:w-1/3 md:w-1/4">
-                    <div className="w-8 font-serif text-xl text-gray-400 font-bold text-center">
-                      #{idx + 1}
+                <div key={slug} className="relative flex flex-col md:flex-row md:items-center gap-6 group p-4 rounded-2xl hover:bg-gray-50 transition-colors">
+                  {/* Rank & Image */}
+                  <div className="flex items-center gap-6 md:w-1/3">
+                    <div className={`w-10 text-2xl font-serif font-bold text-center ${rankColor} ${idx === 0 ? 'drop-shadow-sm' : ''}`}>
+                      0{idx + 1}
                     </div>
-                    <div className="w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-brand-beige shadow-sm">
-                      <img src={model.image} alt={model.name} className="w-full h-full object-cover" />
+                    <div className={`relative w-16 h-16 rounded-full p-[2px] ${isTop3 ? 'bg-gradient-to-b ' + barGradient : 'bg-gray-200'}`}>
+                      <div className="w-full h-full rounded-full overflow-hidden border-2 border-white">
+                        <img src={model.image} alt={model.name} className="w-full h-full object-cover" />
+                      </div>
                     </div>
-                    <div className="font-sans font-medium text-brand-black truncate">
+                    <div className="font-serif text-lg tracking-wide text-[#1a1a1a]">
                       {model.name}
                     </div>
                   </div>
                   
-                  <div className="flex-1 relative">
-                    <div className="h-5 bg-gray-100 rounded-full overflow-hidden w-full relative">
+                  {/* Progress Line */}
+                  <div className="flex-1 relative pl-16 md:pl-0">
+                    <div className="h-[2px] bg-gray-200 w-full relative">
                       <motion.div 
                         initial={{ width: 0 }}
                         whileInView={{ width: `${percentage}%` }}
                         viewport={{ once: true }}
                         transition={{ duration: 1.5, delay: idx * 0.1, ease: "easeOut" }}
-                        className={`absolute top-0 left-0 h-full rounded-full transition-colors ${
-                          idx === 0 && votes > 0 ? 'bg-brand-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]' 
-                          : idx === 1 && votes > 0 ? 'bg-gray-400' 
-                          : idx === 2 && votes > 0 ? 'bg-brand-bronze' 
-                          : 'bg-brand-black'
-                        }`}
+                        className={`absolute top-1/2 -translate-y-1/2 h-[4px] rounded-full bg-gradient-to-r ${barGradient} ${idx === 0 ? 'shadow-sm' : ''}`}
                       />
                     </div>
                   </div>
                   
-                  <div className="sm:w-20 text-right font-sans font-bold text-brand-black flex items-center justify-end">
-                    {votes} <span className="text-xs font-normal text-gray-500 ml-1">Votes</span>
+                  {/* Score */}
+                  <div className="pl-16 md:pl-0 md:w-28 text-left md:text-right flex items-baseline md:justify-end gap-2">
+                    <span className={`text-3xl font-serif font-bold ${rankColor}`}>
+                      {votes}
+                    </span>
+                    <span className="text-[10px] text-gray-400 uppercase tracking-widest">Votes</span>
                   </div>
                 </div>
               );

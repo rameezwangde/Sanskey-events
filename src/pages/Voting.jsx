@@ -57,13 +57,13 @@ export default function Voting() {
         >
           <Crown className="text-brand-gold w-12 h-12 mb-6 drop-shadow-sm" strokeWidth={1.5} />
           <h1 className="text-5xl md:text-7xl font-serif text-[#1a1a1a] mb-4 tracking-wider uppercase">
-            The <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-[#b5952f] to-brand-gold">Royal</span> Court
+            South India <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-[#b5952f] to-brand-gold">Queen</span> 2026
           </h1>
           <p className="text-brand-gold tracking-[0.3em] uppercase text-xs md:text-sm mb-8 font-semibold">
-            South India Queen 2026
+            Miss Popular
           </p>
           <p className="text-gray-600 max-w-xl mx-auto text-sm md:text-base leading-relaxed border-t border-brand-gold/20 pt-6">
-            The stage is set. The crown awaits. Cast your vote for the contestant who truly embodies grace, intellect, and beauty.
+            The race for miss popular begins.
           </p>
         </motion.div>
       </div>

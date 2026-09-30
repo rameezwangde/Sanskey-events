@@ -80,41 +80,39 @@ export default function Voting() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: (idx % 4) * 0.15, duration: 0.8, ease: "easeOut" }}
               whileHover={{ y: -10 }}
-              className="group relative w-full max-w-[320px] aspect-[1/1.6] rounded-t-[160px] rounded-b-2xl overflow-hidden border border-brand-gold/20 bg-white shadow-[0_15px_40px_rgba(0,0,0,0.06)]"
+              className="group relative w-full max-w-[320px] flex flex-col rounded-t-[160px] rounded-b-3xl overflow-hidden border border-brand-gold/20 bg-white shadow-[0_15px_40px_rgba(0,0,0,0.06)] p-1.5"
             >
               {/* Image Container with Arch */}
-              <div className="absolute inset-[4px] rounded-t-[156px] rounded-b-xl overflow-hidden bg-white">
+              <div className="relative w-full aspect-[4/5] rounded-t-[156px] rounded-b-2xl overflow-hidden bg-white shrink-0">
                 <img 
                   src={model.image} 
                   alt={model.name} 
                   className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105" 
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500"></div>
-              </div>
 
-              {/* Vote Count Badge (Floating top) */}
-              <div className="absolute top-8 left-1/2 -translate-x-1/2 z-20">
-                <div className="flex flex-col items-center justify-center w-16 h-16 rounded-full bg-white/90 backdrop-blur-md border border-brand-gold/40 shadow-lg">
-                  <span className="text-brand-gold text-lg font-serif font-bold leading-none">
-                    {isCounting ? '-' : (voteCounts[slug] || 0)}
-                  </span>
-                  <span className="text-[9px] uppercase tracking-widest text-gray-500 mt-1">Votes</span>
+                {/* Vote Count Badge (Floating top) */}
+                <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
+                  <div className="flex flex-col items-center justify-center w-14 h-14 rounded-full bg-white/90 backdrop-blur-md border border-brand-gold/40 shadow-lg">
+                    <span className="text-brand-gold text-base font-serif font-bold leading-none">
+                      {isCounting ? '-' : (voteCounts[slug] || 0)}
+                    </span>
+                    <span className="text-[8px] uppercase tracking-widest text-gray-500 mt-1">Votes</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Content (Bottom) */}
-              <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col items-center text-center z-20">
-                <Crown className="w-6 h-6 text-brand-gold mb-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500" />
-                <h3 className="text-2xl font-serif text-[#1a1a1a] mb-2 tracking-wide">{model.name}</h3>
-                <p className="text-brand-gold/90 text-[10px] tracking-[0.2em] uppercase font-semibold mb-6">
+              {/* Content (Below Image) */}
+              <div className="w-full pt-6 pb-4 px-4 flex flex-col items-center text-center flex-1">
+                <h3 className="text-xl font-serif text-[#1a1a1a] mb-1 tracking-wide">{model.name}</h3>
+                <p className="text-brand-gold/90 text-[9px] tracking-[0.2em] uppercase font-semibold mb-5">
                   {model.title}
                 </p>
                 
                 <Link 
                   to={`/vote/${slug}`} 
-                  className="relative overflow-hidden w-full py-3 rounded-full border border-brand-gold/50 flex items-center justify-center group/btn transition-all duration-300 hover:bg-brand-gold bg-white"
+                  className="mt-auto relative overflow-hidden w-full py-2.5 rounded-full border border-brand-gold/50 flex items-center justify-center group/btn transition-all duration-300 hover:bg-brand-gold bg-white"
                 >
-                  <span className="text-brand-gold group-hover/btn:text-white font-semibold text-xs tracking-[0.15em] uppercase z-10 transition-colors">
+                  <span className="text-brand-gold group-hover/btn:text-white font-semibold text-[10px] tracking-[0.15em] uppercase z-10 transition-colors">
                     Cast Vote
                   </span>
                   <ChevronRight size={14} className="ml-2 text-brand-gold group-hover/btn:text-white z-10 transition-colors" />

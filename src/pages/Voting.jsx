@@ -38,7 +38,7 @@ export default function Voting() {
   });
 
   return (
-    <div className="pt-12 pb-16 md:pt-24 md:pb-24 min-h-screen bg-[#FCFAf5] relative overflow-hidden font-sans">
+    <div className="pt-6 pb-16 md:pt-8 md:pb-24 min-h-screen bg-[#FCFAf5] relative overflow-hidden font-sans">
       
       {/* --- UNIQUE BACKGROUND DESIGN --- */}
       {/* 1. Subtle Luxury Pattern Overlay */}
@@ -48,7 +48,7 @@ export default function Voting() {
       <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[80%] bg-brand-gold/15 blur-[120px] rounded-full rotate-[-45deg] pointer-events-none"></div>
       <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[80%] bg-[#FFDF73]/10 blur-[100px] rounded-full rotate-[45deg] pointer-events-none"></div>
 
-      <div className="container relative z-10 mx-auto px-4 md:px-8 mb-16 text-center mt-8">
+      <div className="container relative z-10 mx-auto px-4 md:px-8 mb-12 text-center mt-2">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}

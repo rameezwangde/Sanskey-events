@@ -89,24 +89,21 @@ export default function Voting() {
                   alt={model.name} 
                   className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105" 
                 />
-
-                {/* Vote Count Badge (Floating top) */}
-                <div className="absolute top-6 left-1/2 -translate-x-1/2 z-20">
-                  <div className="flex flex-col items-center justify-center w-14 h-14 rounded-full bg-white/90 backdrop-blur-md border border-brand-gold/40 shadow-lg">
-                    <span className="text-brand-gold text-base font-serif font-bold leading-none">
-                      {isCounting ? '-' : (voteCounts[slug] || 0)}
-                    </span>
-                    <span className="text-[8px] uppercase tracking-widest text-gray-500 mt-1">Votes</span>
-                  </div>
-                </div>
               </div>
 
               {/* Content (Below Image) */}
-              <div className="w-full pt-6 pb-4 px-4 flex flex-col items-center text-center flex-1">
+              <div className="w-full pt-5 pb-4 px-4 flex flex-col items-center text-center flex-1">
                 <h3 className="text-xl font-serif text-[#1a1a1a] mb-1 tracking-wide">{model.name}</h3>
-                <p className="text-brand-gold/90 text-[9px] tracking-[0.2em] uppercase font-semibold mb-5">
+                <p className="text-brand-gold/90 text-[9px] tracking-[0.2em] uppercase font-semibold mb-3">
                   {model.title}
                 </p>
+                
+                <div className="inline-flex items-center justify-center px-4 py-1.5 bg-brand-gold/10 rounded-full mb-4">
+                  <span className="text-brand-gold font-bold text-sm mr-1.5">
+                    {isCounting ? '...' : (voteCounts[slug] || 0)}
+                  </span>
+                  <span className="text-brand-gold/80 text-[9px] uppercase tracking-wider font-medium">Votes</span>
+                </div>
                 
                 <Link 
                   to={`/vote/${slug}`} 

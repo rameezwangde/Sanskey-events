@@ -55,7 +55,7 @@ export default function Voting() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="flex flex-col items-center"
         >
-          <Crown className="text-brand-gold w-12 h-12 mb-6 drop-shadow-sm" strokeWidth={1.5} />
+          <img src="/south-india-queen-logo.jpeg" alt="South India Queen Logo" className="w-48 h-48 rounded-full shadow-lg mb-6 object-cover" />
           <h1 className="text-5xl md:text-7xl font-serif text-[#1a1a1a] mb-4 tracking-wider uppercase">
             South India <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-[#b5952f] to-brand-gold">Queen</span> 2026
           </h1>

@@ -1,9 +1,12 @@
 {
-    "description":  "Vote for your favorite South India Queen contestant!",
-    "eyebrow":  "South India Queen Voting",
-    "ctaText":  "Register",
-    "ctaLink":  "/register",
-    "title":  "Contestants",
+    "logoImage": "/south-india-queen-logo.jpeg",
+    "pageTitleMain": "South India",
+    "pageTitleHighlight": "Queen",
+    "pageTitleSuffix": "2026",
+    "subtitle": "Miss Popular",
+    "introDescription": "The race for miss popular begins.",
+    "timeFrameText": "Voting ends on October 31st at Midnight",
+    "leaderboardTitle": "Live Standings",
     "models":  [
                    {
                        "name":  "Contestant 1",

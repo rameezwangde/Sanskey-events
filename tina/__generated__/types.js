@@ -84,11 +84,14 @@ export const GalleryPartsFragmentDoc = gql`
 export const ModelsPartsFragmentDoc = gql`
     fragment ModelsParts on Models {
   __typename
-  eyebrow
-  title
-  description
-  ctaText
-  ctaLink
+  logoImage
+  pageTitleMain
+  pageTitleHighlight
+  pageTitleSuffix
+  subtitle
+  introDescription
+  timeFrameText
+  leaderboardTitle
   models {
     __typename
     name

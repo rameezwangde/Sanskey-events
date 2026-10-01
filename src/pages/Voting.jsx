@@ -55,17 +55,34 @@ export default function Voting() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="flex flex-col items-center"
         >
-          <img src="/south-india-queen-logo.jpeg" alt="South India Queen Logo" className="w-48 h-48 rounded-full shadow-lg mb-6 object-cover" />
+          {modelsData.logoImage && (
+            <img src={modelsData.logoImage} alt="Logo" className="w-48 h-48 rounded-full shadow-lg mb-6 object-cover" />
+          )}
           <h1 className="text-5xl md:text-7xl font-serif text-[#1a1a1a] mb-4 tracking-wider uppercase">
-            South India <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-[#b5952f] to-brand-gold">Queen</span> 2026
+            {modelsData.pageTitleMain} <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-brand-gold via-[#b5952f] to-brand-gold">{modelsData.pageTitleHighlight}</span> {modelsData.pageTitleSuffix}
           </h1>
           <p className="text-brand-gold tracking-[0.3em] uppercase text-xs md:text-sm mb-8 font-semibold">
-            Miss Popular
+            {modelsData.subtitle}
           </p>
-          <p className="text-gray-600 max-w-xl mx-auto text-sm md:text-base leading-relaxed border-t border-brand-gold/20 pt-6 mb-8">
-            The race for miss popular begins.
+          <p className="text-gray-600 max-w-xl mx-auto text-sm md:text-base leading-relaxed border-t border-brand-gold/20 pt-6 mb-6">
+            {modelsData.introDescription}
           </p>
-          <button 
+          
+          {/* Time Frame Indicator */}
+          {modelsData.timeFrameText && (
+            <div className="inline-flex items-center justify-center px-6 py-2.5 bg-brand-gold/10 border border-brand-gold/30 rounded-full mb-8 shadow-sm">
+              <span className="relative flex h-2.5 w-2.5 mr-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+              </span>
+              <span className="text-brand-gold font-bold text-xs tracking-widest uppercase">
+                {modelsData.timeFrameText}
+              </span>
+            </div>
+          )}
+
+          <div className="w-full flex justify-center">
+            <button 
             onClick={() => document.getElementById('standings').scrollIntoView({ behavior: 'smooth' })}
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-brand-gold text-white font-bold text-[11px] tracking-[0.2em] uppercase shadow-lg shadow-brand-gold/20 hover:bg-[#b5952f] transition-all hover:-translate-y-1"
           >
@@ -136,7 +153,7 @@ export default function Voting() {
           className="flex flex-col items-center text-center mb-16"
         >
           <Sparkles className="text-brand-gold w-6 h-6 mb-4" />
-          <h2 className="text-3xl md:text-5xl font-serif text-[#1a1a1a] mb-4 uppercase tracking-widest">Live Standings</h2>
+          <h2 className="text-3xl md:text-5xl font-serif text-[#1a1a1a] mb-4 uppercase tracking-widest">{modelsData.leaderboardTitle || 'Live Standings'}</h2>
           <div className="w-px h-16 bg-gradient-to-b from-brand-gold to-transparent"></div>
         </motion.div>
 

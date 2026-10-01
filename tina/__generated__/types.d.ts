@@ -568,11 +568,14 @@ export type ModelsModels = {
 
 export type Models = Node & Document & {
   __typename?: 'Models';
-  eyebrow?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  ctaText?: Maybe<Scalars['String']['output']>;
-  ctaLink?: Maybe<Scalars['String']['output']>;
+  logoImage?: Maybe<Scalars['String']['output']>;
+  pageTitleMain?: Maybe<Scalars['String']['output']>;
+  pageTitleHighlight?: Maybe<Scalars['String']['output']>;
+  pageTitleSuffix?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  introDescription?: Maybe<Scalars['String']['output']>;
+  timeFrameText?: Maybe<Scalars['String']['output']>;
+  leaderboardTitle?: Maybe<Scalars['String']['output']>;
   models?: Maybe<Array<Maybe<ModelsModels>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -586,11 +589,14 @@ export type ModelsModelsFilter = {
 };
 
 export type ModelsFilter = {
-  eyebrow?: InputMaybe<StringFilter>;
-  title?: InputMaybe<StringFilter>;
-  description?: InputMaybe<StringFilter>;
-  ctaText?: InputMaybe<StringFilter>;
-  ctaLink?: InputMaybe<StringFilter>;
+  logoImage?: InputMaybe<ImageFilter>;
+  pageTitleMain?: InputMaybe<StringFilter>;
+  pageTitleHighlight?: InputMaybe<StringFilter>;
+  pageTitleSuffix?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  introDescription?: InputMaybe<StringFilter>;
+  timeFrameText?: InputMaybe<StringFilter>;
+  leaderboardTitle?: InputMaybe<StringFilter>;
   models?: InputMaybe<ModelsModelsFilter>;
 };
 
@@ -1122,11 +1128,14 @@ export type ModelsModelsMutation = {
 };
 
 export type ModelsMutation = {
-  eyebrow?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  ctaText?: InputMaybe<Scalars['String']['input']>;
-  ctaLink?: InputMaybe<Scalars['String']['input']>;
+  logoImage?: InputMaybe<Scalars['String']['input']>;
+  pageTitleMain?: InputMaybe<Scalars['String']['input']>;
+  pageTitleHighlight?: InputMaybe<Scalars['String']['input']>;
+  pageTitleSuffix?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  introDescription?: InputMaybe<Scalars['String']['input']>;
+  timeFrameText?: InputMaybe<Scalars['String']['input']>;
+  leaderboardTitle?: InputMaybe<Scalars['String']['input']>;
   models?: InputMaybe<Array<InputMaybe<ModelsModelsMutation>>>;
 };
 
@@ -1292,11 +1301,14 @@ export type ModelsModelsFilter = {
 };
 
 export type ModelsFilter = {
-  eyebrow?: StringFilter | null | undefined;
-  title?: StringFilter | null | undefined;
-  description?: StringFilter | null | undefined;
-  ctaText?: StringFilter | null | undefined;
-  ctaLink?: StringFilter | null | undefined;
+  logoImage?: ImageFilter | null | undefined;
+  pageTitleMain?: StringFilter | null | undefined;
+  pageTitleHighlight?: StringFilter | null | undefined;
+  pageTitleSuffix?: StringFilter | null | undefined;
+  subtitle?: StringFilter | null | undefined;
+  introDescription?: StringFilter | null | undefined;
+  timeFrameText?: StringFilter | null | undefined;
+  leaderboardTitle?: StringFilter | null | undefined;
   models?: ModelsModelsFilter | null | undefined;
 };
 
@@ -1376,7 +1388,7 @@ export type ContactPartsFragment = { __typename: 'Contact', eyebrow: string | nu
 
 export type GalleryPartsFragment = { __typename: 'Gallery', eyebrow: string | null, title: string | null, images: Array<{ __typename: 'GalleryImages', image: string | null, thumb: string | null, alt: string | null } | null> | null };
 
-export type ModelsPartsFragment = { __typename: 'Models', eyebrow: string | null, title: string | null, description: string | null, ctaText: string | null, ctaLink: string | null, models: Array<{ __typename: 'ModelsModels', name: string | null, title: string | null, image: string | null } | null> | null };
+export type ModelsPartsFragment = { __typename: 'Models', logoImage: string | null, pageTitleMain: string | null, pageTitleHighlight: string | null, pageTitleSuffix: string | null, subtitle: string | null, introDescription: string | null, timeFrameText: string | null, leaderboardTitle: string | null, models: Array<{ __typename: 'ModelsModels', name: string | null, title: string | null, image: string | null } | null> | null };
 
 export type RegisterPartsFragment = { __typename: 'Register', eyebrow: string | null, title: string | null, description: string | null, formFields: Array<{ __typename: 'RegisterFormFields', name: string | null, label: string | null, type: string | null, placeholder: string | null, options: Array<string | null> | null } | null> | null };
 
@@ -1469,7 +1481,7 @@ export type ModelsQueryVariables = Exact<{
 }>;
 
 
-export type ModelsQuery = { models: { __typename: 'Models', id: string, eyebrow: string | null, title: string | null, description: string | null, ctaText: string | null, ctaLink: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, models: Array<{ __typename: 'ModelsModels', name: string | null, title: string | null, image: string | null } | null> | null } };
+export type ModelsQuery = { models: { __typename: 'Models', id: string, logoImage: string | null, pageTitleMain: string | null, pageTitleHighlight: string | null, pageTitleSuffix: string | null, subtitle: string | null, introDescription: string | null, timeFrameText: string | null, leaderboardTitle: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, models: Array<{ __typename: 'ModelsModels', name: string | null, title: string | null, image: string | null } | null> | null } };
 
 export type ModelsConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -1481,7 +1493,7 @@ export type ModelsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ModelsConnectionQuery = { modelsConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Models', id: string, eyebrow: string | null, title: string | null, description: string | null, ctaText: string | null, ctaLink: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, models: Array<{ __typename: 'ModelsModels', name: string | null, title: string | null, image: string | null } | null> | null } | null } | null> | null } };
+export type ModelsConnectionQuery = { modelsConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Models', id: string, logoImage: string | null, pageTitleMain: string | null, pageTitleHighlight: string | null, pageTitleSuffix: string | null, subtitle: string | null, introDescription: string | null, timeFrameText: string | null, leaderboardTitle: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, models: Array<{ __typename: 'ModelsModels', name: string | null, title: string | null, image: string | null } | null> | null } | null } | null> | null } };
 
 export type RegisterQueryVariables = Exact<{
   relativePath: string;
@@ -1657,11 +1669,14 @@ export const GalleryPartsFragmentDoc = gql`
 export const ModelsPartsFragmentDoc = gql`
     fragment ModelsParts on Models {
   __typename
-  eyebrow
-  title
-  description
-  ctaText
-  ctaLink
+  logoImage
+  pageTitleMain
+  pageTitleHighlight
+  pageTitleSuffix
+  subtitle
+  introDescription
+  timeFrameText
+  leaderboardTitle
   models {
     __typename
     name

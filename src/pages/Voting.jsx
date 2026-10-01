@@ -83,12 +83,13 @@ export default function Voting() {
 
           <div className="w-full flex justify-center">
             <button 
-            onClick={() => document.getElementById('standings').scrollIntoView({ behavior: 'smooth' })}
-            className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-brand-gold text-white font-bold text-[11px] tracking-[0.2em] uppercase shadow-lg shadow-brand-gold/20 hover:bg-[#b5952f] transition-all hover:-translate-y-1"
-          >
-            View Live Standings
-            <ChevronRight size={16} className="ml-2" />
-          </button>
+              onClick={() => document.getElementById('standings').scrollIntoView({ behavior: 'smooth' })}
+              className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-brand-gold text-white font-bold text-[11px] tracking-[0.2em] uppercase shadow-lg shadow-brand-gold/20 hover:bg-[#b5952f] transition-all hover:-translate-y-1"
+            >
+              View Live Standings
+              <ChevronRight size={16} className="ml-2" />
+            </button>
+          </div>
         </motion.div>
       </div>
 

@@ -62,9 +62,16 @@ export default function Voting() {
           <p className="text-brand-gold tracking-[0.3em] uppercase text-xs md:text-sm mb-8 font-semibold">
             Miss Popular
           </p>
-          <p className="text-gray-600 max-w-xl mx-auto text-sm md:text-base leading-relaxed border-t border-brand-gold/20 pt-6">
+          <p className="text-gray-600 max-w-xl mx-auto text-sm md:text-base leading-relaxed border-t border-brand-gold/20 pt-6 mb-8">
             The race for miss popular begins.
           </p>
+          <button 
+            onClick={() => document.getElementById('standings').scrollIntoView({ behavior: 'smooth' })}
+            className="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-brand-gold text-white font-bold text-[11px] tracking-[0.2em] uppercase shadow-lg shadow-brand-gold/20 hover:bg-[#b5952f] transition-all hover:-translate-y-1"
+          >
+            View Live Standings
+            <ChevronRight size={16} className="ml-2" />
+          </button>
         </motion.div>
       </div>
 
@@ -121,7 +128,7 @@ export default function Voting() {
       </div>
 
       {/* --- LEADERBOARD (Premium Pedestal Style) --- */}
-      <div className="container relative z-10 mx-auto px-4 md:px-8 mt-32 max-w-4xl">
+      <div id="standings" className="container relative z-10 mx-auto px-4 md:px-8 mt-16 max-w-4xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -134,8 +141,61 @@ export default function Voting() {
         </motion.div>
 
         <div className="bg-white rounded-[40px] shadow-xl p-6 md:p-12 border border-brand-beige relative">
-          <div className="space-y-8">
-            {sortedModels.map((model, idx) => {
+          
+          {/* PODIUM GRAPHIC */}
+          {sortedModels.length >= 3 && (
+            <div className="flex justify-center items-end gap-2 sm:gap-6 md:gap-10 mb-16 pt-12 border-b border-gray-100 pb-16">
+              {/* Rank 2 */}
+              <div className="flex flex-col items-center w-1/3 max-w-[120px]">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full p-1 bg-gradient-to-b from-gray-300 to-gray-100 shadow-lg mb-4 z-10">
+                  <div className="w-full h-full rounded-full overflow-hidden border-2 border-white">
+                    <img src={sortedModels[1].image} alt={sortedModels[1].name} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-6 h-6 bg-gray-400 text-white rounded-full flex items-center justify-center text-xs font-bold border-2 border-white shadow-sm">2</div>
+                </div>
+                <div className="w-full h-24 sm:h-32 bg-gradient-to-t from-gray-100 to-gray-50 rounded-t-lg border border-gray-200 border-b-0 flex flex-col items-center justify-start pt-4 shadow-inner relative overflow-hidden">
+                  <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '10px 10px' }}></div>
+                  <span className="font-serif text-[#1a1a1a] font-bold text-center leading-tight z-10 text-[10px] sm:text-base px-1">{sortedModels[1].name}</span>
+                  <span className="text-gray-500 font-bold mt-1 z-10 text-xs sm:text-sm">{voteCounts[generateSlug(sortedModels[1].name)] || 0}</span>
+                </div>
+              </div>
+
+              {/* Rank 1 */}
+              <div className="flex flex-col items-center w-1/3 max-w-[140px]">
+                <Crown className="text-brand-gold w-8 h-8 mb-2 drop-shadow-sm" strokeWidth={2} />
+                <div className="relative w-20 h-20 sm:w-28 sm:h-28 rounded-full p-1 bg-gradient-to-b from-brand-gold to-[#FFDF73] shadow-xl mb-4 z-10">
+                  <div className="w-full h-full rounded-full overflow-hidden border-4 border-white">
+                    <img src={sortedModels[0].image} alt={sortedModels[0].name} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-8 h-8 bg-brand-gold text-white rounded-full flex items-center justify-center text-sm font-bold border-2 border-white shadow-md">1</div>
+                </div>
+                <div className="w-full h-32 sm:h-44 bg-gradient-to-t from-brand-gold/10 to-brand-gold/5 rounded-t-lg border border-brand-gold/30 border-b-0 flex flex-col items-center justify-start pt-6 shadow-inner relative overflow-hidden">
+                  <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(#d4af37 1px, transparent 1px)', backgroundSize: '10px 10px' }}></div>
+                  <span className="font-serif text-[#1a1a1a] font-bold text-center leading-tight z-10 text-[11px] sm:text-lg px-1">{sortedModels[0].name}</span>
+                  <span className="text-brand-gold font-bold mt-2 z-10 text-sm sm:text-xl drop-shadow-sm">{voteCounts[generateSlug(sortedModels[0].name)] || 0}</span>
+                </div>
+              </div>
+
+              {/* Rank 3 */}
+              <div className="flex flex-col items-center w-1/3 max-w-[120px]">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full p-1 bg-gradient-to-b from-[#cd7f32] to-[#e69f58] shadow-lg mb-4 z-10">
+                  <div className="w-full h-full rounded-full overflow-hidden border-2 border-white">
+                    <img src={sortedModels[2].image} alt={sortedModels[2].name} className="w-full h-full object-cover" />
+                  </div>
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-6 h-6 bg-[#cd7f32] text-white rounded-full flex items-center justify-center text-xs font-bold border-2 border-white shadow-sm">3</div>
+                </div>
+                <div className="w-full h-16 sm:h-24 bg-gradient-to-t from-[#cd7f32]/10 to-[#cd7f32]/5 rounded-t-lg border border-[#cd7f32]/20 border-b-0 flex flex-col items-center justify-start pt-4 shadow-inner relative overflow-hidden">
+                  <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#cd7f32 1px, transparent 1px)', backgroundSize: '10px 10px' }}></div>
+                  <span className="font-serif text-[#1a1a1a] font-bold text-center leading-tight z-10 text-[10px] sm:text-base px-1">{sortedModels[2].name}</span>
+                  <span className="text-[#cd7f32] font-bold mt-1 z-10 text-xs sm:text-sm">{voteCounts[generateSlug(sortedModels[2].name)] || 0}</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="space-y-6">
+            {sortedModels.slice(3).map((model, offsetIdx) => {
+              const idx = offsetIdx + 3;
               const slug = generateSlug(model.name);
               const votes = voteCounts[slug] || 0;
               const percentage = maxVotes === 1 && Object.values(voteCounts).every(v => v === 0) 

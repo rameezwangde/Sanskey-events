@@ -30,12 +30,27 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-between border-t border-white/10 pt-6 text-center text-sm text-gray-500 md:flex-row md:pt-8">
-          <p>(c) {new Date().getFullYear()} {footerData.copyright}</p>
-          <div className="mt-4 flex gap-4 md:mt-0">
-            {footerData.legalLinks.map((link) => (
-              <a key={link.label} href={link.url} className="transition-colors hover:text-brand-gold">{link.label}</a>
-            ))}
+        <div className="flex flex-col items-center justify-between border-t border-white/10 pt-6 text-center text-sm text-gray-500 md:flex-row md:pt-8 gap-6 md:gap-0">
+          <div className="flex flex-col items-center md:items-start">
+            <p>&copy; {new Date().getFullYear()} {footerData.copyright}</p>
+            {footerData.legalLinks && footerData.legalLinks.length > 0 && (
+              <div className="mt-2 flex gap-4">
+                {footerData.legalLinks.map((link) => (
+                  <a key={link.label} href={link.url} className="transition-colors hover:text-brand-gold">{link.label}</a>
+                ))}
+              </div>
+            )}
+          </div>
+          
+          <div className="flex flex-col items-center md:items-end space-y-1.5 p-4 rounded-xl bg-white/5 border border-white/5">
+            <p className="text-gray-400">
+              Developed by <span className="text-brand-gold font-serif text-base tracking-wide">Rameez Wangde</span>
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-3 text-xs">
+              <a href="tel:+9710506019431" className="hover:text-brand-ivory transition-colors">+971 050 601 9431</a>
+              <span className="text-brand-gold/30">|</span>
+              <a href="mailto:rameezwang@gmail.com" className="hover:text-brand-ivory transition-colors">rameezwang@gmail.com</a>
+            </div>
           </div>
         </div>
       </div>

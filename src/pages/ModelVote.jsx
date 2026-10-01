@@ -1,7 +1,7 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaFacebookF } from 'react-icons/fa';
+import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { Vote, Share2 } from 'lucide-react';
 import { getRedirectResult, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
@@ -76,7 +76,14 @@ export default function ModelVote() {
   }
 
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
-  const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
+  const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
+  const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(`Vote for ${model.name} in South India Queen 2026!`)}`;
+  
+  const handleInstaShare = (e) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(currentUrl);
+    alert('Link copied to clipboard! Paste it on your Instagram story or bio to gather support.');
+  };
 
   return (
     <div className="pt-20 pb-16 md:pt-32 md:pb-20 min-h-screen bg-brand-ivory">
@@ -116,30 +123,52 @@ export default function ModelVote() {
             </div>
 
             <p className="text-gray-600 font-sans mb-8 leading-relaxed">
-              Show your support for {model.name} by casting your vote. Every vote counts towards helping them achieve their goals in the upcoming event. Share this page on Facebook to gather more support!
+              Show your support for {model.name} by casting your vote. Every vote counts towards helping them achieve their goals in the upcoming event. Share this page on your social media to gather more support!
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-3">
               <button 
                 onClick={() => {
                   setModalStep(currentUser ? 2 : 1);
                   setIsOtpModalOpen(true);
                 }}
-                className="w-full flex items-center justify-center px-8 py-4 bg-brand-gold text-white font-medium rounded-xl hover:bg-brand-bronze transition-all shadow-lg shadow-brand-gold/20 group cursor-pointer"
+                className="w-full flex items-center justify-center px-8 py-4 bg-brand-gold text-white font-medium rounded-xl hover:bg-brand-bronze transition-all shadow-lg shadow-brand-gold/20 group cursor-pointer mb-6"
               >
                 <Vote className="mr-2 group-hover:scale-110 transition-transform" size={20} />
                 Register to Vote
               </button>
               
-              <a 
-                href={shareUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center px-8 py-4 bg-[#1877F2] text-white font-medium rounded-xl hover:bg-[#1864D9] transition-all shadow-lg shadow-blue-500/20 group"
-              >
-                <FaFacebookF className="mr-2 group-hover:scale-110 transition-transform" size={20} />
-                Share on Facebook
-              </a>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <a 
+                  href={fbShareUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center px-4 py-3 bg-[#1877F2] text-white font-medium text-sm rounded-xl hover:bg-[#1864D9] transition-all shadow-md group"
+                >
+                  <FaFacebookF className="mr-2 group-hover:scale-110 transition-transform" size={16} />
+                  Facebook
+                </a>
+                
+                <a 
+                  href={twitterShareUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center px-4 py-3 bg-black text-white font-medium text-sm rounded-xl hover:bg-gray-800 transition-all shadow-md group"
+                >
+                  <FaTwitter className="mr-2 group-hover:scale-110 transition-transform" size={16} />
+                  X
+                </a>
+
+                <a 
+                  href="https://www.instagram.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center px-4 py-3 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] text-white font-medium text-sm rounded-xl hover:opacity-90 transition-all shadow-md group"
+                >
+                  <FaInstagram className="mr-2 group-hover:scale-110 transition-transform" size={18} />
+                  Instagram
+                </a>
+              </div>
             </div>
           </div>
         </motion.div>

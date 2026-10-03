@@ -1,7 +1,7 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { Vote, Share2 } from 'lucide-react';
 import { getRedirectResult, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
@@ -77,7 +77,6 @@ export default function ModelVote() {
 
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
   const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
-  const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(`Vote for ${model.name} in South India Queen 2026!`)}`;
   
   const handleInstaShare = (e) => {
     e.preventDefault();
@@ -138,7 +137,7 @@ export default function ModelVote() {
                 Register to Vote
               </button>
               
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <a 
                   href={fbShareUrl}
                   target="_blank"
@@ -147,16 +146,6 @@ export default function ModelVote() {
                 >
                   <FaFacebookF className="mr-2 group-hover:scale-110 transition-transform" size={16} />
                   Facebook
-                </a>
-                
-                <a 
-                  href={twitterShareUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center px-4 py-3 bg-black text-white font-medium text-sm rounded-xl hover:bg-gray-800 transition-all shadow-md group"
-                >
-                  <FaTwitter className="mr-2 group-hover:scale-110 transition-transform" size={16} />
-                  X
                 </a>
 
                 <a 

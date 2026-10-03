@@ -78,10 +78,28 @@ export default function ModelVote() {
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
   const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
   
-  const handleInstaShare = (e) => {
+  const handleShare = async (e, platform) => {
     e.preventDefault();
-    navigator.clipboard.writeText(currentUrl);
-    alert('Link copied to clipboard! Paste it on your Instagram story or bio to gather support.');
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `Vote for ${model.name}`,
+          text: `Show your support for ${model.name}!`,
+          url: currentUrl
+        });
+        return;
+      } catch (err) {
+        console.log('Share error:', err);
+      }
+    }
+    
+    // Fallback for desktop or unsupported browsers
+    if (platform === 'facebook') {
+      window.open(fbShareUrl, '_blank');
+    } else if (platform === 'instagram') {
+      navigator.clipboard.writeText(currentUrl);
+      alert('Link copied to clipboard! Paste it on your Instagram story or bio to gather support.');
+    }
   };
 
   return (
@@ -128,7 +146,7 @@ export default function ModelVote() {
             <div className="space-y-3">
               <button 
                 onClick={() => {
-                  setModalStep(currentUser ? 2 : 1);
+                  setModalStep(1);
                   setIsOtpModalOpen(true);
                 }}
                 className="w-full flex items-center justify-center px-8 py-4 bg-brand-gold text-white font-medium rounded-xl hover:bg-brand-bronze transition-all shadow-lg shadow-brand-gold/20 group cursor-pointer mb-6"
@@ -138,25 +156,21 @@ export default function ModelVote() {
               </button>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <a 
-                  href={fbShareUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button 
+                  onClick={(e) => handleShare(e, 'facebook')}
                   className="w-full flex items-center justify-center px-4 py-3 bg-[#1877F2] text-white font-medium text-sm rounded-xl hover:bg-[#1864D9] transition-all shadow-md group"
                 >
                   <FaFacebookF className="mr-2 group-hover:scale-110 transition-transform" size={16} />
                   Facebook
-                </a>
+                </button>
 
-                <a 
-                  href="https://www.instagram.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button 
+                  onClick={(e) => handleShare(e, 'instagram')}
                   className="w-full flex items-center justify-center px-4 py-3 bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F56040] text-white font-medium text-sm rounded-xl hover:opacity-90 transition-all shadow-md group"
                 >
                   <FaInstagram className="mr-2 group-hover:scale-110 transition-transform" size={18} />
                   Instagram
-                </a>
+                </button>
               </div>
             </div>
           </div>

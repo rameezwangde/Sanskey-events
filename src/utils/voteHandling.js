@@ -13,7 +13,7 @@ export const submitVote = async (user, modelSlug, modelName) => {
   if (!user || !user.uid) throw new Error("User must be logged in to vote");
   
   const voteDocId = `${user.uid}_${modelSlug}`;
-  const voteRef = doc(db, "votes", voteDocId);
+  const voteRef = doc(db, "votes_v2", voteDocId);
   
   await setDoc(voteRef, {
     userId: user.uid,
@@ -32,7 +32,7 @@ export const submitVote = async (user, modelSlug, modelName) => {
  */
 export const getVoteCount = async (modelSlug) => {
   try {
-    const votesCol = collection(db, "votes");
+    const votesCol = collection(db, "votes_v2");
     const q = query(votesCol, where("modelSlug", "==", modelSlug));
     const snapshot = await getCountFromServer(q);
     return snapshot.data().count;

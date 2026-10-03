@@ -98,6 +98,12 @@ export const ModelsPartsFragmentDoc = gql`
     title
     image
   }
+  sponsors {
+    __typename
+    logo
+    altText
+    link
+  }
 }
     `;
 export const RegisterPartsFragmentDoc = gql`

@@ -86,6 +86,12 @@ fragment ModelsParts on Models {
     title
     image
   }
+  sponsors {
+    __typename
+    logo
+    altText
+    link
+  }
 }
 
 fragment RegisterParts on Register {

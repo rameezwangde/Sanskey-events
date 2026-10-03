@@ -566,6 +566,13 @@ export type ModelsModels = {
   image?: Maybe<Scalars['String']['output']>;
 };
 
+export type ModelsSponsors = {
+  __typename?: 'ModelsSponsors';
+  logo?: Maybe<Scalars['String']['output']>;
+  altText?: Maybe<Scalars['String']['output']>;
+  link?: Maybe<Scalars['String']['output']>;
+};
+
 export type Models = Node & Document & {
   __typename?: 'Models';
   logoImage?: Maybe<Scalars['String']['output']>;
@@ -577,6 +584,7 @@ export type Models = Node & Document & {
   timeFrameText?: Maybe<Scalars['String']['output']>;
   leaderboardTitle?: Maybe<Scalars['String']['output']>;
   models?: Maybe<Array<Maybe<ModelsModels>>>;
+  sponsors?: Maybe<Array<Maybe<ModelsSponsors>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -586,6 +594,12 @@ export type ModelsModelsFilter = {
   name?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
   image?: InputMaybe<ImageFilter>;
+};
+
+export type ModelsSponsorsFilter = {
+  logo?: InputMaybe<ImageFilter>;
+  altText?: InputMaybe<StringFilter>;
+  link?: InputMaybe<StringFilter>;
 };
 
 export type ModelsFilter = {
@@ -598,6 +612,7 @@ export type ModelsFilter = {
   timeFrameText?: InputMaybe<StringFilter>;
   leaderboardTitle?: InputMaybe<StringFilter>;
   models?: InputMaybe<ModelsModelsFilter>;
+  sponsors?: InputMaybe<ModelsSponsorsFilter>;
 };
 
 export type ModelsConnectionEdges = {
@@ -1127,6 +1142,12 @@ export type ModelsModelsMutation = {
   image?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type ModelsSponsorsMutation = {
+  logo?: InputMaybe<Scalars['String']['input']>;
+  altText?: InputMaybe<Scalars['String']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type ModelsMutation = {
   logoImage?: InputMaybe<Scalars['String']['input']>;
   pageTitleMain?: InputMaybe<Scalars['String']['input']>;
@@ -1137,6 +1158,7 @@ export type ModelsMutation = {
   timeFrameText?: InputMaybe<Scalars['String']['input']>;
   leaderboardTitle?: InputMaybe<Scalars['String']['input']>;
   models?: InputMaybe<Array<InputMaybe<ModelsModelsMutation>>>;
+  sponsors?: InputMaybe<Array<InputMaybe<ModelsSponsorsMutation>>>;
 };
 
 export type RegisterFormFieldsMutation = {
@@ -1300,6 +1322,12 @@ export type ModelsModelsFilter = {
   image?: ImageFilter | null | undefined;
 };
 
+export type ModelsSponsorsFilter = {
+  logo?: ImageFilter | null | undefined;
+  altText?: StringFilter | null | undefined;
+  link?: StringFilter | null | undefined;
+};
+
 export type ModelsFilter = {
   logoImage?: ImageFilter | null | undefined;
   pageTitleMain?: StringFilter | null | undefined;
@@ -1310,6 +1338,7 @@ export type ModelsFilter = {
   timeFrameText?: StringFilter | null | undefined;
   leaderboardTitle?: StringFilter | null | undefined;
   models?: ModelsModelsFilter | null | undefined;
+  sponsors?: ModelsSponsorsFilter | null | undefined;
 };
 
 export type RegisterFormFieldsFilter = {
@@ -1388,7 +1417,7 @@ export type ContactPartsFragment = { __typename: 'Contact', eyebrow: string | nu
 
 export type GalleryPartsFragment = { __typename: 'Gallery', eyebrow: string | null, title: string | null, images: Array<{ __typename: 'GalleryImages', image: string | null, thumb: string | null, alt: string | null } | null> | null };
 
-export type ModelsPartsFragment = { __typename: 'Models', logoImage: string | null, pageTitleMain: string | null, pageTitleHighlight: string | null, pageTitleSuffix: string | null, subtitle: string | null, introDescription: string | null, timeFrameText: string | null, leaderboardTitle: string | null, models: Array<{ __typename: 'ModelsModels', name: string | null, title: string | null, image: string | null } | null> | null };
+export type ModelsPartsFragment = { __typename: 'Models', logoImage: string | null, pageTitleMain: string | null, pageTitleHighlight: string | null, pageTitleSuffix: string | null, subtitle: string | null, introDescription: string | null, timeFrameText: string | null, leaderboardTitle: string | null, models: Array<{ __typename: 'ModelsModels', name: string | null, title: string | null, image: string | null } | null> | null, sponsors: Array<{ __typename: 'ModelsSponsors', logo: string | null, altText: string | null, link: string | null } | null> | null };
 
 export type RegisterPartsFragment = { __typename: 'Register', eyebrow: string | null, title: string | null, description: string | null, formFields: Array<{ __typename: 'RegisterFormFields', name: string | null, label: string | null, type: string | null, placeholder: string | null, options: Array<string | null> | null } | null> | null };
 
@@ -1481,7 +1510,7 @@ export type ModelsQueryVariables = Exact<{
 }>;
 
 
-export type ModelsQuery = { models: { __typename: 'Models', id: string, logoImage: string | null, pageTitleMain: string | null, pageTitleHighlight: string | null, pageTitleSuffix: string | null, subtitle: string | null, introDescription: string | null, timeFrameText: string | null, leaderboardTitle: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, models: Array<{ __typename: 'ModelsModels', name: string | null, title: string | null, image: string | null } | null> | null } };
+export type ModelsQuery = { models: { __typename: 'Models', id: string, logoImage: string | null, pageTitleMain: string | null, pageTitleHighlight: string | null, pageTitleSuffix: string | null, subtitle: string | null, introDescription: string | null, timeFrameText: string | null, leaderboardTitle: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, models: Array<{ __typename: 'ModelsModels', name: string | null, title: string | null, image: string | null } | null> | null, sponsors: Array<{ __typename: 'ModelsSponsors', logo: string | null, altText: string | null, link: string | null } | null> | null } };
 
 export type ModelsConnectionQueryVariables = Exact<{
   before?: string | null | undefined;
@@ -1493,7 +1522,7 @@ export type ModelsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ModelsConnectionQuery = { modelsConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Models', id: string, logoImage: string | null, pageTitleMain: string | null, pageTitleHighlight: string | null, pageTitleSuffix: string | null, subtitle: string | null, introDescription: string | null, timeFrameText: string | null, leaderboardTitle: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, models: Array<{ __typename: 'ModelsModels', name: string | null, title: string | null, image: string | null } | null> | null } | null } | null> | null } };
+export type ModelsConnectionQuery = { modelsConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Models', id: string, logoImage: string | null, pageTitleMain: string | null, pageTitleHighlight: string | null, pageTitleSuffix: string | null, subtitle: string | null, introDescription: string | null, timeFrameText: string | null, leaderboardTitle: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, models: Array<{ __typename: 'ModelsModels', name: string | null, title: string | null, image: string | null } | null> | null, sponsors: Array<{ __typename: 'ModelsSponsors', logo: string | null, altText: string | null, link: string | null } | null> | null } | null } | null> | null } };
 
 export type RegisterQueryVariables = Exact<{
   relativePath: string;
@@ -1682,6 +1711,12 @@ export const ModelsPartsFragmentDoc = gql`
     name
     title
     image
+  }
+  sponsors {
+    __typename
+    logo
+    altText
+    link
   }
 }
     `;

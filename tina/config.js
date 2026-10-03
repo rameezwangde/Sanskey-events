@@ -163,6 +163,17 @@ export default defineConfig({
               { type: "string", name: "title", label: "Title" },
               { type: "image", name: "image", label: "Image" },
             ]
+          },
+          {
+            type: "object",
+            list: true,
+            name: "sponsors",
+            label: "Sponsor Logos",
+            fields: [
+              { type: "image", name: "logo", label: "Sponsor Logo" },
+              { type: "string", name: "altText", label: "Alt Text" },
+              { type: "string", name: "link", label: "Sponsor Link (Optional)" }
+            ]
           }
         ]
       },

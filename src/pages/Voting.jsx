@@ -267,6 +267,28 @@ export default function Voting() {
           </div>
         </div>
       </div>
+
+      {/* --- SPONSORS ROW --- */}
+      {modelsData.sponsors && modelsData.sponsors.length > 0 && (
+        <div className="container relative z-10 mx-auto px-4 md:px-8 mt-24 mb-8">
+          <div className="flex flex-col items-center">
+            <h3 className="text-xl font-serif text-[#1a1a1a] mb-8 uppercase tracking-widest text-center opacity-70">Event Sponsors</h3>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+              {modelsData.sponsors.map((sponsor, idx) => {
+                if (!sponsor.logo) return null;
+                const img = <img src={sponsor.logo} alt={sponsor.altText || 'Sponsor'} className="h-16 md:h-24 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100" />;
+                return sponsor.link ? (
+                  <a key={idx} href={sponsor.link} target="_blank" rel="noopener noreferrer" className="block">
+                    {img}
+                  </a>
+                ) : (
+                  <div key={idx}>{img}</div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

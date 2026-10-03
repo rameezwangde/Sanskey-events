@@ -336,6 +336,12 @@ type ModelsModels {
   image: String
 }
 
+type ModelsSponsors {
+  logo: String
+  altText: String
+  link: String
+}
+
 type Models implements Node & Document {
   logoImage: String
   pageTitleMain: String
@@ -346,6 +352,7 @@ type Models implements Node & Document {
   timeFrameText: String
   leaderboardTitle: String
   models: [ModelsModels]
+  sponsors: [ModelsSponsors]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -355,6 +362,12 @@ input ModelsModelsFilter {
   name: StringFilter
   title: StringFilter
   image: ImageFilter
+}
+
+input ModelsSponsorsFilter {
+  logo: ImageFilter
+  altText: StringFilter
+  link: StringFilter
 }
 
 input ModelsFilter {
@@ -367,6 +380,7 @@ input ModelsFilter {
   timeFrameText: StringFilter
   leaderboardTitle: StringFilter
   models: ModelsModelsFilter
+  sponsors: ModelsSponsorsFilter
 }
 
 type ModelsConnectionEdges {
@@ -720,6 +734,12 @@ input ModelsModelsMutation {
   image: String
 }
 
+input ModelsSponsorsMutation {
+  logo: String
+  altText: String
+  link: String
+}
+
 input ModelsMutation {
   logoImage: String
   pageTitleMain: String
@@ -730,6 +750,7 @@ input ModelsMutation {
   timeFrameText: String
   leaderboardTitle: String
   models: [ModelsModelsMutation]
+  sponsors: [ModelsSponsorsMutation]
 }
 
 input RegisterFormFieldsMutation {

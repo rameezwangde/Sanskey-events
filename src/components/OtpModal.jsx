@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle2 } from 'lucide-react';
-import { signInWithRedirect } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../firebase";
 import confetti from 'canvas-confetti';
 
@@ -29,10 +29,21 @@ export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubm
     setError('');
     
     try {
-      await signInWithRedirect(auth, googleProvider);
+      const result = await signInWithPopup(auth, googleProvider);
+      if (result && result.user) {
+        setStep(2);
+      }
     } catch (err) {
       console.error("Google Sign-In Error:", err);
-      setError('Authentication failed. Please try again.');
+      // Give more detailed error messages if possible
+      if (err.code === 'auth/unauthorized-domain') {
+        setError('This domain is not authorized in Firebase.');
+      } else if (err.code === 'auth/popup-closed-by-user') {
+        setError('Sign-in popup was closed before completion.');
+      } else {
+        setError('Authentication failed. Please try again.');
+      }
+    } finally {
       setIsLoading(false);
     }
   };

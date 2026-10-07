@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider, microsoftProvider, yahooProvider } from '../firebase';
 
 export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubmitSuccess, initialStep = 1 }) {
-  const [step, setStep] = useState(initialStep); // 1: Login, 2: Confirm, 3: Success
+  const [step, setStep] = useState(initialStep); // 1: Login, 3: Success
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [email, setEmail] = useState('');
 
   // Reset state when modal is closed
   React.useEffect(() => {
@@ -23,24 +24,16 @@ export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubm
 
   if (!isOpen) return null;
 
-  const handleEmailSubmit = (e) => {
-    e.preventDefault();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError('Please enter a valid email address.');
-      return;
-    }
-    setError('');
-    setStep(2);
-  };
-
-  const handleConfirmVote = async () => {
+  const handleOAuthSignIn = async (provider) => {
     setIsLoading(true);
     setError('');
     
     try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      
       if (onSubmitSuccess) {
-        const mockUser = { email: email.toLowerCase(), uid: email.toLowerCase() };
-        await onSubmitSuccess(mockUser);
+        await onSubmitSuccess(user);
         setStep(3);
         // Trigger confetti animation
         confetti({
@@ -51,7 +44,12 @@ export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubm
         });
       }
     } catch (err) {
-      setError('Failed to submit vote. Please try again.');
+      console.error(err);
+      if (err.code === 'auth/popup-closed-by-user') {
+        setError('Sign-in cancelled. Please try again.');
+      } else {
+        setError('Failed to sign in. Please try again.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -89,46 +87,45 @@ export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubm
                   <h2 className="text-2xl font-serif text-brand-black mb-2">
                     Voting for {modelName}
                   </h2>
-                  {step === 1 && <p className="text-gray-500 font-sans text-sm">Enter your email to register your vote.</p>}
-                  {step === 2 && <p className="text-gray-500 font-sans text-sm">Please confirm your vote to proceed.</p>}
+                  {step === 1 && <p className="text-gray-500 font-sans text-sm">Sign in to securely register your vote.</p>}
                 </div>
 
                 {step === 1 && (
-                  <form onSubmit={handleEmailSubmit} className="space-y-4">
+                  <div className="space-y-4">
                     {error && <p className="text-red-500 text-sm mt-2 font-sans text-center">{error}</p>}
-                    <input
-                      type="email"
-                      placeholder="Enter your email (e.g., yourname@yahoo.com)"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-gold font-sans"
-                      required
-                    />
+                    
                     <button 
-                      type="submit"
+                      onClick={() => handleOAuthSignIn(googleProvider)}
                       disabled={isLoading}
-                      className="w-full flex items-center justify-center py-3 bg-brand-black text-white font-medium rounded-lg hover:bg-gray-800 transition-all shadow-sm disabled:opacity-70 mt-4"
+                      className="w-full flex items-center justify-center py-3 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all shadow-sm disabled:opacity-70 mt-4 gap-3"
                     >
-                      Continue
+                      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="w-5 h-5" />
+                      Sign in with Google
                     </button>
-                  </form>
-                )}
-
-                {step === 2 && (
-                  <div className="space-y-4 mt-4">
-                    <div className="bg-gray-50 p-4 rounded-lg border border-gray-100 mb-4">
-                      <p className="text-gray-600 font-sans text-sm text-center">
-                        Voting with email:<br/>
-                        <strong className="text-brand-black">{email}</strong>
-                      </p>
-                    </div>
-                    {error && <p className="text-red-500 text-sm mt-2 font-sans text-center">{error}</p>}
+                    
                     <button 
-                      onClick={handleConfirmVote} 
+                      onClick={() => handleOAuthSignIn(microsoftProvider)}
                       disabled={isLoading}
-                      className="w-full flex items-center justify-center px-8 py-3 bg-brand-gold text-white font-medium rounded-xl hover:bg-brand-bronze transition-all shadow-lg shadow-brand-gold/20 disabled:opacity-70"
+                      className="w-full flex items-center justify-center py-3 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all shadow-sm disabled:opacity-70 mt-3 gap-3"
                     >
-                      {isLoading ? 'Confirming...' : 'Confirm Vote'}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+                        <path fill="#f25022" d="M1 1h9v9H1z"/>
+                        <path fill="#00a4ef" d="M1 11h9v9H1z"/>
+                        <path fill="#7fba00" d="M11 1h9v9h-9z"/>
+                        <path fill="#ffb900" d="M11 11h9v9h-9z"/>
+                      </svg>
+                      Sign in with Microsoft
+                    </button>
+
+                    <button 
+                      onClick={() => handleOAuthSignIn(yahooProvider)}
+                      disabled={isLoading}
+                      className="w-full flex items-center justify-center py-3 bg-[#6001D2] text-white font-medium rounded-lg hover:bg-[#4a00a3] transition-all shadow-sm disabled:opacity-70 mt-3 gap-3"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M2.87.5h2.15l2.97 4.1h.06L10.96.5h2.16L9 6.27V12h-2V6.27L2.87.5z"/>
+                      </svg>
+                      Sign in with Yahoo
                     </button>
                   </div>
                 )}

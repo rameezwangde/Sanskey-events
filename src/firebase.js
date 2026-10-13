@@ -18,6 +18,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
-export const microsoftProvider = new OAuthProvider('microsoft.com');
 export const yahooProvider = new OAuthProvider('yahoo.com');
 export const db = getFirestore(app);

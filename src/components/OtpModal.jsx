@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { signInWithPopup } from 'firebase/auth';
-import { auth, googleProvider, microsoftProvider, yahooProvider } from '../firebase';
+import { auth, googleProvider, yahooProvider } from '../firebase';
 
 export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubmitSuccess, initialStep = 1 }) {
   const [step, setStep] = useState(initialStep); // 1: Login, 3: Success
@@ -100,21 +100,7 @@ export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubm
                       className="w-full flex items-center justify-center py-3 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all shadow-sm disabled:opacity-70 mt-4 gap-3"
                     >
                       <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="w-5 h-5" />
-                      Sign in with Google
-                    </button>
-                    
-                    <button 
-                      onClick={() => handleOAuthSignIn(microsoftProvider)}
-                      disabled={isLoading}
-                      className="w-full flex items-center justify-center py-3 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all shadow-sm disabled:opacity-70 mt-3 gap-3"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
-                        <path fill="#f25022" d="M1 1h9v9H1z"/>
-                        <path fill="#00a4ef" d="M1 11h9v9H1z"/>
-                        <path fill="#7fba00" d="M11 1h9v9h-9z"/>
-                        <path fill="#ffb900" d="M11 11h9v9h-9z"/>
-                      </svg>
-                      Sign in with Microsoft
+                       Sign in with Google
                     </button>
 
                     <button 

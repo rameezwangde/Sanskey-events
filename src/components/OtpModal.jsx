@@ -103,21 +103,21 @@ export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubm
                     <button 
                       onClick={() => handleOAuthSignIn(googleProvider)}
                       disabled={isLoading}
-                      className="w-full flex items-center justify-center py-3 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-all shadow-sm disabled:opacity-70 mt-4 gap-3"
+                      className="w-full flex items-center justify-center py-3 bg-white border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 active:scale-[0.98] transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed mt-4 gap-3"
                     >
                       <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="w-5 h-5" />
-                       Sign in with Google
+                      {isLoading ? 'Signing in...' : 'Sign in with Google'}
                     </button>
 
                     <button 
                       onClick={() => handleOAuthSignIn(yahooProvider)}
                       disabled={isLoading}
-                      className="w-full flex items-center justify-center py-3 bg-[#6001D2] text-white font-medium rounded-lg hover:bg-[#4a00a3] transition-all shadow-sm disabled:opacity-70 mt-3 gap-3"
+                      className="w-full flex items-center justify-center py-3 bg-[#6001D2] text-white font-medium rounded-lg hover:bg-[#4a00a3] active:scale-[0.98] transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed mt-3 gap-3"
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M2.87.5h2.15l2.97 4.1h.06L10.96.5h2.16L9 6.27V12h-2V6.27L2.87.5z"/>
                       </svg>
-                      Sign in with Yahoo
+                      {isLoading ? 'Signing in...' : 'Sign in with Yahoo'}
                     </button>
                   </div>
                 )}

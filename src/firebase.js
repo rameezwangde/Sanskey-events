@@ -19,10 +19,4 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 export const yahooProvider = new OAuthProvider('yahoo.com');
-yahooProvider.addScope('openid');
-yahooProvider.addScope('email');
-yahooProvider.addScope('profile');
-yahooProvider.setCustomParameters({
-  prompt: 'login'
-});
 export const db = getFirestore(app);

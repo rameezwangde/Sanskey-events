@@ -23,6 +23,14 @@ export default function ModelVote() {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
+    if (model) {
+      document.title = `Vote for ${model.name} | South India Queen`;
+    } else {
+      document.title = "South India Queen - Official Voting";
+    }
+  }, [model]);
+
+  useEffect(() => {
     // Listen for auth state changes
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);

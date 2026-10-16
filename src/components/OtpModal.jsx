@@ -44,11 +44,17 @@ export default function OtpModal({ isOpen, onClose, modelName, modelSlug, onSubm
         });
       }
     } catch (err) {
-      console.error(err);
+      console.error("Sign-in / vote error:", err);
       if (err.code === 'auth/popup-closed-by-user') {
         setError('Sign-in cancelled. Please try again.');
+      } else if (err.code === 'auth/unauthorized-domain') {
+        setError('This domain is not authorized in Firebase. Please add it to Firebase Authentication > Settings > Authorized domains.');
+      } else if (err.code === 'auth/popup-blocked') {
+        setError('Popup was blocked by your browser. Please allow popups or open in standard browser.');
+      } else if (err.code) {
+        setError(`${err.message} (${err.code})`);
       } else {
-        setError('Failed to sign in. Please try again.');
+        setError(err.message || 'Failed to sign in. Please try again.');
       }
     } finally {
       setIsLoading(false);

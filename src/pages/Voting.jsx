@@ -76,8 +76,7 @@ export default function Voting() {
           {modelsData.timeFrameText && (
             <div className="inline-flex items-center justify-center px-6 py-2.5 bg-brand-gold/10 border border-brand-gold/30 rounded-full mb-8 shadow-sm">
               <span className="relative flex h-2.5 w-2.5 mr-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                <span className="inline-flex rounded-full h-2.5 w-2.5 bg-red-600"></span>
               </span>
               <span className="text-brand-gold font-bold text-xs tracking-widest uppercase">
                 {modelsData.timeFrameText}
@@ -139,7 +138,7 @@ export default function Voting() {
                   className="mt-auto relative overflow-hidden w-full py-2.5 rounded-full border border-brand-gold/50 flex items-center justify-center group/btn transition-all duration-300 hover:bg-brand-gold bg-white"
                 >
                   <span className="text-brand-gold group-hover/btn:text-white font-semibold text-[10px] tracking-[0.15em] uppercase z-10 transition-colors">
-                    Cast Vote
+                    View Contestant
                   </span>
                   <ChevronRight size={14} className="ml-2 text-brand-gold group-hover/btn:text-white z-10 transition-colors" />
                 </Link>

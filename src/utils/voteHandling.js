@@ -3,25 +3,10 @@ import { db } from "../firebase";
 
 /**
  * Submits a vote for a specific model.
- * Uses a composite ID (userId_modelSlug) to ensure a user can only vote for a specific model once.
- * 
- * @param {Object} user - The Firebase Auth user object
- * @param {string} modelSlug - The slug of the model being voted for
- * @param {string} modelName - The display name of the model
+ * Voting is now officially closed.
  */
 export const submitVote = async (user, modelSlug, modelName) => {
-  if (!user || !user.uid) throw new Error("User must be logged in to vote");
-  
-  const voteDocId = `${user.uid}_${modelSlug}`;
-  const voteRef = doc(db, "votes_v3", voteDocId);
-  
-  await setDoc(voteRef, {
-    userId: user.uid,
-    userEmail: user.email,
-    modelSlug: modelSlug,
-    modelName: modelName,
-    timestamp: new Date().toISOString()
-  }, { merge: true }); // merge true ensures we just overwrite/update if they vote again
+  throw new Error("Voting has officially ended. No new votes can be accepted.");
 };
 
 /**

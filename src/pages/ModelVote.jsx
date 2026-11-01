@@ -152,16 +152,10 @@ export default function ModelVote() {
             </p>
 
             <div className="space-y-3">
-              <button 
-                onClick={() => {
-                  setModalStep(1);
-                  setIsOtpModalOpen(true);
-                }}
-                className="w-full flex items-center justify-center px-8 py-4 bg-brand-gold text-white font-medium rounded-xl hover:bg-brand-bronze transition-all shadow-lg shadow-brand-gold/20 group cursor-pointer mb-6"
-              >
-                <Vote className="mr-2 group-hover:scale-110 transition-transform" size={20} />
-                Register to Vote
-              </button>
+              <div className="w-full p-4 mb-6 text-center bg-gray-50 border border-gray-200 rounded-xl">
+                <p className="text-sm font-semibold text-gray-700">Voting for this contest has concluded.</p>
+                <p className="text-xs text-gray-500 mt-1">Thank you to everyone who participated!</p>
+              </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <button 

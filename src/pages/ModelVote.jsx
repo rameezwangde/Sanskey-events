@@ -31,7 +31,7 @@ export default function ModelVote() {
   }, [model]);
 
   useEffect(() => {
-    // Listen for auth state changes
+    if (!auth) return;
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
     });
@@ -39,13 +39,11 @@ export default function ModelVote() {
   }, []);
 
   useEffect(() => {
-    // Check if they just returned from Google Login redirect
+    if (!auth) return;
     const checkRedirect = async () => {
       try {
         const result = await getRedirectResult(auth);
         if (result && result.user) {
-          // They just successfully logged in. 
-          // Open the modal directly to the Confirmation step so they can cast their vote.
           setModalStep(2);
           setIsOtpModalOpen(true);
         }
@@ -71,7 +69,6 @@ export default function ModelVote() {
   const handleVoteSubmit = async (user) => {
     try {
       await submitVote(user, modelId, model.name);
-      // Immediately increment the local vote count so the UI updates
       setVoteCount(prev => prev + 1);
     } catch (error) {
       console.error("Error submitting vote:", error);
@@ -101,7 +98,6 @@ export default function ModelVote() {
       }
     }
     
-    // Fallback for desktop or unsupported browsers
     if (platform === 'facebook') {
       window.open(fbShareUrl, '_blank');
     } else if (platform === 'instagram') {
@@ -184,7 +180,7 @@ export default function ModelVote() {
           isOpen={isOtpModalOpen} 
           onClose={() => {
             setIsOtpModalOpen(false);
-            setModalStep(1); // Reset for next time
+            setModalStep(1);
           }} 
           modelName={model.name}
           modelSlug={modelId}

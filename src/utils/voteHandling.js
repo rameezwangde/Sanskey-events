@@ -1,4 +1,4 @@
-import { collection, doc, setDoc, getCountFromServer, query, where } from "firebase/firestore";
+import { collection, getCountFromServer, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 
 /**
@@ -16,6 +16,7 @@ export const submitVote = async (user, modelSlug, modelName) => {
  * @returns {number} The total vote count
  */
 export const getVoteCount = async (modelSlug) => {
+  if (!db) return 0;
   try {
     const votesCol = collection(db, "votes_v3");
     const q = query(votesCol, where("modelSlug", "==", modelSlug));
@@ -23,6 +24,6 @@ export const getVoteCount = async (modelSlug) => {
     return snapshot.data().count;
   } catch (error) {
     console.error("Error fetching vote count:", error);
-    return 0; // Return 0 if there's a permission error or database is unreachable
+    return 0;
   }
 };

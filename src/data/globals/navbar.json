@@ -13,10 +13,6 @@
       "path": "/models"
     },
     {
-      "name": "Vote",
-      "path": "/vote"
-    },
-    {
       "name": "Register Here",
       "path": "/register"
     },

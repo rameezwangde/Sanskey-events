@@ -24,9 +24,9 @@ export default function ModelVote() {
 
   useEffect(() => {
     if (model) {
-      document.title = `Vote for ${model.name} | South India Queen`;
+      document.title = `${model.name} | Sankey Events`;
     } else {
-      document.title = "South India Queen - Official Voting";
+      document.title = "Sankey Events";
     }
   }, [model]);
 

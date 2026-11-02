@@ -17,7 +17,7 @@ export default function Voting() {
   const [isCounting, setIsCounting] = useState(true);
 
   useEffect(() => {
-    document.title = "South India Queen - Official Voting";
+    document.title = "Sankey Events";
   }, []);
 
   useEffect(() => {

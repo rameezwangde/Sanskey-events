@@ -89,6 +89,8 @@ export type Query = {
   contactConnection: ContactConnection;
   gallery: Gallery;
   galleryConnection: GalleryConnection;
+  team: Team;
+  teamConnection: TeamConnection;
   models: Models;
   modelsConnection: ModelsConnection;
   register: Register;
@@ -182,6 +184,21 @@ export type QueryGalleryConnectionArgs = {
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<GalleryFilter>;
+};
+
+
+export type QueryTeamArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryTeamConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<TeamFilter>;
 };
 
 
@@ -279,6 +296,7 @@ export type DocumentFilter = {
   about?: InputMaybe<AboutFilter>;
   contact?: InputMaybe<ContactFilter>;
   gallery?: InputMaybe<GalleryFilter>;
+  team?: InputMaybe<TeamFilter>;
   models?: InputMaybe<ModelsFilter>;
   register?: InputMaybe<RegisterFilter>;
   navbar?: InputMaybe<NavbarFilter>;
@@ -324,7 +342,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Home | About | Contact | Gallery | Models | Register | Navbar | Footer | Events | Event_Sections | Folder;
+export type DocumentNode = Home | About | Contact | Gallery | Team | Models | Register | Navbar | Footer | Events | Event_Sections | Folder;
 
 export type HomeStats = {
   __typename?: 'HomeStats';
@@ -557,6 +575,54 @@ export type GalleryConnection = Connection & {
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
   edges?: Maybe<Array<Maybe<GalleryConnectionEdges>>>;
+};
+
+export type TeamMembers = {
+  __typename?: 'TeamMembers';
+  name?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+};
+
+export type Team = Node & Document & {
+  __typename?: 'Team';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  ctaText?: Maybe<Scalars['String']['output']>;
+  ctaLink?: Maybe<Scalars['String']['output']>;
+  members?: Maybe<Array<Maybe<TeamMembers>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type TeamMembersFilter = {
+  name?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+};
+
+export type TeamFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  ctaText?: InputMaybe<StringFilter>;
+  ctaLink?: InputMaybe<StringFilter>;
+  members?: InputMaybe<TeamMembersFilter>;
+};
+
+export type TeamConnectionEdges = {
+  __typename?: 'TeamConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Team>;
+};
+
+export type TeamConnection = Connection & {
+  __typename?: 'TeamConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<TeamConnectionEdges>>>;
 };
 
 export type ModelsModels = {
@@ -869,6 +935,8 @@ export type Mutation = {
   createContact: Contact;
   updateGallery: Gallery;
   createGallery: Gallery;
+  updateTeam: Team;
+  createTeam: Team;
   updateModels: Models;
   createModels: Models;
   updateRegister: Register;
@@ -965,6 +1033,18 @@ export type MutationCreateGalleryArgs = {
 };
 
 
+export type MutationUpdateTeamArgs = {
+  relativePath: Scalars['String']['input'];
+  params: TeamMutation;
+};
+
+
+export type MutationCreateTeamArgs = {
+  relativePath: Scalars['String']['input'];
+  params: TeamMutation;
+};
+
+
 export type MutationUpdateModelsArgs = {
   relativePath: Scalars['String']['input'];
   params: ModelsMutation;
@@ -1041,6 +1121,7 @@ export type DocumentUpdateMutation = {
   about?: InputMaybe<AboutMutation>;
   contact?: InputMaybe<ContactMutation>;
   gallery?: InputMaybe<GalleryMutation>;
+  team?: InputMaybe<TeamMutation>;
   models?: InputMaybe<ModelsMutation>;
   register?: InputMaybe<RegisterMutation>;
   navbar?: InputMaybe<NavbarMutation>;
@@ -1055,6 +1136,7 @@ export type DocumentMutation = {
   about?: InputMaybe<AboutMutation>;
   contact?: InputMaybe<ContactMutation>;
   gallery?: InputMaybe<GalleryMutation>;
+  team?: InputMaybe<TeamMutation>;
   models?: InputMaybe<ModelsMutation>;
   register?: InputMaybe<RegisterMutation>;
   navbar?: InputMaybe<NavbarMutation>;
@@ -1134,6 +1216,21 @@ export type GalleryMutation = {
   eyebrow?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   images?: InputMaybe<Array<InputMaybe<GalleryImagesMutation>>>;
+};
+
+export type TeamMembersMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type TeamMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  ctaText?: InputMaybe<Scalars['String']['input']>;
+  ctaLink?: InputMaybe<Scalars['String']['input']>;
+  members?: InputMaybe<Array<InputMaybe<TeamMembersMutation>>>;
 };
 
 export type ModelsModelsMutation = {
@@ -1316,6 +1413,21 @@ export type GalleryFilter = {
   images?: GalleryImagesFilter | null | undefined;
 };
 
+export type TeamMembersFilter = {
+  name?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  image?: ImageFilter | null | undefined;
+};
+
+export type TeamFilter = {
+  eyebrow?: StringFilter | null | undefined;
+  title?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  ctaText?: StringFilter | null | undefined;
+  ctaLink?: StringFilter | null | undefined;
+  members?: TeamMembersFilter | null | undefined;
+};
+
 export type ModelsModelsFilter = {
   name?: StringFilter | null | undefined;
   title?: StringFilter | null | undefined;
@@ -1417,6 +1529,8 @@ export type ContactPartsFragment = { __typename: 'Contact', eyebrow: string | nu
 
 export type GalleryPartsFragment = { __typename: 'Gallery', eyebrow: string | null, title: string | null, images: Array<{ __typename: 'GalleryImages', image: string | null, thumb: string | null, alt: string | null } | null> | null };
 
+export type TeamPartsFragment = { __typename: 'Team', eyebrow: string | null, title: string | null, description: string | null, ctaText: string | null, ctaLink: string | null, members: Array<{ __typename: 'TeamMembers', name: string | null, title: string | null, image: string | null } | null> | null };
+
 export type ModelsPartsFragment = { __typename: 'Models', logoImage: string | null, pageTitleMain: string | null, pageTitleHighlight: string | null, pageTitleSuffix: string | null, subtitle: string | null, introDescription: string | null, timeFrameText: string | null, leaderboardTitle: string | null, models: Array<{ __typename: 'ModelsModels', name: string | null, title: string | null, image: string | null } | null> | null, sponsors: Array<{ __typename: 'ModelsSponsors', logo: string | null, altText: string | null, link: string | null } | null> | null };
 
 export type RegisterPartsFragment = { __typename: 'Register', eyebrow: string | null, title: string | null, description: string | null, formFields: Array<{ __typename: 'RegisterFormFields', name: string | null, label: string | null, type: string | null, placeholder: string | null, options: Array<string | null> | null } | null> | null };
@@ -1504,6 +1618,25 @@ export type GalleryConnectionQueryVariables = Exact<{
 
 
 export type GalleryConnectionQuery = { galleryConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Gallery', id: string, eyebrow: string | null, title: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, images: Array<{ __typename: 'GalleryImages', image: string | null, thumb: string | null, alt: string | null } | null> | null } | null } | null> | null } };
+
+export type TeamQueryVariables = Exact<{
+  relativePath: string;
+}>;
+
+
+export type TeamQuery = { team: { __typename: 'Team', id: string, eyebrow: string | null, title: string | null, description: string | null, ctaText: string | null, ctaLink: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, members: Array<{ __typename: 'TeamMembers', name: string | null, title: string | null, image: string | null } | null> | null } };
+
+export type TeamConnectionQueryVariables = Exact<{
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: TeamFilter | null | undefined;
+}>;
+
+
+export type TeamConnectionQuery = { teamConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Team', id: string, eyebrow: string | null, title: string | null, description: string | null, ctaText: string | null, ctaLink: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, members: Array<{ __typename: 'TeamMembers', name: string | null, title: string | null, image: string | null } | null> | null } | null } | null> | null } };
 
 export type ModelsQueryVariables = Exact<{
   relativePath: string;
@@ -1692,6 +1825,22 @@ export const GalleryPartsFragmentDoc = gql`
     image
     thumb
     alt
+  }
+}
+    `;
+export const TeamPartsFragmentDoc = gql`
+    fragment TeamParts on Team {
+  __typename
+  eyebrow
+  title
+  description
+  ctaText
+  ctaLink
+  members {
+    __typename
+    name
+    title
+    image
   }
 }
     `;
@@ -2021,6 +2170,63 @@ export const GalleryConnectionDocument = gql`
   }
 }
     ${GalleryPartsFragmentDoc}`;
+export const TeamDocument = gql`
+    query team($relativePath: String!) {
+  team(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...TeamParts
+  }
+}
+    ${TeamPartsFragmentDoc}`;
+export const TeamConnectionDocument = gql`
+    query teamConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TeamFilter) {
+  teamConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...TeamParts
+      }
+    }
+  }
+}
+    ${TeamPartsFragmentDoc}`;
 export const ModelsDocument = gql`
     query models($relativePath: String!) {
   models(relativePath: $relativePath) {
@@ -2389,6 +2595,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     galleryConnection(variables?: GalleryConnectionQueryVariables, options?: C): Promise<{data: GalleryConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GalleryConnectionQueryVariables, query: string}> {
         return requester<{data: GalleryConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GalleryConnectionQueryVariables, query: string}, GalleryConnectionQueryVariables>(GalleryConnectionDocument, variables, options);
+      },
+    team(variables: TeamQueryVariables, options?: C): Promise<{data: TeamQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TeamQueryVariables, query: string}> {
+        return requester<{data: TeamQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TeamQueryVariables, query: string}, TeamQueryVariables>(TeamDocument, variables, options);
+      },
+    teamConnection(variables?: TeamConnectionQueryVariables, options?: C): Promise<{data: TeamConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TeamConnectionQueryVariables, query: string}> {
+        return requester<{data: TeamConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TeamConnectionQueryVariables, query: string}, TeamConnectionQueryVariables>(TeamConnectionDocument, variables, options);
       },
     models(variables: ModelsQueryVariables, options?: C): Promise<{data: ModelsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ModelsQueryVariables, query: string}> {
         return requester<{data: ModelsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ModelsQueryVariables, query: string}, ModelsQueryVariables>(ModelsDocument, variables, options);

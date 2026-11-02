@@ -1,0 +1,25 @@
+{
+  "eyebrow": "Sankey Team",
+  "title": "Our Team",
+  "description": "Showcasing the dedicated talent, organizers, and creative minds driving Sankey Events to craft unforgettable experiences.",
+  "ctaText": "Join Our Team",
+  "ctaLink": "/register",
+  "members": [
+    {
+      "name": "Pradeep Kumar",
+      "title": "CEO (Sankey Events)",
+      "image": "/uploads/baac9c5e-c4cd-46fd-9a5a-ad811244df5a.jpg"
+    },
+    {
+      "name": "Sushmitha Nair",
+      "title": "Miss Sankey 2017 - 2026 Model/Choreographer Founder Cindy's Nail Studio",
+      "image": "/uploads/SUN_4511.JPG"
+    },
+    {
+      "name": "Priya Patel",
+      "title": "Commercial Model / Event Lead",
+      "image": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1920&auto=format&fit=crop"
+    }
+  ]
+}
+

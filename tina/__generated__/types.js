@@ -81,6 +81,22 @@ export const GalleryPartsFragmentDoc = gql`
   }
 }
     `;
+export const TeamPartsFragmentDoc = gql`
+    fragment TeamParts on Team {
+  __typename
+  eyebrow
+  title
+  description
+  ctaText
+  ctaLink
+  members {
+    __typename
+    name
+    title
+    image
+  }
+}
+    `;
 export const ModelsPartsFragmentDoc = gql`
     fragment ModelsParts on Models {
   __typename
@@ -407,6 +423,63 @@ export const GalleryConnectionDocument = gql`
   }
 }
     ${GalleryPartsFragmentDoc}`;
+export const TeamDocument = gql`
+    query team($relativePath: String!) {
+  team(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...TeamParts
+  }
+}
+    ${TeamPartsFragmentDoc}`;
+export const TeamConnectionDocument = gql`
+    query teamConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: TeamFilter) {
+  teamConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...TeamParts
+      }
+    }
+  }
+}
+    ${TeamPartsFragmentDoc}`;
 export const ModelsDocument = gql`
     query models($relativePath: String!) {
   models(relativePath: $relativePath) {
@@ -774,6 +847,12 @@ export function getSdk(requester) {
     },
     galleryConnection(variables, options) {
       return requester(GalleryConnectionDocument, variables, options);
+    },
+    team(variables, options) {
+      return requester(TeamDocument, variables, options);
+    },
+    teamConnection(variables, options) {
+      return requester(TeamConnectionDocument, variables, options);
     },
     models(variables, options) {
       return requester(ModelsDocument, variables, options);

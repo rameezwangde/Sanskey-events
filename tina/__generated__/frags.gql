@@ -70,6 +70,21 @@ fragment GalleryParts on Gallery {
   }
 }
 
+fragment TeamParts on Team {
+  __typename
+  eyebrow
+  title
+  description
+  ctaText
+  ctaLink
+  members {
+    __typename
+    name
+    title
+    image
+  }
+}
+
 fragment ModelsParts on Models {
   __typename
   logoImage

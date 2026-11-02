@@ -137,6 +137,32 @@ export default defineConfig({
           }
         ]
       },
+            {
+        name: "team",
+        label: "Team Page",
+        path: "src/data/pages",
+        match: { include: "team" },
+        format: "json",
+        ui: { allowedActions: { create: false, delete: false } },
+        fields: [
+          { type: "string", name: "eyebrow", label: "Eyebrow" },
+          { type: "string", name: "title", label: "Title" },
+          { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+          { type: "string", name: "ctaText", label: "CTA Button Text" },
+          { type: "string", name: "ctaLink", label: "CTA Button Link" },
+          {
+            type: "object",
+            list: true,
+            name: "members",
+            label: "Team Members",
+            fields: [
+              { type: "string", name: "name", label: "Name" },
+              { type: "string", name: "title", label: "Role / Title" },
+              { type: "image", name: "image", label: "Photo" },
+            ]
+          }
+        ]
+      },
       {
         name: "models",
         label: "Models Page",
